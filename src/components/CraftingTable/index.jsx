@@ -17,7 +17,7 @@ function CraftingTable({ input, result, amount }) {
             }
             return <MinecraftSlot key={index} image={item[1]} name={item[0]} />;
           })}
-        </Grid>
+        </div>
 
         <MinecraftResultArrow />
 

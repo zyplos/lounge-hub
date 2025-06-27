@@ -143,7 +143,7 @@ function PlayerPage() { // Renamed component
                 </div>
               </div>
             </div>
-          </Box>
+          </div>
           <div className={styles.chunkListGrid}>
             {player.home_x && player.home_y && player.home_z && player.home_dimension && (
               <Button
