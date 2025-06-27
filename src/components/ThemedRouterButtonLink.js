@@ -1,12 +1,12 @@
-import { Button, Link as ThemedLink } from "theme-ui";
 import Link from "next/link";
+import styles from "./styles.module.css";
 
-function ThemedRouterButtonLink({ href, children, ...props }) {
+function ThemedRouterButtonLink({ href, children, className = '', ...props }) {
   return (
-    <Link href={href} passHref>
-      <Button {...props} as={ThemedLink}>
+    <Link href={href} passHref legacyBehavior>
+      <a className={styles.button + ' ' + className} {...props}>
         {children}
-      </Button>
+      </a>
     </Link>
   );
 }

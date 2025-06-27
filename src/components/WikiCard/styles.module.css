@@ -1,0 +1,32 @@
+.card {
+  display: block;
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-10);
+  height: 100%;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  flex-wrap: wrap;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.textCol {
+  margin-left: var(--space-3);
+}
+
+.heading {
+  font-size: var(--font-size-5);
+  margin-bottom: var(--space-2);
+}
+
+.description {
+  font-size: var(--font-size-2);
+} 

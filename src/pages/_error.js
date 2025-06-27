@@ -1,13 +1,11 @@
-/** @jsxImportSource theme-ui */
 import MainLayout from "../internals/MainLayout";
-import { Heading, Button } from "theme-ui";
 import FullBox from "../components/FullBox";
 
 function Error({ statusCode }) {
   return (
     <MainLayout noPadding>
       <FullBox useDims={true}>
-        <Heading as="h1">oops</Heading>
+        <h1>oops</h1>
         <p>{statusCode ? `An error ${statusCode} occurred on the server` : "An error occurred on client"}</p>
       </FullBox>
     </MainLayout>

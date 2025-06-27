@@ -1,7 +1,6 @@
-/** @jsxImportSource theme-ui */
 import React from "react";
-import { Grid, Text } from "theme-ui";
 import WikiCard from "../../components/WikiCard";
+import styles from "./styles.module.css";
 
 import craftingTable from "../../assets/crafting-table.png";
 import glowstone from "../../assets/glowstone.png";
@@ -16,26 +15,10 @@ import MainLayout from "../../internals/MainLayout";
 function WikiHome() {
   return (
     <MainLayout>
-      <Grid
-        sx={{
-          gridTemplateColumns: ["repeat(auto-fill, minmax(200px, 1fr) )", "repeat(auto-fill, minmax(500px, 1fr) )"],
-          gridAutoRows: "1fr",
-        }}
-      >
-        <div
-          sx={{
-            display: "flex",
-            background: "linear-gradient( 135deg, #f06e6e 10%, #ff3e3e 100%)",
-            p: [2, 5],
-            borderRadius: "10px",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: ["center", "start"],
-            fontFamily: "Minecraft, monospace",
-          }}
-        >
-          <Text sx={{ fontSize: [2, 3] }}>the lounge SMP's</Text>
-          <Text sx={{ fontSize: [5, 6] }}>Server Wiki</Text>
+      <div className={styles.grid}>
+        <div className={styles.heroCard}>
+          <span className={styles.heroTitle}>the lounge SMP's</span>
+          <span className={styles.heroSubtitle}>Server Wiki</span>
         </div>
         <WikiCard
           link="/wiki/changelog"
@@ -65,7 +48,7 @@ function WikiHome() {
           heading="Land Claiming"
           description="Claim land for your community."
         />
-      </Grid>
+      </div>
     </MainLayout>
   );
 }

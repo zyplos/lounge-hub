@@ -1,0 +1,56 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  max-height: 100vh;
+  height: 100vh;
+}
+
+.navToggle {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: var(--space-3);
+  background: var(--color-background-secondary);
+  display: block;
+  z-index: 100;
+  cursor: pointer;
+  border-radius: var(--radius-4);
+}
+
+.closeIcon {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.hamburgerIcon {
+  display: block;
+  fill: white;
+  width: 24px;
+  height: 24px;
+}
+
+.navSection {
+  display: none;
+}
+
+.navSectionOpen {
+  display: flex;
+  width: 100%;
+}
+
+.articleOpen {
+  flex-grow: 1;
+  padding: var(--space-4);
+  padding-bottom: var(--space-6);
+  overflow-y: auto;
+  display: block;
+}
+
+.articleClosed {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: none;
+} 

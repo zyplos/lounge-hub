@@ -1,0 +1,61 @@
+:root {
+  /* Font families */
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-heading: inherit;
+  --font-monospace: Menlo, monospace;
+
+  /* Font sizes */
+  --font-size-0: 12px;
+  --font-size-1: 14px;
+  --font-size-2: 16px;
+  --font-size-3: 20px;
+  --font-size-4: 24px;
+  --font-size-5: 32px;
+  --font-size-6: 48px;
+  --font-size-7: 64px;
+  --font-size-8: 96px;
+
+  /* Spacing */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 32px;
+  --space-5: 64px;
+  --space-6: 128px;
+  --space-7: 256px;
+  --space-8: 512px;
+
+  /* Colors (light mode) */
+  --color-text: #000;
+  --color-background: #fff;
+  --color-background-secondary: #171717;
+  --color-background-tertiary: #737373;
+  --color-primary: #ff3e3e;
+  --color-secondary: #ffd300;
+  --color-accent: #fff;
+  --color-highlight: #ff4000;
+  --color-muted: #808080;
+  --color-dark-gray: #242424;
+  --color-dark-gray-accent: #353535;
+  --color-discord: #5865F2;
+  --color-twitch: #9146ff;
+  --color-card-bg: #efefef;
+  --color-card-bg-secondary: #c7c7c7;
+
+  /* Border radius */
+  --radius-0: 0;
+  --radius-4: 4px;
+  --radius-10: 10px;
+}
+
+[data-theme='dark'] {
+  --color-text: #fff;
+  --color-background: #383332;
+  --color-background-secondary: #212020;
+  --color-background-tertiary: #332E30;
+  --color-dark-gray: #000;
+  --color-muted: #8e8e8e;
+  --color-card-bg: #4a403e;
+  --color-card-bg-secondary: #332c2b;
+} 

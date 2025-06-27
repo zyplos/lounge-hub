@@ -1,0 +1,19 @@
+.header {
+  font-family: 'Minecraft', monospace;
+  font-size: var(--font-size-4);
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.inlineFlex {
+  display: inline-flex;
+  align-items: center;
+}
+
+.resultBorder {
+  border: 2px solid var(--color-border, #373737);
+  height: 56px;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+} 

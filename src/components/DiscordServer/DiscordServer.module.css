@@ -1,0 +1,119 @@
+.grid {
+  display: grid;
+  gap: var(--space-3);
+  font-family: 'Minecraft', monospace;
+}
+
+.voiceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-background-secondary, #23272a);
+  padding: var(--space-2);
+  border-radius: var(--radius-4);
+}
+
+.voiceIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.voiceInfoCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.voiceLabel {
+  font-size: var(--font-size-2);
+  color: #fff;
+  font-weight: bold;
+}
+
+.voiceCount {
+  font-size: var(--font-size-3);
+  color: #fff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.memberRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-background-tertiary, #2c2f33);
+  padding: var(--space-2);
+  border-radius: var(--radius-4);
+  margin-bottom: var(--space-1);
+}
+
+.streaming {
+  background: linear-gradient(0deg, rgba(145,70,255,0.7) 0%, rgba(255,0,185,0) 75%);
+  color: white;
+}
+
+.memberIcon {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #7289DA;
+  border-radius: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.online {
+  border: 2px solid #3eff58;
+}
+
+.idle {
+  border: 2px solid #ffde00;
+}
+
+.dnd {
+  border: 2px solid #ff3e3e;
+}
+
+.streaming {
+  border: 2px solid #8f48ff;
+}
+
+.memberInfoCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.memberName {
+  font-size: var(--font-size-3);
+  color: #fff;
+  font-weight: bold;
+}
+
+.botBadge {
+  background: #5865f2;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: var(--space-2);
+  font-size: 0.8em;
+}
+
+.live {
+  color: #ff3e3e;
+  font-weight: bold;
+}
+
+.memberGame {
+  font-size: var(--font-size-2);
+  color: #fff;
+}
+
+.muted {
+  color: var(--color-muted, #aaa);
+  font-size: var(--font-size-2);
+  margin-top: var(--space-2);
+} 

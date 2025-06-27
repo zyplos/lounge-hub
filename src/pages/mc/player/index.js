@@ -1,10 +1,9 @@
-/** @jsxImportSource theme-ui */
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Link from "next/link";
-import { Heading, Grid, Button, Text, Alert } from "theme-ui";
 import MainLayout from "../../../internals/MainLayout";
 import FullBox from "../../../components/FullBox";
+import styles from "./styles.module.css";
 
 function IndexPlayer() {
   const [playerName, setPlayerName] = useState("");
@@ -18,18 +17,16 @@ function IndexPlayer() {
   return (
     <MainLayout noPadding>
       <FullBox useDims={true}>
-        <form onSubmit={handleSubmit}>
-          <Grid>
-            <Text variant="muted">TODO: make this look better</Text>
-            <Heading as="h1">Player Lookup</Heading>
-
-            {router.query.notfound && <Alert>Player not found.</Alert>}
-            <label>
-              Player Name: <input name="playerName" type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} required />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.grid}>
+            <div className={styles.muted}>TODO: make this look better</div>
+            <h1 className={styles.heading}>Player Lookup</h1>
+            {router.query.notfound && <div className={styles.alert}>Player not found.</div>}
+            <label className={styles.label}>
+              Player Name: <input name="playerName" type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} required className={styles.input} />
             </label>
-
-            <Button>View Profile</Button>
-          </Grid>
+            <button className={styles.button}>View Profile</button>
+          </div>
         </form>
       </FullBox>
     </MainLayout>

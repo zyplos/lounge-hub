@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Close } from "theme-ui";
 import HamburgerIcon from "../assets/hamburger.svg";
 import Navbar from "../components/Navbar";
+import styles from "./MainLayout.module.css";
 
 function MainLayout({ noPadding, children, ...props }: { noPadding?: boolean, children: React.ReactNode }) {
   const [isOpen, setOpen] = useState(false);
@@ -12,53 +12,18 @@ function MainLayout({ noPadding, children, ...props }: { noPadding?: boolean, ch
   }
 
   return (
-    <div
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignSelf: "stretch",
-        maxHeight: "100vh",
-        height: "100vh",
-      }}
-      id="App"
-    >
+    <div className={styles.root} id="App">
       <div
         id="nav-toggle"
-        sx={{
-          position: "absolute",
-          top: "5px",
-          right: "5px",
-          padding: 3,
-          backgroundColor: "backgroundSecondary",
-          display: ["block", "none"],
-          zIndex: 100,
-        }}
+        className={styles.navToggle}
         onClick={showNavbar}
       >
-        {isOpen ? <Close color="white" /> : <HamburgerIcon sx={{ display: "block", fill: "white", width: "24px", height: "24px" }} />}
+        {isOpen ? <span className={styles.closeIcon}>&times;</span> : <HamburgerIcon className={styles.hamburgerIcon} />}
       </div>
-      <section
-        sx={{
-          display: [isOpen ? "flex" : "none", "flex"],
-          width: [isOpen ? "100%" : "auto", "auto"],
-          ...(isOpen && {
-            "& > div": {
-              width: "100%",
-            },
-          }),
-        }}
-      >
+      <section className={isOpen ? styles.navSectionOpen : styles.navSection}>
         <Navbar />
       </section>
-      <article
-        sx={{
-          flexGrow: "1",
-          p: noPadding ? 0 : 4,
-          pb: noPadding ? 0 : [4, 6],
-          overflowY: "auto",
-          display: [isOpen ? "none" : "block", "block"],
-        }}
-      >
+      <article className={isOpen ? styles.articleClosed : styles.articleOpen}>
         {children}
       </article>
     </div>

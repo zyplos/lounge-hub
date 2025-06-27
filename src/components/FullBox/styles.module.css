@@ -1,0 +1,16 @@
+.fullBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fullBoxDims {
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.fullBoxPadding {
+  padding: 2em;
+} 

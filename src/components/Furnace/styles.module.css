@@ -1,0 +1,25 @@
+.header {
+  font-family: 'Minecraft', monospace;
+  font-size: var(--font-size-4);
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.inlineFlex {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 36px);
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.fuelIcon {
+  width: 25px;
+  height: 25px;
+  fill: var(--color-icon, #8b8b8b);
+  margin: 0 8px;
+} 

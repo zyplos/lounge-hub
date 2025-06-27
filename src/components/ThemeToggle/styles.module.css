@@ -1,0 +1,23 @@
+.button {
+  background: var(--color-text);
+  color: var(--color-background);
+  padding: var(--space-1);
+  line-height: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-background);
+  border-radius: var(--radius-4);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  outline: none;
+}
+
+[data-theme='dark'] .button {
+  background: var(--color-background);
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.button svg {
+  display: block;
+} 

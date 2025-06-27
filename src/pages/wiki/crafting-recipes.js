@@ -1,26 +1,18 @@
-/** @jsxImportSource theme-ui */
-import { Heading, Grid, Text } from "theme-ui";
-
+import React from "react";
 import CraftingTable from "../../components/CraftingTable";
 import Stonecutter from "../../components/Stonecutter";
 import Furnace from "../../components/Furnace";
-
 import recipes from "../../internals/recipes";
 import MainLayout from "../../internals/MainLayout";
+import styles from "./styles.module.css";
 
 function CraftingRecipes() {
   return (
     <MainLayout>
-      <Grid>
-        <Heading as="h1">Crafting Recipes</Heading>
-        <Text>The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.</Text>
-
-        <Grid
-          sx={{
-            gridTemplateColumns: ["repeat(auto-fill, minmax(250px, 1fr) )", "repeat(auto-fill, minmax(320px, 1fr) )"],
-            gridAutoRows: "1fr",
-          }}
-        >
+      <div className={styles.content}>
+        <h1 className={styles.heading}>Crafting Recipes</h1>
+        <p className={styles.text}>The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.</p>
+        <div className={styles.grid}>
           {recipes.map((recipe, index) => {
             const { type, input, result } = recipe;
             const amount = result[2];
@@ -35,11 +27,11 @@ function CraftingRecipes() {
             } else if (type === "stonecutter") {
               return <Stonecutter key={index} input={input} result={result} amount={amount} />;
             } else {
-              return <p>broken recipe</p>;
+              return <p key={index}>broken recipe</p>;
             }
           })}
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </MainLayout>
   );
 }

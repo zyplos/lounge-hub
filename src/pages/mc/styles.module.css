@@ -1,0 +1,148 @@
+.notSignedInRoot {
+  color: white;
+  font-size: var(--font-size-4);
+}
+
+.heroSection {
+  background-size: cover;
+  position: relative;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroEmblemWrapper {
+  position: absolute;
+  width: 350px;
+  opacity: 0.3;
+  animation: bounceSubtle 2s ease-in-out alternate infinite;
+  display: block;
+  left: 50%;
+  top: 10%;
+  transform: translateX(-50%);
+}
+
+.heroTextBlock {
+  font-family: 'Minecraft', monospace;
+  z-index: 2;
+  text-align: center;
+  position: relative;
+}
+
+.heroTitle {
+  font-size: var(--font-size-6);
+  font-weight: bold;
+  text-shadow: 3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black;
+}
+
+.heroSeason {
+  font-size: var(--font-size-5);
+  display: block;
+  margin-top: var(--space-2);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-4);
+  display: block;
+  margin-top: var(--space-1);
+}
+
+.heroSignIn {
+  margin-top: var(--space-5);
+}
+
+.heroScroll {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  font-size: var(--font-size-5);
+  animation: bounce 1s ease-in-out alternate infinite;
+}
+
+@keyframes bounce {
+  from { bottom: 32px; }
+  to { bottom: 48px; }
+}
+
+@keyframes bounceSubtle {
+  from { transform: translate(-50%, -5px); }
+  to { transform: translate(-50%, 5px); }
+}
+
+.centerSectionBox {
+  background: #131313;
+  padding: var(--space-5) var(--space-4);
+}
+
+.centerSectionContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.modifiedH2 {
+  font-size: var(--font-size-5);
+  font-weight: bold;
+  margin-bottom: var(--space-3);
+}
+
+.sectionBox {
+  display: flex;
+  flex-wrap: wrap;
+  background: #16161b;
+  border-radius: var(--radius-10);
+  margin-bottom: var(--space-5);
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.sectionBoxAlt {
+  flex-direction: row-reverse;
+}
+
+.sectionContent {
+  width: 100%;
+  max-width: 50%;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sectionHeading {
+  font-size: var(--font-size-5);
+  font-weight: bold;
+  margin-bottom: var(--space-3);
+}
+
+.signInButton {
+  background: var(--color-discord);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-4);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-2);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.signInButton:hover {
+  background: var(--color-primary);
+}
+
+.paragraph {
+  font-size: var(--font-size-2);
+  margin: var(--space-3) 0;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+} 

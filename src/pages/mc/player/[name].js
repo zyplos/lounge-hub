@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-import { Box, Button, Grid, Heading, Text } from "theme-ui";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import useSWR from "swr";
@@ -25,39 +23,27 @@ import MainLayout from "../../../internals/MainLayout";
 const ChunkCard = ({ x, z, y, dimension, claimed_on, isHome }) => {
   return (
     <div
-      sx={{
-        bg: "cardBg",
-        p: 3,
-        borderRadius: "7px",
-        display: "flex",
-        alignItems: "center",
-        color: (theme) => theme.colors.text,
-        "&:hover": {
-          bg: "cardBgSecondary",
-        },
-      }}
+      className="cardBg p-3 border-radius-7 flex align-items-center color-text"
     >
       <div
-        sx={{
-          mr: 3,
-        }}
+        className="mr-3"
       >
         {isHome ? (
-          <BaseIcon fill={DimensionColorMap[dimension]} sx={{ width: "64px", height: "64px" }} />
+          <BaseIcon fill={DimensionColorMap[dimension]} className="width-64 height-64" />
         ) : (
-          <DimensionIcon fill={DimensionColorMap[dimension]} sx={{ width: "64px", height: "64px" }} />
+          <DimensionIcon fill={DimensionColorMap[dimension]} className="width-64 height-64" />
         )}
       </div>
-      <Grid>
-        <Text sx={{ variant: "text.heading", fontSize: 3 }}>{isHome ? "Home" : `(${x}, ${z})`}</Text>
+      <div className="grid">
+        <h3 className="text-heading font-size-3">{isHome ? "Home" : `(${x}, ${z})`}</h3>
         {isHome ? (
-          <Text>
+          <p>
             Set at {x}, {y}, {z}
-          </Text>
+          </p>
         ) : (
-          <Text>Claimed {prettyPrintDateAndTime(claimed_on)}</Text>
+          <p>Claimed {prettyPrintDateAndTime(claimed_on)}</p>
         )}
-      </Grid>
+      </div>
     </div>
   );
 };
@@ -128,39 +114,13 @@ function Player() {
 
   return (
     <MainLayout noPadding>
-      <Grid
-        sx={{
-          gridTemplateColumns: "500px auto",
-          maxHeight: "100vh",
-          height: "100vh",
-        }}
-        gap={0}
-      >
+      <div className="grid grid-template-columns-500px-auto max-height-100vh height-100vh" gap={0}>
         <div
-          sx={{
-            overflowY: "auto",
-            "::-webkit-scrollbar": {
-              width: "5px",
-            },
-            "::-webkit-scrollbar-track": {
-              backgroundColor: "backgroundSecondary",
-            },
-            "::-webkit-scrollbar-thumb": {
-              backgroundColor: "white",
-            },
-          }}
+          className="overflow-y-auto"
         >
-          <Box color="white" bg={communityColor} sx={{ position: "sticky", top: 0 }}>
-            <div
-              sx={{
-                height: "125px",
-                overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
-                position: "relative",
-              }}
-            >
-              <div sx={{ alignSelf: "flex-start", mr: 2, position: "relative" }}>
+          <div className="sticky top-0">
+            <div className="height-125 overflow-hidden flex align-items-center position-relative">
+              <div className="align-self-flex-start mr-2 position-relative">
                 <Image
                   src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
                   alt={`${player.name}'s portrait`}
@@ -171,88 +131,59 @@ function Player() {
                 />
               </div>
 
-              <Grid gap={2}>
-                <Heading as="h1" sx={{ fontSize: 4 }}>
-                  {player.name}
-                </Heading>
-                <Text>
+              <div className="grid gap-2">
+                <h1 className="font-size-4">{player.name}</h1>
+                <p>
                   <CommunityIcon
-                    sx={{
-                      height: (theme) => theme.fontSizes[3],
-                      width: (theme) => theme.fontSizes[3],
-                      fill: "white",
-                      verticalAlign: "text-bottom",
-                      mr: 2,
-                    }}
+                    className="height-font-size-3 width-font-size-3 fill-white vertical-align-text-bottom mr-2"
                   />
                   {communityName}
-                </Text>
-                <Text>
+                </p>
+                <p>
                   <CalendarIcon
-                    sx={{
-                      height: (theme) => theme.fontSizes[3],
-                      width: (theme) => theme.fontSizes[3],
-                      fill: "white",
-                      verticalAlign: "text-bottom",
-                      mr: 2,
-                    }}
+                    className="height-font-size-3 width-font-size-3 fill-white vertical-align-text-bottom mr-2"
                   />
                   Joined on {prettyPrintDate(joinDate)}
-                </Text>
+                </p>
                 <div
-                  sx={{
-                    position: "absolute",
-                    width: "45px",
-                    opacity: "75%",
-                    top: "15px",
-                    right: "15px",
-                    zIndex: -1,
-                  }}
+                  className="position-absolute width-45 opacity-75 top-15 right-15 z-index-1"
                 >
                   <Image src={`/static-assets/community/${player.community_id}.png`} alt="community watermark" width="45px" height="45px" />
                 </div>
-              </Grid>
+              </div>
             </div>
-          </Box>
-          <Grid p={4}>
+          </div>
+          <div className="p-4">
             {player.home_x && player.home_y && player.home_z && player.home_dimension && (
-              <Button
+              <button
                 onClick={() => updateMapFrameHome(player.home_x, player.home_y, player.home_z, DimensionInternalNameMap[player.home_dimension])}
-                p={0}
-                bg="transparent"
-                sx={{ textAlign: "left", cursor: "pointer" }}
+                className="p-0 bg-transparent text-left cursor-pointer"
               >
                 <ChunkCard x={player.home_x} y={player.home_y} z={player.home_z} dimension={player.home_dimension} isHome />
-              </Button>
+              </button>
             )}
-            {chunkData.data.length === 0 && <Text>This player has not claimed any chunks yet.</Text>}
+            {chunkData.data.length === 0 && <p>This player has not claimed any chunks yet.</p>}
             {chunkData.data.map((chunk, index) => {
               return (
-                <Button
+                <button
                   onClick={() => updateMapFrame(chunk.x, chunk.z, DimensionInternalNameMap[chunk.dimension])}
                   key={index}
-                  p={0}
-                  bg="transparent"
-                  sx={{ textAlign: "left", cursor: "pointer" }}
+                  className="p-0 bg-transparent text-left cursor-pointer"
                 >
                   <ChunkCard x={chunk.x} z={chunk.z} dimension={chunk.dimension} claimed_on={new Date(chunk.claimed_on)} />
-                </Button>
+                </button>
               );
             })}
-          </Grid>
+          </div>
         </div>
         <div>
           <iframe
-            sx={{
-              width: "100%",
-              height: "100%",
-              border: "none",
-            }}
+            className="width-100 height-100 border-none"
             src={currentMapUrl}
             title={`${player.name}'s Base`}
           ></iframe>
         </div>
-      </Grid>
+      </div>
     </MainLayout>
   );
 }

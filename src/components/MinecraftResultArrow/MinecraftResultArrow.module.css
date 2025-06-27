@@ -1,0 +1,9 @@
+.minecraftResultArrow {
+  width: 50px;
+  margin: 0 var(--space-3);
+  fill: var(--color-arrow, #8b8b8b);
+}
+
+[data-theme='dark'] .minecraftResultArrow {
+  fill: #080808;
+} 
