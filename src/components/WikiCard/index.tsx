@@ -22,7 +22,7 @@ const WikiCard: React.FC<WikiCardProps> = ({ link, image, gradient, heading, des
   };
 
   return (
-    <Link href={link} passHref className={styles.link} legacyBehavior>
+    <Link href={link} className={styles.link}>
       <div className={styles.flexContainer} style={flexStyle}>
         <div className={styles.imageContainer}>
           <Image src={image} alt={heading} height={128} width={128} /> {/* Use numbers */}

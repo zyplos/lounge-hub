@@ -94,41 +94,37 @@ const Navbar: React.FC = () => {
       <div className={styles.navbarOuterContainer}>
         <div className={styles.navGrid}>
           <div className={styles.emblemContainer}>
-            <Link href="/" passHref className={styles.emblemLink} legacyBehavior>
-
+            <Link href="/"  className={styles.emblemLink} >
               <Image src={emblem} alt="Emblem" layout="fixed" width={48} height={28} /> {/* Use numbers */}
-
             </Link>
           </div>
 
           <NavDivider />
 
-          <Link href="/" passHref className={styles.navLink} legacyBehavior>
-
+          <Link href="/"  className={styles.navLink} >
             <Image src={HomeIconImg} alt="Home Icon" width={32} height={32} /> {/* Use numbers */}
             <NavText>Home</NavText>
-
           </Link>
 
-          <Link href="/wiki" passHref className={styles.navLink} legacyBehavior>
-
-            <Image src={WikiIconImg} alt="Wiki Icon" width={32} height={32} /> {/* Use numbers */}
-            <NavText>Wiki</NavText>
-
+          <Link href="/wiki"  className={styles.navLink} >
+            <span>
+              <Image src={WikiIconImg} alt="Wiki Icon" width={32} height={32} /> {/* Use numbers */}
+              <NavText>Wiki</NavText>
+            </span>
           </Link>
 
-          <Link href="/mc" passHref className={styles.navLink} legacyBehavior>
-
-            <BlockIcon className={styles.navIcon} /> {/* SVG components accept className */}
-            <NavText>Minecraft</NavText>
-
+          <Link href="/mc"  className={styles.navLink} >
+            <span>
+              <BlockIcon className={styles.navIcon} /> {/* SVG components accept className */}
+              <NavText>Minecraft</NavText>
+            </span>
           </Link>
 
-          <Link href="/mc/player" passHref className={styles.navLink} legacyBehavior>
-
-            <Image src={PlayerIconImg} alt="Player Icon" width={32} height={32} /> {/* Use numbers */}
-            <NavText>Player Lookup</NavText>
-
+          <Link href="/mc/player"  className={styles.navLink} >
+            <span>
+              <Image src={PlayerIconImg} alt="Player Icon" width={32} height={32} /> {/* Use numbers */}
+              <NavText>Player Lookup</NavText>
+            </span>
           </Link>
 
           <a href={mapUrlBase} target="_blank" rel="noreferrer" className={styles.navLink}>

@@ -17,19 +17,19 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.discordapp.com',
-        port: '443',
+        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'visage.surgeplay.com',
-        port: '443',
+        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'crafatar.com',
-        port: '443',
+        port: '',
         pathname: '/**',
       },
     ],

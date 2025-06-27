@@ -11,7 +11,7 @@ function GameplayPage() { // Renamed component
       <div className={styles.pageGrid}>
         <p className={styles.paragraphText}>Some stuff on the server functions a little differently from Vanilla.</p>
         <p className={styles.paragraphText}>
-          Various <Link href="/wiki/crafting-recipes" passHref className={styles.inlineLink}>crafting recipes</Link> have been added to make things a bit easier.
+          Various <Link href="/wiki/crafting-recipes" className={styles.inlineLink}>crafting recipes</Link> have been added to make things a bit easier.
         </p>
 
         <h2 className={styles.sectionHeading}>Gamerules</h2>

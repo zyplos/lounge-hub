@@ -36,8 +36,8 @@ function LandClaimingPage() { // Renamed component
           See your own profile by doing <MinecraftText>/profile</MinecraftText>. See another player's profile by doing <MinecraftText>/profile [name]</MinecraftText>.
         </p>
         <p className={styles.paragraphText}>
-          More detailed player profiles can be viewed on the <Link href="/mc/player/" passHref className={styles.inlineLink}>player profile page</Link> (example here:{" "}
-          <Link href="/mc/player/Zyplos/" passHref className={styles.inlineLink}>Zyplos's profile</Link>).
+          More detailed player profiles can be viewed on the <Link href="/mc/player/" className={styles.inlineLink}>player profile page</Link> (example here:{" "}
+          <Link href="/mc/player/Zyplos/" className={styles.inlineLink}>Zyplos's profile</Link>).
         </p>
 
         <h2 className={styles.sectionHeading}>Player Homes</h2>

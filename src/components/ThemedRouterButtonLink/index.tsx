@@ -59,7 +59,7 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
   };
 
   return (
-    <Link href={href} {...nextLinkProps} legacyBehavior>
+    <Link href={href} {...nextLinkProps}>
       <Button {...buttonAsAnchorProps} />
     </Link>
   );
