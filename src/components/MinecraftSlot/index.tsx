@@ -60,9 +60,9 @@ const MinecraftSlot: React.FC<MinecraftSlotProps> = ({
          </div>
       )}
       {amount && amount > 1 && ( // Ensure amount is not null/undefined before checking > 1
-        <span className={styles.amountText}>
+        (<span className={styles.amountText}>
           {amount}
-        </span>
+        </span>)
       )}
     </span>
   );

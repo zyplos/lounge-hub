@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
         href={href} // href is guaranteed to be a string here by ButtonProps if as === 'a'
         className={combinedClasses}
         onClick={onClick}
-        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement})}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {children}
       </a>

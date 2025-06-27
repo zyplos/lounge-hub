@@ -22,20 +22,20 @@ const WikiCard: React.FC<WikiCardProps> = ({ link, image, gradient, heading, des
   };
 
   return (
-    <Link href={link} passHref>
-      <a className={styles.link}>
-        <div className={styles.flexContainer} style={flexStyle}>
-          <div className={styles.imageContainer}>
-            <Image src={image} alt={heading} height={128} width={128} /> {/* Use numbers */}
-          </div>
-          <div className={styles.textContainer}>
-            <h2 className={styles.heading}>
-              {heading}
-            </h2>
-            <p className={styles.description}>{description}</p>
-          </div>
+    <Link href={link} passHref className={styles.link}>
+
+      <div className={styles.flexContainer} style={flexStyle}>
+        <div className={styles.imageContainer}>
+          <Image src={image} alt={heading} height={128} width={128} /> {/* Use numbers */}
         </div>
-      </a>
+        <div className={styles.textContainer}>
+          <h2 className={styles.heading}>
+            {heading}
+          </h2>
+          <p className={styles.description}>{description}</p>
+        </div>
+      </div>
+
     </Link>
   );
 };

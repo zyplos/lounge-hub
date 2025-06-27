@@ -26,9 +26,9 @@ const Stonecutter: React.FC<StonecutterProps> = ({
       <p className={styles.stonecutterTitle}>Stonecutter</p>
       <div className={styles.recipeLayout}>
         {input && input[1] ? ( // Check if input and its image exist
-          <MinecraftSlot image={input[1]} name={input[0]} />
+          (<MinecraftSlot image={input[1]} name={input[0]} />)
         ) : (
-          <MinecraftSlot /> // Render empty slot
+          (<MinecraftSlot />) // Render empty slot
         )}
 
         <MinecraftResultArrow />
