@@ -1,0 +1,11 @@
+/* No specific styles for ErrorFullBox itself needed for now,
+   as FullBox handles layout and text variant is global.
+   This file is created for consistency and future use. */
+
+.headerText {
+  /* If any specific styling for header text beyond .text-fullbox is needed */
+}
+
+.bodyText {
+  /* If any specific styling for body text is needed */
+}

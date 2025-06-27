@@ -1,0 +1,36 @@
+.pageContainer {
+  /* If any overall page container styles are needed beyond MainLayout */
+}
+
+.pageGrid {
+  display: grid;
+  gap: var(--space-3); /* Default gap for the main page grid */
+}
+
+.pageHeading {
+  /* Uses h1 styles from _common.css */
+  margin-bottom: var(--space-2); /* Example spacing */
+}
+
+.pageDescription {
+  margin-bottom: var(--space-4); /* Example spacing */
+}
+
+.recipesGrid {
+  display: grid;
+  /* gridTemplateColumns: ["repeat(auto-fill, minmax(250px, 1fr) )", "repeat(auto-fill, minmax(320px, 1fr) )"] */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Default for smaller screens */
+  grid-auto-rows: 1fr; /* Ensure cards in a row are same height if content varies */
+  gap: var(--space-3); /* Assuming a default gap */
+}
+
+@media screen and (min-width: 40em) { /* First breakpoint for larger recipe card size */
+  .recipesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+.brokenRecipeText {
+  color: var(--color-primary); /* Make it stand out */
+  font-weight: var(--font-weight-bold);
+}

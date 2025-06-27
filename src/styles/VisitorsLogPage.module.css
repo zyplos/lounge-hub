@@ -1,0 +1,123 @@
+/* VisitorsLogPage.module.css */
+
+/* Main Page Layout */
+.pageGrid {
+  display: grid;
+  grid-template-columns: 500px auto; /* Fixed width for sidebar, auto for map */
+  max-height: 100vh;
+  height: 100vh;
+  gap: 0; /* No gap between sidebar and map */
+}
+
+.sidebar {
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background-color: var(--color-background-secondary);
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--color-text); /* Using --color-text for thumb for visibility */
+}
+
+/* Chunk Header Section */
+.chunkHeader {
+  color: white; /* Set by default, bg is dynamic */
+  position: sticky;
+  top: 0;
+  z-index: 10; /* Ensure it's above scrolling content */
+}
+
+.chunkHeaderContent {
+  height: 125px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative; /* For any potential absolute children */
+  padding: var(--space-3); /* Added some padding */
+}
+
+.ownerPortraitContainer {
+  align-self: flex-start;
+  margin-right: var(--space-2); /* mr: 2 */
+}
+
+.chunkInfoGrid {
+  display: grid;
+  gap: var(--space-2); /* gap={2} */
+}
+
+.chunkNameHeading {
+  font-size: var(--font-size-4); /* fontSize: 4 */
+  /* Other h1 styles from _common.css */
+}
+
+.chunkDetailText {
+  display: flex; /* To align icon and text */
+  align-items: center;
+}
+.chunkDetailText > span { /* Targeting the span after PlayerIcon Image */
+    margin-left: var(--space-2); /* ml: 2 */
+    vertical-align: middle; /* from original sx */
+}
+
+
+.chunkDetailIcon { /* For CalendarIcon */
+  height: var(--font-size-3); /* theme.fontSizes[3] */
+  width: var(--font-size-3);
+  fill: white; /* Default, can be overridden by inline style if needed */
+  vertical-align: text-bottom; /* May need adjustment */
+  margin-right: var(--space-2); /* mr: 2 */
+}
+
+/* Log List Section */
+.logListGrid {
+  display: grid;
+  gap: var(--space-3); /* Assuming a small gap between chunk cards */
+  padding: var(--space-4); /* p={4} */
+}
+
+/* ChunkCard (visitor card) styles */
+.visitorCard {
+  background-color: var(--color-card-bg);
+  padding: var(--space-3); /* p: 3 */
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.visitorAvatarContainer {
+  margin-right: var(--space-3); /* mr: 3 */
+}
+
+.visitorInfoGrid {
+  display: grid;
+  gap: var(--space-1); /* Small gap for info text */
+}
+
+.visitorNameHeading {
+  /* Uses .text-heading from _common.css (implicitly by being h3 or similar) */
+  font-size: var(--font-size-3); /* fontSize: 3 */
+  margin: 0; /* Remove default heading margin */
+}
+
+.visitorDetailText {
+  /* Standard text styling */
+  font-size: var(--font-size-1);
+}
+
+/* Map Iframe */
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.noDataText {
+  color: var(--color-muted);
+  padding: var(--space-4);
+  text-align: center;
+}

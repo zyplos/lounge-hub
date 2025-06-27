@@ -1,0 +1,36 @@
+.pageGrid {
+  display: grid;
+  gap: var(--space-3); /* gap={3} */
+}
+
+.serversGrid {
+  display: grid;
+  gap: var(--space-5); /* gap={5} */
+  grid-template-columns: repeat(1, 1fr); /* columns={[1, 1, 2]} - default */
+}
+
+/* Responsive columns for serversGrid */
+@media screen and (min-width: 64em) { /* Third breakpoint in theme.breakpoints for 2 columns */
+  .serversGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.serverSection {
+  /* Styles for the div wrapping each server status */
+}
+
+.sectionHeading {
+  margin-bottom: var(--space-3); /* mb: 3 */
+  /* Default h1/h2 styling from _common.css will apply for font, etc. */
+}
+
+.loungeHeading {
+  margin-top: var(--space-4); /* mt: 4 */
+}
+
+/* Styles for the commented-out Alert if it were to be used */
+.infoAlert {
+  /* Uses .alert and .info from Alert component or _common.css */
+  margin-top: var(--space-4); /* mt: 4 */
+}

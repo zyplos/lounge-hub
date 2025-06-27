@@ -1,126 +1,89 @@
-/** @jsxImportSource theme-ui */
-import { Box, Grid, Heading, Text } from "theme-ui";
-import useSWR from "swr";
-import { mapUrlBase, DimensionInternalNameMap, DimensionColorMap, findChunkCenter, prettyPrintDate, prettyPrintDateAndTime } from "../../../../../../internals/Utils";
-import { useRouter } from "next/router";
-import Image from "next/image";
+import React from 'react'; // Removed unused Box, Grid, Heading, Text from theme-ui
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-import CalendarIcon from "../../../../../../assets/calendar-icon.svg";
-import PlayerIcon from "../../../../../../assets/player-icon.png";
-import ErrorFullBox from "../../../../../../components/ErrorFullBox";
-import LoadingFullBox from "../../../../../../components/LoadingFullBox";
-import MainLayout from "../../../../../../internals/MainLayout";
+import {
+  mapUrlBase,
+  DimensionInternalNameMap,
+  DimensionColorMap,
+  findChunkCenter,
+  prettyPrintDate,
+  prettyPrintDateAndTime
+} from '../../../../../../internals/Utils'; // Adjusted path
 
-const ChunkCard = ({ enteredTime, playerUUID, name }) => {
+import CalendarIcon from '../../../../../../assets/calendar-icon.svg'; // Adjusted path
+import PlayerIcon from '../../../../../../assets/player-icon.png';   // Adjusted path
+import ErrorFullBox from '../../../../../../components/ErrorFullBox/index';
+import LoadingFullBox from '../../../../../../components/LoadingFullBox/index';
+import MainLayout from '../../../../../../internals/MainLayout';
+
+import styles from '../../../../../../styles/VisitorsLogPage.module.css'; // Adjusted path
+
+// Refactored VisitorCard (previously ChunkCard in this file)
+const VisitorCard = ({ enteredTime, playerUUID, name }) => {
   return (
-    <div
-      sx={{
-        bg: "cardBg",
-        p: 3,
-        borderRadius: "7px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        sx={{
-          mr: 3,
-        }}
-      >
+    <div className={styles.visitorCard}>
+      <div className={styles.visitorAvatarContainer}>
         <Image src={`https://crafatar.com/avatars/${playerUUID}?size=64&overlay`} alt={`${name}'s Head`} width="64px" height="64px" />
       </div>
-      <Grid>
-        <Text sx={{ variant: "text.heading", fontSize: 3 }}>{name}</Text>
-        <Text>Visited {prettyPrintDateAndTime(enteredTime)}</Text>
-      </Grid>
+      <div className={styles.visitorInfoGrid}>
+        <h3 className={`${styles.visitorNameHeading} text-heading`}>{name}</h3>
+        <p className={styles.visitorDetailText}>Visited {prettyPrintDateAndTime(enteredTime)}</p>
+      </div>
     </div>
   );
 };
 
-function VisitorsLog() {
+function VisitorsLogPage() { // Renamed component
   const router = useRouter();
-  console.log("===========QUERY", router.query);
+  // console.log("===========QUERY", router.query); // Keep for debugging
 
-  const { uuid, x, z } = router.query;
+  const { uuid: dimensionUuid, x, z } = router.query; // Renamed uuid to dimensionUuid for clarity
 
-  const { data: logData, error: logError } = useSWR(`/api/minecraft/logEntryByCoords?x=${x}&z=${z}&dimension=${uuid}`);
-  const { data: chunkData, error: chunkError } = useSWR(`/api/minecraft/chunkByCoords?x=${x}&z=${z}&dimension=${uuid}`);
+  const { data: logData, error: logError } = useSWR(
+    dimensionUuid && x && z ? `/api/minecraft/logEntryByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}` : null
+  );
+  const { data: chunkOwnerData, error: chunkOwnerError } = useSWR( // Renamed from chunkData
+    dimensionUuid && x && z ? `/api/minecraft/chunkByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}` : null
+  );
 
-  if (!uuid || !x || !z) {
-    return (
-      <MainLayout>
-        <ErrorFullBox message="Invalid query" />;
-      </MainLayout>
-    );
+  if (!dimensionUuid || !x || !z) {
+    return <MainLayout><ErrorFullBox header="Error" text="Invalid query parameters." /></MainLayout>;
   }
 
   if (logError) {
-    return (
-      <MainLayout>
-        <ErrorFullBox header={logError.status} text="Error getting log data." />
-      </MainLayout>
-    );
+    return <MainLayout><ErrorFullBox header={logError.status || "Error"} text="Error getting log data." /></MainLayout>;
   }
-  if (chunkError) {
-    return (
-      <MainLayout>
-        <ErrorFullBox header={chunkData.status} text="Error getting chunk data." />
-      </MainLayout>
-    );
+  if (chunkOwnerError) {
+    return <MainLayout><ErrorFullBox header={chunkOwnerError.status || "Error"} text="Error getting chunk owner data." /></MainLayout>;
   }
+
   if (!logData) {
     return <LoadingFullBox text="Grabbing log entries..." />;
   }
-  if (!chunkData) {
-    return <LoadingFullBox text="Loading chunk data..." />;
+  if (!chunkOwnerData) {
+    return <LoadingFullBox text="Loading chunk owner data..." />;
   }
 
-  if (chunkData.data.length === 0 || logData.data.length === 0) {
-    return (
-      <MainLayout>
-        <ErrorFullBox header="404" text="This chunk has no data." />
-      </MainLayout>
-    );
+  if (chunkOwnerData.data.length === 0) { // A chunk must have an owner to have visit logs in this context
+    return <MainLayout><ErrorFullBox header="404" text="This chunk has no owner data or is unclaimed." /></MainLayout>;
   }
 
-  const newCoords = findChunkCenter(x, z);
-  const ownedChunk = chunkData.data[0];
+  // If chunkOwnerData is fine, but logData is empty, it means no visits yet.
+  // This is handled by the map function returning nothing or a "no visits" message.
+
+  const ownedChunk = chunkOwnerData.data[0];
+  const mapChunkCenter = findChunkCenter(x, z);
+  const dimensionColor = DimensionColorMap[ownedChunk.dimension] || '#333';
 
   return (
     <MainLayout noPadding>
-      <Grid
-        sx={{
-          gridTemplateColumns: "500px auto",
-          maxHeight: "100vh",
-          height: "100vh",
-        }}
-        gap={0}
-      >
-        <div
-          sx={{
-            overflowY: "auto",
-            "::-webkit-scrollbar": {
-              width: "5px",
-            },
-            "::-webkit-scrollbar-track": {
-              backgroundColor: "backgroundSecondary",
-            },
-            "::-webkit-scrollbar-thumb": {
-              backgroundColor: "white",
-            },
-          }}
-        >
-          <Box color="white" bg={DimensionColorMap[ownedChunk.dimension]} sx={{ position: "sticky", top: 0, zIndex: 10 }}>
-            <div
-              sx={{
-                height: "125px",
-                overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
-                position: "relative",
-              }}
-            >
-              <div sx={{ alignSelf: "flex-start", mr: 2 }}>
+      <div className={styles.pageGrid}>
+        <div className={styles.sidebar}>
+          <div className={styles.chunkHeader} style={{ backgroundColor: dimensionColor }}>
+            <div className={styles.chunkHeaderContent}>
+              <div className={styles.ownerPortraitContainer}>
                 <Image
                   src={`https://visage.surgeplay.com/full/304/${ownedChunk.player_id}`}
                   alt={`${ownedChunk.name}'s portrait`}
@@ -130,63 +93,36 @@ function VisitorsLog() {
                   priority
                 />
               </div>
-
-              <Grid
-                sx={{
-                  gap: 2,
-                }}
-              >
-                <Heading as="h1" sx={{ fontSize: 4 }}>
-                  Chunk ({x}, {z})
-                </Heading>
-
-                <Text
-                  sx={{
-                    "> span": {
-                      verticalAlign: "middle",
-                    },
-                  }}
-                >
+              <div className={styles.chunkInfoGrid}>
+                <h1 className={`${styles.chunkNameHeading} text-h1`}>Chunk ({x}, {z})</h1>
+                <p className={styles.chunkDetailText}>
                   <Image src={PlayerIcon} alt="Head Icon" width="20px" height="20px" />
-                  <span sx={{ ml: 2 }}>Owned by {ownedChunk.name}</span>
-                </Text>
-
-                <Text>
-                  <CalendarIcon
-                    sx={{
-                      height: (theme) => theme.fontSizes[3],
-                      width: (theme) => theme.fontSizes[3],
-                      fill: "white",
-                      verticalAlign: "text-bottom",
-                      mr: 2,
-                    }}
-                  />
+                  <span>Owned by {ownedChunk.name}</span>
+                </p>
+                <p className={styles.chunkDetailText}>
+                  <CalendarIcon className={styles.chunkDetailIcon} />
                   Claimed {prettyPrintDate(new Date(ownedChunk.claimed_on))}
-                </Text>
-              </Grid>
+                </p>
+              </div>
             </div>
-          </Box>
-          <Grid p={4}>
-            {logData.data.length === 0 && <Text>Seems no one has visited this chunk yet.</Text>}
-            {logData.data.map((logEntry, index) => {
-              return <ChunkCard key={index} enteredTime={new Date(logEntry.entered_time)} playerUUID={logEntry.player_id} name={logEntry.name} />;
-            })}
-          </Grid>
+          </div>
+          <div className={styles.logListGrid}>
+            {logData.data.length === 0 && <p className={styles.noDataText}>Seems no one has visited this chunk yet.</p>}
+            {logData.data.map((logEntry, index) => (
+              <VisitorCard key={index} enteredTime={new Date(logEntry.entered_time)} playerUUID={logEntry.player_id} name={logEntry.name} />
+            ))}
+          </div>
         </div>
         <div>
           <iframe
-            sx={{
-              width: "100%",
-              height: "100%",
-              border: "none",
-            }}
-            src={`${mapUrlBase}/#${DimensionInternalNameMap[uuid]}:${newCoords.x}:${newCoords.y}:${newCoords.z}:30:0:0:0:0:perspective`}
-            title={"chunk"}
+            className={styles.mapIframe}
+            src={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
+            title={"Chunk Map"}
           ></iframe>
         </div>
-      </Grid>
+      </div>
     </MainLayout>
   );
 }
 
-export default VisitorsLog;
+export default VisitorsLogPage;

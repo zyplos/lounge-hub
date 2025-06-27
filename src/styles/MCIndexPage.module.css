@@ -1,0 +1,191 @@
+/* Keyframes */
+@keyframes bounce {
+  from { bottom: var(--space-4); } /* 32px */
+  to { bottom: var(--space-5); }   /* 48px, using space scale */
+}
+
+@keyframes bounceSubtle {
+  from { transform: translateY(-5px); }
+  to { transform: translateY(5px); }
+}
+
+/* MCHomeNotSignedIn styles */
+.notSignedInContainer {
+  font-size: var(--font-size-4); /* fontSize: 4 */
+  color: white;
+}
+
+.heroSection {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: var(--space-5); /* padding: 5 */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroEmblem {
+  position: absolute;
+  width: 200px; /* Default width */
+  opacity: 0.3; /* 30% */
+  animation: bounceSubtle 2s ease-in-out alternate infinite;
+  display: block;
+}
+@media screen and (min-width: 40em) { /* First breakpoint for 350px */
+  .heroEmblem {
+    width: 350px;
+  }
+}
+@media screen and (min-width: 52em) { /* Second breakpoint for 500px */
+  .heroEmblem {
+    width: 500px;
+  }
+}
+
+.heroTextContent {
+  font-family: "Minecraft", monospace;
+  z-index: 2;
+  text-align: center;
+}
+
+.heroHeading {
+  text-shadow: 3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black;
+  /* Default h1 styles from _common.css will apply for font size etc. */
+}
+
+.heroSubheading {
+  /* This was variant="display" */
+  /* Apply .text-display class from _common.css */
+  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black; /* Mobile shadow */
+  display: block;
+}
+@media screen and (min-width: 40em) { /* First breakpoint for larger shadow */
+  .heroSubheading {
+    text-shadow: 5px 5px 0px black, -5px 5px 0px black, -5px -5px 0px black ,5px -5px 0px black;
+  }
+}
+
+.heroSeasonText {
+  /* This was variant="displaysm" */
+  /* Apply .text-displaysm class from _common.css */
+  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black; /* Mobile shadow */
+  display: block;
+}
+@media screen and (min-width: 40em) { /* First breakpoint for larger shadow */
+  .heroSeasonText {
+    text-shadow: 3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black;
+  }
+}
+
+.signInButtonContainer {
+  margin-top: var(--space-5); /* mt: 5 */
+}
+
+.scrollDownText {
+  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black;
+  position: absolute;
+  /* bottom: 4 (var(--space-4)) set by animation */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: auto; /* mx: auto */
+  margin-right: auto;
+  font-size: var(--font-size-5); /* fontSize: 5 */
+  animation: bounce 1s ease-in-out alternate infinite;
+}
+
+/* CenterSectionBox styles */
+.centerSection {
+  padding-top: var(--space-5);    /* py: 5 */
+  padding-bottom: var(--space-5);
+  padding-left: var(--space-4);   /* px: 4 */
+  padding-right: var(--space-4);
+  background-color: #131313;
+  text-align: left; /* Default */
+}
+@media screen and (min-width: 40em) { /* First breakpoint for text-align: center */
+  .centerSection {
+    text-align: center;
+  }
+}
+/* .centerSection > .container is used for inner content */
+
+/* ModifiedH2 styles */
+.modifiedH2 {
+  /* Uses h1 styles from _common.css */
+  margin-bottom: var(--space-4); /* mb={4} */
+}
+
+.centerSectionParagraph {
+  margin-bottom: var(--space-4); /* mb={4} for first paragraph */
+}
+.centerSectionParagraphMt {
+  margin-top: var(--space-4); /* mt={4} for second paragraph */
+}
+
+.cidImageGrid {
+  display: grid;
+  gap: var(--space-4); /* gap={4} */
+  grid-template-columns: repeat(1, 1fr); /* Mobile default */
+  justify-items: center;
+  margin-bottom: var(--space-5); /* mb: 5 */
+}
+@media screen and (min-width: 40em) { /* First breakpoint for 2 columns */
+  .cidImageGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 64em) { /* Third breakpoint for 3 columns */
+  .cidImageGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* SectionBox styles (Not used in MCHomeNotSignedIn, but defined in original file) */
+.sectionBox {
+  display: flex;
+  background-color: #16161b; /* bg="#16161b" */
+  flex-wrap: wrap;
+}
+.sectionTextGrid {
+  width: 100%; /* Default width */
+  padding-top: var(--space-5);    /* py: [5, 6] */
+  padding-bottom: var(--space-5);
+  padding-left: var(--space-5);   /* px: 5 */
+  padding-right: var(--space-5);
+  order: 2; /* Default order */
+}
+@media screen and (min-width: 52em) { /* Second breakpoint for 50% width and order changes */
+  .sectionTextGrid {
+    width: 50%;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
+  }
+  .sectionTextGridOrder1 { order: 1; }
+  .sectionTextGridOrder2 { order: 2; }
+}
+
+.sectionImage {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-grow: 1;
+  width: 100%; /* Default width */
+  height: 300px; /* Default height */
+  order: 1; /* Default order */
+}
+@media screen and (min-width: 52em) { /* Second breakpoint for auto width/height and order changes */
+  .sectionImage {
+    width: auto;
+    height: auto;
+  }
+  .sectionImageOrder1 { order: 1; }
+  .sectionImageOrder2 { order: 2; }
+}
+.sectionHeading {
+  /* Uses h1 styles from _common.css */
+}

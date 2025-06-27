@@ -1,0 +1,17 @@
+.alert {
+  padding: var(--space-3);
+  border-radius: 4px; /* Default radius, or var(--border-radius) if preferred */
+  /* Default alert type - can add variants for error, success, warning */
+}
+
+/* Info variant from _common.css */
+.info {
+  color: var(--alert-info-text);
+  background-color: var(--alert-info-bg);
+}
+
+/* Add other variants if needed */
+.error {
+  color: var(--color-background); /* Example: white text */
+  background-color: var(--color-primary); /* Example: primary red background */
+}

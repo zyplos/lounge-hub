@@ -1,0 +1,10 @@
+.heading {
+  /* If specific styling for the 404 heading is needed beyond default h1 */
+  font-size: var(--font-size-7); /* Example: make it larger */
+  margin-bottom: var(--space-3);
+}
+
+.message {
+  /* Styling for the message paragraph */
+  font-size: var(--font-size-3);
+}

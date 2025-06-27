@@ -1,0 +1,23 @@
+.pageGrid {
+  display: grid;
+  gap: var(--space-3); /* Default gap for the main page grid content */
+}
+
+.sectionHeading {
+  /* Uses h1/h2 styles from _common.css */
+  margin-top: var(--space-4); /* Example: Add space above section headings */
+  margin-bottom: var(--space-2);
+}
+
+.paragraphText {
+  margin-bottom: var(--space-2); /* Space between paragraphs */
+  line-height: var(--line-height-body);
+}
+
+.inlineLink {
+  color: var(--color-primary); /* Or your preferred link color */
+  text-decoration: underline;
+}
+.inlineLink:hover {
+  color: var(--color-highlight);
+}

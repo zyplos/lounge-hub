@@ -1,29 +1,26 @@
-/** @jsxImportSource theme-ui */
-import { Heading, Grid, Text } from "theme-ui";
-
-import CraftingTable from "../../components/CraftingTable";
-import Stonecutter from "../../components/Stonecutter";
-import Furnace from "../../components/Furnace";
-
+import React from 'react';
+import CraftingTable from "../../components/CraftingTable/index";
+import Stonecutter from "../../components/Stonecutter/index";
+import Furnace from "../../components/Furnace/index";
 import recipes from "../../internals/recipes";
 import MainLayout from "../../internals/MainLayout";
+import styles from "../../styles/CraftingRecipesPage.module.css"; // Adjusted path
 
-function CraftingRecipes() {
+function CraftingRecipesPage() { // Renamed component
   return (
     <MainLayout>
-      <Grid>
-        <Heading as="h1">Crafting Recipes</Heading>
-        <Text>The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.</Text>
+      <div className={styles.pageGrid}>
+        <h1 className={styles.pageHeading}>Crafting Recipes</h1>
+        <p className={styles.pageDescription}>
+          The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.
+        </p>
 
-        <Grid
-          sx={{
-            gridTemplateColumns: ["repeat(auto-fill, minmax(250px, 1fr) )", "repeat(auto-fill, minmax(320px, 1fr) )"],
-            gridAutoRows: "1fr",
-          }}
-        >
+        <div className={styles.recipesGrid}>
           {recipes.map((recipe, index) => {
             const { type, input, result } = recipe;
-            const amount = result[2];
+            // Ensure result exists and has a 3rd element (amount) before accessing
+            const amount = result && result.length > 2 ? result[2] : undefined;
+
             if (type === "crafting") {
               return <CraftingTable key={index} input={input} result={result} amount={amount} />;
             } else if (type === "furnace") {
@@ -35,13 +32,13 @@ function CraftingRecipes() {
             } else if (type === "stonecutter") {
               return <Stonecutter key={index} input={input} result={result} amount={amount} />;
             } else {
-              return <p>broken recipe</p>;
+              return <p key={index} className={styles.brokenRecipeText}>broken recipe</p>;
             }
           })}
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </MainLayout>
   );
 }
 
-export default CraftingRecipes;
+export default CraftingRecipesPage;

@@ -1,0 +1,4 @@
+.loadingText {
+  margin-top: var(--space-3); /* Example: add some space above the text */
+  font-size: var(--font-size-3);
+}

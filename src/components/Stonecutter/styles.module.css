@@ -1,0 +1,26 @@
+.stonecutterTitle {
+  margin-bottom: var(--space-1); /* mb: 1 */
+  font-family: "Minecraft", monospace;
+  color: var(--color-text); /* Match MinecraftContainer's text color */
+}
+
+.recipeLayout {
+  display: inline-flex;
+  align-items: center;
+}
+
+.resultSlotWrapper {
+  /* Light mode default border for the span around result slot */
+  border: 2px solid #373737;
+  height: 56px; /* 52px slot height + 2px top border + 2px bottom border */
+  box-sizing: content-box; /* As per original sx prop */
+  display: inline-flex; /* To make it wrap the slot correctly */
+  align-items: center; /* Vertically center slot if needed, though slot itself has fixed height */
+  justify-content: center; /* Horizontally center slot if needed */
+}
+
+/* Dark mode border for the span */
+:root[data-theme="dark"] .resultSlotWrapper,
+:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .resultSlotWrapper {
+  border: 2px solid #080808;
+}

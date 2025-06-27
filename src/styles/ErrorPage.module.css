@@ -1,0 +1,12 @@
+.heading {
+  /* If specific styling for the error heading is needed beyond default h1 */
+  font-size: var(--font-size-7); /* Example: make it larger */
+  margin-bottom: var(--space-3);
+  text-transform: uppercase; /* From original theme.text.fullbox which might have been intended for such pages */
+  letter-spacing: 0.1em;
+}
+
+.message {
+  /* Styling for the error message paragraph */
+  font-size: var(--font-size-3);
+}

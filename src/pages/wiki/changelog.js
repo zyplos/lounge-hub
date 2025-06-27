@@ -1,142 +1,72 @@
-/** @jsxImportSource theme-ui */
-import { Heading, Grid, Text, Badge, Alert } from "theme-ui";
-import SmallCardGrid from "../../components/SmallCardGrid";
+import React from 'react';
+import SmallCardGrid from "../../components/SmallCardGrid/index";
 import ArticleLayout from "../../internals/ArticleLayout";
+import Alert from "../../components/Alert/index"; // Custom Alert
+import styles from "../../styles/ChangelogPage.module.css"; // Adjusted path
 
+// Local components, now using CSS Modules
 const SmallerCardGrid = ({ ...props }) => <SmallCardGrid width="300px" {...props} />;
 const EvenSmallerCardGrid = ({ ...props }) => <SmallCardGrid width="200px" {...props} />;
+
 const FastLink = ({ href, children }) => (
-  <a href={href} target="_blank" rel="noreferrer">
+  <a href={href} target="_blank" rel="noreferrer" className={styles.fastLink}>
     {children}
   </a>
 );
 
-function Changelog() {
+// Helper for card content
+const SeasonCard = ({ title, details, isCurrent = false, linkHref, linkText }) => (
+  <div>
+    <h3 className={styles.cardHeading}>{title}</h3>
+    <p className={styles.cardText}>
+      {linkHref ? <FastLink href={linkHref}>{linkText || details}</FastLink> : details}
+      {isCurrent && <span className={styles.currentBadge}>Current</span>}
+    </p>
+  </div>
+);
+
+
+function ChangelogPage() { // Renamed component
   return (
     <ArticleLayout title="Server History">
-      <Alert variant="info" sx={{ my: 4 }}>
+      <Alert variant="info" className={styles.infoAlert}>
         i'll add world backups here sometime soon
       </Alert>
-      <Grid>
-        <Heading>Vanilla Minecraft</Heading>
+      <div className={styles.pageGrid}>
+        <h2 className={styles.sectionHeading}>Vanilla Minecraft</h2>
         <SmallerCardGrid>
-          <div>
-            <Heading>Season 6: Echoes of the Realm</Heading>
-            <Text>
-              1.20 <Badge>Current</Badge>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 6</Heading>
-            <Text>1.19</Text>
-          </div>
-          <div>
-            <Heading>Season 5: Part II</Heading>
-            <Text>1.18</Text>
-          </div>
-          <div>
-            <Heading>Season 5</Heading>
-            <Text>1.17</Text>
-          </div>
-          <div>
-            <Heading>Season 4</Heading>
-            <Text>1.16</Text>
-          </div>
-          <div>
-            <Heading>Season 3</Heading>
-            <Text>1.14 / 1.15</Text>
-          </div>
-          <div>
-            <Heading>Season 2</Heading>
-            <Text>1.13</Text>
-          </div>
-          <div>
-            <Heading>Season 1</Heading>
-            <Text>1.13</Text>
-          </div>
+          <SeasonCard title="Season 6: Echoes of the Realm" details="1.20" isCurrent />
+          <SeasonCard title="Season 6" details="1.19" />
+          <SeasonCard title="Season 5: Part II" details="1.18" />
+          <SeasonCard title="Season 5" details="1.17" />
+          <SeasonCard title="Season 4" details="1.16" />
+          <SeasonCard title="Season 3" details="1.14 / 1.15" />
+          <SeasonCard title="Season 2" details="1.13" />
+          <SeasonCard title="Season 1" details="1.13" />
         </SmallerCardGrid>
 
-        <Heading>Modded Minecraft</Heading>
+        <h2 className={styles.sectionHeading}>Modded Minecraft</h2>
         <EvenSmallerCardGrid>
-          <div>
-            <Heading>Season 11</Heading>
-            <Text>
-              <FastLink href="https://www.technicpack.net/modpack/tekkit-2.1935271">Tekkit 2</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 10</Heading>
-            <Text>
-              <FastLink href="https://drive.google.com/file/d/1mCPLbVJsjIM4IAEw-DVUjf7f1W8ELgzS/view?usp=sharing">kedr's FUNNY TIME FABRIC</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 9</Heading>
-            <Text>
-              <FastLink href="https://drive.google.com/file/d/1KaJf4n3wM_kOl0tj3boYhkBCYNTbAQAd/view?usp=sharing">ratpack</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 8</Heading>
-            <Text>
-              <FastLink href="https://drive.google.com/file/d/1-4UWqfbF16rS649tSf9EG3SrYNPsHJuG/view?usp=sharing">julian's lounge pack</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 7</Heading>
-            <Text>
-              <FastLink href="https://www.technicpack.net/modpack/vanilla-sprinkles-modpack.1780181">Vanilla & Sprinkles</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 6</Heading>
-            <FastLink href="https://www.curseforge.com/minecraft/modpacks/enigmatica2">Enigmatica 2</FastLink>
-          </div>
-          <div>
-            <Heading>Season 5</Heading>
-            <Text>
-              <FastLink href="https://www.technicpack.net/modpack/tekxit-3-official-1122.1253751">Tekxit 3</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 4</Heading>
-            <Text>
-              <FastLink href="https://www.curseforge.com/minecraft/modpacks/enigmatica2">Enigmatica 2</FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 3</Heading>
-            <Text>
-              <FastLink href="https://www.curseforge.com/minecraft/modpacks/skyfactory-4" target="_blank" rel="noreferrer">
-                SkyFactory 4
-              </FastLink>
-            </Text>
-          </div>
-          <div>
-            <Heading>Season 2</Heading>
-            <Text>Pixelmon</Text>
-          </div>
-          <div>
-            <Heading>Season 1</Heading>
-            <Text>
-              <FastLink href="https://www.technicpack.net/modpack/zy-cos-modpack.1260752">zy & co.'s modpack</FastLink>
-            </Text>
-          </div>
+          <SeasonCard title="Season 11" linkHref="https://www.technicpack.net/modpack/tekkit-2.1935271" linkText="Tekkit 2" />
+          <SeasonCard title="Season 10" linkHref="https://drive.google.com/file/d/1mCPLbVJsjIM4IAEw-DVUjf7f1W8ELgzS/view?usp=sharing" linkText="kedr's FUNNY TIME FABRIC" />
+          <SeasonCard title="Season 9" linkHref="https://drive.google.com/file/d/1KaJf4n3wM_kOl0tj3boYhkBCYNTbAQAd/view?usp=sharing" linkText="ratpack" />
+          <SeasonCard title="Season 8" linkHref="https://drive.google.com/file/d/1-4UWqfbF16rS649tSf9EG3SrYNPsHJuG/view?usp=sharing" linkText="julian's lounge pack" />
+          <SeasonCard title="Season 7" linkHref="https://www.technicpack.net/modpack/vanilla-sprinkles-modpack.1780181" linkText="Vanilla & Sprinkles" />
+          <SeasonCard title="Season 6" linkHref="https://www.curseforge.com/minecraft/modpacks/enigmatica2" linkText="Enigmatica 2" />
+          <SeasonCard title="Season 5" linkHref="https://www.technicpack.net/modpack/tekxit-3-official-1122.1253751" linkText="Tekxit 3" />
+          <SeasonCard title="Season 4" linkHref="https://www.curseforge.com/minecraft/modpacks/enigmatica2" linkText="Enigmatica 2" />
+          <SeasonCard title="Season 3" linkHref="https://www.curseforge.com/minecraft/modpacks/skyfactory-4" linkText="SkyFactory 4" />
+          <SeasonCard title="Season 2" details="Pixelmon" />
+          <SeasonCard title="Season 1" linkHref="https://www.technicpack.net/modpack/zy-cos-modpack.1260752" linkText="zy & co.'s modpack" />
         </EvenSmallerCardGrid>
 
-        <Heading>Terraria</Heading>
+        <h2 className={styles.sectionHeading}>Terraria</h2>
         <EvenSmallerCardGrid>
-          <div>
-            <Heading>Season 2</Heading>
-            <Text>Journey's End</Text>
-          </div>
-          <div>
-            <Heading>Season 1</Heading>
-            <Text>1.3</Text>
-          </div>
+          <SeasonCard title="Season 2" details="Journey's End" />
+          <SeasonCard title="Season 1" details="1.3" />
         </EvenSmallerCardGrid>
-      </Grid>
+      </div>
     </ArticleLayout>
   );
 }
-export default Changelog;
+export default ChangelogPage;

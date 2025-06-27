@@ -1,41 +1,25 @@
-/** @jsxImportSource theme-ui */
 import React from "react";
-import { Grid, Text } from "theme-ui";
-import WikiCard from "../../components/WikiCard";
+import WikiCard from "../../components/WikiCard/index";
+import MainLayout from "../../internals/MainLayout";
+import styles from "../../styles/WikiIndexPage.module.css"; // Adjusted path
 
+// Import assets directly if they are not dynamically chosen based on props
 import craftingTable from "../../assets/crafting-table.png";
-import glowstone from "../../assets/glowstone.png";
-// import zombieHead from "../../assets/zombie-head.png";
+// import glowstone from "../../assets/glowstone.png"; // Unused in this component
 import grassBlock from "../../assets/grass-block.png";
 import commandBlock from "../../assets/command-block.png";
-import skulkSensor from "../../assets/sculk_sensor.gif";
+// import skulkSensor from "../../assets/sculk_sensor.gif"; // Unused
 import jigsawBlock from "../../assets/jigsaw-block.png";
-import MainLayout from "../../internals/MainLayout";
-// import endPortal from "../../assets/end-portal-frame-filled.png";
+// import endPortal from "../../assets/end-portal-frame-filled.png"; // Unused
 
-function WikiHome() {
+
+function WikiHomePage() { // Renamed component
   return (
     <MainLayout>
-      <Grid
-        sx={{
-          gridTemplateColumns: ["repeat(auto-fill, minmax(200px, 1fr) )", "repeat(auto-fill, minmax(500px, 1fr) )"],
-          gridAutoRows: "1fr",
-        }}
-      >
-        <div
-          sx={{
-            display: "flex",
-            background: "linear-gradient( 135deg, #f06e6e 10%, #ff3e3e 100%)",
-            p: [2, 5],
-            borderRadius: "10px",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: ["center", "start"],
-            fontFamily: "Minecraft, monospace",
-          }}
-        >
-          <Text sx={{ fontSize: [2, 3] }}>the lounge SMP's</Text>
-          <Text sx={{ fontSize: [5, 6] }}>Server Wiki</Text>
+      <div className={styles.wikiGrid}>
+        <div className={styles.heroCard}>
+          <p className={styles.heroTextLine1}>the lounge SMP's</p>
+          <p className={styles.heroTextLine2}>Server Wiki</p>
         </div>
         <WikiCard
           link="/wiki/changelog"
@@ -65,9 +49,9 @@ function WikiHome() {
           heading="Land Claiming"
           description="Claim land for your community."
         />
-      </Grid>
+      </div>
     </MainLayout>
   );
 }
 
-export default WikiHome;
+export default WikiHomePage;

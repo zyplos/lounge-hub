@@ -1,0 +1,4 @@
+.minecraftText {
+  font-family: "Minecraft", monospace; /* Directly using the font names. Ensure "Minecraft" font is globally available. */
+  /* The @south-paw/typeface-minecraft import in _app.jsx should handle this. */
+}

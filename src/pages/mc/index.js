@@ -1,204 +1,125 @@
-/** @jsxImportSource theme-ui */
-import { Box, Container, Flex, Grid, Heading, Paragraph, Text, Button } from "theme-ui";
-import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import React from 'react'; // Removed unused imports like Box, Container etc. from theme-ui
+import { signIn, useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link'; // Keep Link if used by any sub-component, though not directly in this snippet
 
-import Link from "next/link";
-import Image from "next/image";
-import InvitationSplashImage from "../../assets/invitation-splash.png";
-import EmblemMCImage from "../../assets/emblem-mc.png";
-import ChunkClaimImage from "../../assets/chunk-claim.png";
-import CloudsMiscImage from "../../assets/clouds-misc.png";
-import WorldgenPackImage from "../../assets/worldgen-pack.png";
+import MainLayout from '../../internals/MainLayout';
+import Yourspace from '../../components/Yourspace/index'; // Already migrated
+import Button from '../../components/Button/index'; // Custom button
 
-import { keyframes } from "@emotion/react";
-import MainLayout from "../../internals/MainLayout";
-import Yourspace from "../../components/Yourspace";
+// Assets (ensure paths are correct)
+import InvitationSplashImage from '../../assets/invitation-splash.png';
+import EmblemMCImage from '../../assets/emblem-mc.png';
+// Unused image assets commented out for now:
+// import ChunkClaimImage from '../../assets/chunk-claim.png';
+// import CloudsMiscImage from '../../assets/clouds-misc.png';
+// import WorldgenPackImage from '../../assets/worldgen-pack.png';
+import CID1 from '../../assets/ref/1.png';
+import CID2 from '../../assets/ref/2.png';
+import CID3 from '../../assets/ref/3.png';
+import CID4 from '../../assets/ref/4.png';
+import CID5 from '../../assets/ref/5.png';
+import CID6 from '../../assets/ref/6.png';
 
-import CID1 from "../../assets/ref/1.png";
-import CID2 from "../../assets/ref/2.png";
-import CID3 from "../../assets/ref/3.png";
-import CID4 from "../../assets/ref/4.png";
-import CID5 from "../../assets/ref/5.png";
-import CID6 from "../../assets/ref/6.png";
+import styles from '../../styles/MCIndexPage.module.css'; // Adjusted path
 
-const bounceAnimation = keyframes({
-  from: { bottom: "32px" },
-  to: { bottom: "48px" },
-});
+// Local Sub-components, now using CSS Modules
 
-const bounceAnimationSubtle = keyframes({
-  from: { transform: "translateY(-5px)" },
-  to: { transform: "translateY(5px)" },
-});
-
-function ModifiedH2({ children }) {
+const ModifiedH2 = ({ children }) => {
   return (
-    <Heading variant="styles.h1" as="h2" mb={4}>
+    <h2 className={`${styles.modifiedH2} text-h1`}>{/* text-h1 applies h1 styling from _common.css */}
       {children}
-    </Heading>
+    </h2>
   );
-}
+};
 
-function SectionBox({ heading, image, children, isAlt, ...props }) {
+// SectionBox is not used in MCHomeNotSignedIn, so definition can be removed or kept if planned for future use.
+// For now, commenting out to reduce unused code.
+/*
+const SectionBox = ({ heading, image, children, isAlt, ...props }) => {
+  const textGridOrderClass = !isAlt ? styles.sectionTextGridOrder1 : styles.sectionTextGridOrder2;
+  const imageOrderClass = !isAlt ? styles.sectionImageOrder2 : styles.sectionImageOrder1;
   return (
-    <Flex bg="#16161b" sx={{ flexWrap: "wrap" }} {...props}>
-      <Grid
-        sx={{
-          width: ["100%", null, "50%"],
-          py: [5, 6],
-          px: 5,
-          order: [2, null, !isAlt ? 1 : 2],
-        }}
-      >
-        <Heading variant="styles.h1" as="h2">
-          {heading}
-        </Heading>
+    <div className={styles.sectionBox} {...props} style={{ backgroundColor: '#16161b' }}>
+      <div className={`${styles.sectionTextGrid} ${textGridOrderClass}`}>
+        <h2 className={`${styles.sectionHeading} text-h1`}>{heading}</h2>
         {children}
-      </Grid>
+      </div>
       <div
-        sx={{
-          background: `url(${image.src}) center center no-repeat`,
-          backgroundSize: "cover",
-          flexGrow: "1",
-          width: ["100%", null, "auto"],
-          height: ["300px", null, "auto"],
-          order: [1, null, !isAlt ? 2 : 1],
-        }}
+        className={`${styles.sectionImage} ${imageOrderClass}`}
+        style={{ backgroundImage: `url(${image.src})` }}
       ></div>
-    </Flex>
+    </div>
   );
-}
+};
+*/
 
-function CenterSectionBox({ children }) {
+const CenterSectionBox = ({ children }) => {
   return (
-    <Box py={5} px={4} bg="#131313" sx={{ textAlign: [null, "center"] }}>
-      <Container>{children}</Container>
-    </Box>
+    <div className={styles.centerSection}>
+      <div className="container">{/* Using global .container class */}
+        {children}
+      </div>
+    </div>
   );
-}
+};
 
-function SignInButton() {
+const SignInButton = () => {
   return (
-    <Button sx={{ cursor: "pointer" }} onClick={() => signIn("discord", { callbackUrl: "/mc" })}>
+    <Button variant="discord" onClick={() => signIn("discord", { callbackUrl: "/mc" })}>
       Sign in with Discord
     </Button>
   );
-}
+};
 
-const singlePixelShadow = "1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black";
-
-function MCHomeNotSignedIn() {
+const MCHomeNotSignedIn = () => {
   return (
     <MainLayout noPadding>
-      <div sx={{ fontSize: 4, color: "white" }}>
-        <div
-          sx={{
-            background: `url(${InvitationSplashImage.src}) center no-repeat`,
-            backgroundSize: "cover",
-            position: "relative",
-            padding: 5,
-
-            display: "flex",
-            flexDirection: "column",
-            height: "100vh",
-            maxHeight: "100vh",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            sx={{
-              position: "absolute",
-              width: ["200px", "350px", "500px"],
-              opacity: "30%",
-              animation: `${bounceAnimationSubtle} 2s ease-in-out alternate infinite`,
-              display: "block",
-            }}
-          >
+      <div className={styles.notSignedInContainer}>
+        <div className={styles.heroSection} style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}>
+          <div className={styles.heroEmblem}>
             <Image src={EmblemMCImage} alt="Emblem MC" layout="responsive" priority />
           </div>
-
-          <div
-            sx={{
-              fontFamily: "Minecraft,monospace",
-              zIndex: 2,
-              textAlign: "center",
-            }}
-          >
-            <Heading
-              as="h1"
-              sx={{
-                textShadow: "3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black",
-              }}
-            >
+          <div className={styles.heroTextContent}>
+            <h1 className={`${styles.heroHeading} text-h1`}>
               the lounge SMP server
-            </Heading>
-            <Text
-              // as="h2"
-              variant="display"
-              sx={{
-                textShadow: [singlePixelShadow, "5px 5px 0px black, -5px 5px 0px black, -5px -5px 0px black ,5px -5px 0px black"],
-                display: "block",
-              }}
-            >
+            </h1>
+            <p className={`${styles.heroSubheading} text-display`}>
               season 6
-            </Text>
-            <Text
-              // as="h2"
-              variant="displaysm"
-              sx={{
-                textShadow: [singlePixelShadow, "3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black"],
-                display: "block",
-              }}
-            >
+            </p>
+            <p className={`${styles.heroSeasonText} text-displaysm`}>
               echoes of the realm
-            </Text>
-
-            <div sx={{ mt: 5 }}>
+            </p>
+            <div className={styles.signInButtonContainer}>
               <SignInButton />
             </div>
-
-            <Text
-              sx={{
-                textShadow: "1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black",
-                position: "absolute",
-                bottom: 4,
-                left: "50%",
-                transform: "translateX(-50%)",
-                mx: "auto",
-                fontSize: 5,
-                animation: `${bounceAnimation} 1s ease-in-out alternate infinite`,
-              }}
-            >
+            <p className={styles.scrollDownText}>
               scroll down!
-            </Text>
+            </p>
           </div>
         </div>
 
         <CenterSectionBox>
           <ModifiedH2>latest vanilla release</ModifiedH2>
-          <Paragraph mb={4}>lounge mutuals only. Sign in to see if you're on the allowlist.</Paragraph>
+          <p className={styles.centerSectionParagraph}>lounge mutuals only. Sign in to see if you're on the allowlist.</p>
           <SignInButton />
-
-          <Paragraph mt={4}>Or ask for the IP from anyone you recognize below!</Paragraph>
-
-          <Grid gap={4} columns={[1, 2, null, 3]} sx={{ justifyItems: "center", mb: 5 }}>
+          <p className={`${styles.centerSectionParagraph} ${styles.centerSectionParagraphMt}`}>Or ask for the IP from anyone you recognize below!</p>
+          <div className={styles.cidImageGrid}>
             <Image width="200px" height="200px" src={CID1} alt="1" layout="fixed" />
             <Image width="200px" height="200px" src={CID2} alt="2" layout="fixed" />
             <Image width="200px" height="200px" src={CID3} alt="3" layout="fixed" />
             <Image width="200px" height="200px" src={CID4} alt="4" layout="fixed" />
             <Image width="200px" height="200px" src={CID5} alt="5" layout="fixed" />
             <Image width="200px" height="200px" src={CID6} alt="6" layout="fixed" />
-          </Grid>
+          </div>
         </CenterSectionBox>
       </div>
     </MainLayout>
   );
-}
+};
 
 function MCHome() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession(); // status not used directly here
   if (session) {
     return <Yourspace />;
   } else {

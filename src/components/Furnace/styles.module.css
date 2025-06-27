@@ -1,0 +1,29 @@
+.furnaceTitle {
+  margin-bottom: var(--space-1); /* mb: 1 */
+  font-family: "Minecraft", monospace;
+  color: var(--color-text); /* Match MinecraftContainer's text color */
+}
+
+.recipeLayout {
+  display: inline-flex;
+  align-items: center;
+}
+
+.inputSection {
+  display: grid;
+  gap: var(--space-2); /* gap={2} */
+  justify-items: center;
+}
+
+.flameIcon {
+  width: 25px;
+  height: 25px;
+  /* Light mode fill */
+  fill: #8b8b8b;
+}
+
+/* Dark mode fill for flame icon */
+:root[data-theme="dark"] .flameIcon,
+:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .flameIcon {
+  fill: #080808;
+}

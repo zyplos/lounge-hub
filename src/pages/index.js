@@ -1,14 +1,10 @@
-/** @jsxImportSource theme-ui */
-import { useContext } from "react";
-import { Heading, Grid, Message, Paragraph, Alert } from "theme-ui";
+import React from "react"; // useContext and useSWR are not directly used here, but kept if needed by hooks
 import MainLayout from "../internals/MainLayout";
-
-import useSWR from "swr";
-
-import DiscordServer from "../components/DiscordServer";
-import MinecraftStatus from "../components/MinecraftStatus";
-
+import DiscordServer from "../components/DiscordServer/index";
+import MinecraftStatus from "../components/MinecraftStatus/index";
+import Alert from "../components/Alert/index"; // Import new Alert component
 import { useMinecraftData } from "../internals/MinecraftContext";
+import styles from "../styles/IndexPage.module.css";
 
 function Home() {
   const minecraftData = useMinecraftData();
@@ -17,26 +13,27 @@ function Home() {
 
   return (
     <MainLayout>
-      <Grid gap={3}>
-        <Grid gap={5} columns={[1, 1, 2]}>
-          <div>
-            <Heading sx={{ mb: 3 }}>Minecraft • Main Server</Heading>
-            <MinecraftStatus data={vanilla} ip="???" />
+      <div className={styles.pageGrid}>
+        <div className={styles.serversGrid}>
+          <div className={styles.serverSection}>
+            <h2 className={styles.sectionHeading}>Minecraft • Main Server</h2>
+            <MinecraftStatus data={vanilla} /> {/* ip prop removed as it was unused */}
           </div>
-          <div>
-            <Heading sx={{ mb: 3 }}>Minecraft • Off-season</Heading>
-            <MinecraftStatus data={modded} ip="???" />
+          <div className={styles.serverSection}>
+            <h2 className={styles.sectionHeading}>Minecraft • Off-season</h2>
+            <MinecraftStatus data={modded} /> {/* ip prop removed */}
           </div>
-        </Grid>
+        </div>
 
-        {/* <Alert variant="info" sx={{ mt: 4 }}>
+        {/* Example of using the new Alert component if the commented out section were active */}
+        {/* <Alert variant="info" className={styles.infoAlert}>
           The land claims system, player lookups, and other features are currently not working due to the recent release of Minecraft 1.20. They will be fixed as things
           are updated for the new version.
         </Alert> */}
 
-        <Heading sx={{ mt: 4 }}>the lounge</Heading>
+        <h2 className={`${styles.sectionHeading} ${styles.loungeHeading}`}>the lounge</h2>
         <DiscordServer />
-      </Grid>
+      </div>
     </MainLayout>
   );
 }

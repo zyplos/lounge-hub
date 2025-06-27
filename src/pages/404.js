@@ -1,17 +1,16 @@
-/** @jsxImportSource theme-ui */
 import MainLayout from "../internals/MainLayout";
-import { Heading, Button } from "theme-ui";
-import FullBox from "../components/FullBox";
+import FullBox from "../components/FullBox/index"; // Updated path
+import styles from "../styles/404.module.css";
 
-function Error() {
+function Error404() { // Renamed to avoid conflict with global Error if any
   return (
     <MainLayout noPadding>
       <FullBox useDims={true}>
-        <Heading as="h1">404</Heading>
-        <p>Whatever you tried to access doesn't exist.</p>
+        <h1 className={styles.heading}>404</h1>
+        <p className={styles.message}>Whatever you tried to access doesn't exist.</p>
       </FullBox>
     </MainLayout>
   );
 }
 
-export default Error;
+export default Error404;

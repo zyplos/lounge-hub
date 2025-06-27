@@ -1,0 +1,35 @@
+.formGrid {
+  display: grid;
+  gap: var(--space-3); /* Assuming a default gap */
+  text-align: center; /* To center content within FullBox */
+}
+
+.todoText {
+  /* Uses .text-muted from _common.css */
+  margin-bottom: var(--space-2);
+}
+
+.pageHeading {
+  /* Default h1 styles apply, add more if needed */
+  margin-bottom: var(--space-3);
+}
+
+.formLabel {
+  display: block; /* Make label take full width */
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-2);
+}
+
+.formInput {
+  margin-left: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid var(--color-muted);
+  border-radius: 4px; /* Example radius */
+  font-size: var(--font-size-2);
+}
+
+/* Alert styles are handled by the Alert component itself */
+.notFoundAlert {
+  /* Specific layout for the alert if needed, e.g., margin */
+  margin-bottom: var(--space-3);
+}

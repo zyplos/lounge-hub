@@ -1,0 +1,10 @@
+/* This component primarily uses the new Button component.
+   Specific styles for ThemedRouterButtonLink might not be needed
+   if the Button component and NextLink behave as expected.
+   The 'as' prop functionality from theme-ui's Button is handled by
+   wrapping the custom Button with Next.js Link.
+*/
+.link {
+  /* Ensure the link itself doesn't add unwanted styles like underline */
+  text-decoration: none;
+}
