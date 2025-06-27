@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
       <div className={styles.navbarOuterContainer}>
         <div className={styles.navGrid}>
           <div className={styles.emblemContainer}>
-            <Link href="/" passHref className={styles.emblemLink}>
+            <Link href="/" passHref className={styles.emblemLink} legacyBehavior>
 
               <Image src={emblem} alt="Emblem" layout="fixed" width={48} height={28} /> {/* Use numbers */}
 
@@ -103,28 +103,28 @@ const Navbar: React.FC = () => {
 
           <NavDivider />
 
-          <Link href="/" passHref className={styles.navLink}>
+          <Link href="/" passHref className={styles.navLink} legacyBehavior>
 
             <Image src={HomeIconImg} alt="Home Icon" width={32} height={32} /> {/* Use numbers */}
             <NavText>Home</NavText>
 
           </Link>
 
-          <Link href="/wiki" passHref className={styles.navLink}>
+          <Link href="/wiki" passHref className={styles.navLink} legacyBehavior>
 
             <Image src={WikiIconImg} alt="Wiki Icon" width={32} height={32} /> {/* Use numbers */}
             <NavText>Wiki</NavText>
 
           </Link>
 
-          <Link href="/mc" passHref className={styles.navLink}>
+          <Link href="/mc" passHref className={styles.navLink} legacyBehavior>
 
             <BlockIcon className={styles.navIcon} /> {/* SVG components accept className */}
             <NavText>Minecraft</NavText>
 
           </Link>
 
-          <Link href="/mc/player" passHref className={styles.navLink}>
+          <Link href="/mc/player" passHref className={styles.navLink} legacyBehavior>
 
             <Image src={PlayerIconImg} alt="Player Icon" width={32} height={32} /> {/* Use numbers */}
             <NavText>Player Lookup</NavText>
