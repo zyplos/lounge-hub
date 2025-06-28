@@ -15,7 +15,8 @@ function CraftingRecipesPage() { // Renamed component
           The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.
         </p>
 
-        <div className={styles.recipesGrid}>
+        {/* TODO */}
+        {/* <div className={styles.recipesGrid}>
           {recipes.map((recipe, index) => {
             const { type, input, result } = recipe;
             // Ensure result exists and has a 3rd element (amount) before accessing
@@ -35,7 +36,7 @@ function CraftingRecipesPage() { // Renamed component
               return <p key={index} className={styles.brokenRecipeText}>broken recipe</p>;
             }
           })}
-        </div>
+        </div> */}
       </div>
     </MainLayout>
   );

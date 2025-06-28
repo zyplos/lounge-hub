@@ -12,21 +12,21 @@ interface BaseButtonProps {
 }
 
 // Props specific to when the component is a button
-interface AsButtonProps extends BaseButtonProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
+interface AsButtonProps extends BaseButtonProps {
   as?: 'button';
   type?: 'button' | 'submit' | 'reset';
   href?: undefined; // Ensure href is not passed when it's a button
 }
 
 // Props specific to when the component is an anchor
-interface AsAnchorProps extends BaseButtonProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface AsAnchorProps extends BaseButtonProps {
   as: 'a';
   href: string; // href is required for an anchor
   type?: undefined; // Ensure type is not passed when it's an anchor
 }
 
 // Union type for all possible props
-type ButtonProps = AsButtonProps | AsAnchorProps;
+export type ButtonProps = AsButtonProps | AsAnchorProps;
 
 const Button: React.FC<ButtonProps> = ({
   children,

@@ -1,4 +1,4 @@
-import { getSession, Session } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { getProfileData } from "../../../../firebase/fetchData";
 import { REST } from "@discordjs/rest";
 import { Routes, RESTGetAPIGuildMemberResult } from "discord-api-types/rest/v10";
@@ -24,7 +24,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_BOT_TOKEN 
 
 async function UserCB(req: NextApiRequest, res: NextApiResponse<ApiResponseData>) {
   let cbProfile: CBProfileData | { error: string } | null = null;
-  let session: Session | null = null;
+  let session: any = null;
 
   try {
     session = await getSession({ req });

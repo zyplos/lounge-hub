@@ -105,12 +105,12 @@ const MCHomeNotSignedIn = () => {
           <SignInButton />
           <p className={`${styles.centerSectionParagraph} ${styles.centerSectionParagraphMt}`}>Or ask for the IP from anyone you recognize below!</p>
           <div className={styles.cidImageGrid}>
-            <Image width="200px" height="200px" src={CID1} alt="1" layout="fixed" />
-            <Image width="200px" height="200px" src={CID2} alt="2" layout="fixed" />
-            <Image width="200px" height="200px" src={CID3} alt="3" layout="fixed" />
-            <Image width="200px" height="200px" src={CID4} alt="4" layout="fixed" />
-            <Image width="200px" height="200px" src={CID5} alt="5" layout="fixed" />
-            <Image width="200px" height="200px" src={CID6} alt="6" layout="fixed" />
+            <Image width="200" height="200" src={CID1} alt="1" layout="fixed" />
+            <Image width="200" height="200" src={CID2} alt="2" layout="fixed" />
+            <Image width="200" height="200" src={CID3} alt="3" layout="fixed" />
+            <Image width="200" height="200" src={CID4} alt="4" layout="fixed" />
+            <Image width="200" height="200" src={CID5} alt="5" layout="fixed" />
+            <Image width="200" height="200" src={CID6} alt="6" layout="fixed" />
           </div>
         </CenterSectionBox>
       </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-interface SmallCardGridProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'style'> {
+interface SmallCardGridProps extends React.HTMLAttributes<HTMLDivElement> {
   // Omit 'style' from HTMLAttributes to handle it explicitly for merging if necessary,
   // or to make it clear that this component controls gridTemplateColumns.
   // If external style prop needs to be merged, it can be added back: style?: React.CSSProperties;
   width?: string; // Represents the minmax width for grid items
   children: React.ReactNode;
   // className is part of HTMLAttributes
+
 }
 
 const SmallCardGrid: React.FC<SmallCardGridProps> = ({

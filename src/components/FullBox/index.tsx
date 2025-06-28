@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-interface FullBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FullBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   useDims?: boolean;
   usePadding?: boolean;
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { signIn, signOut, useSession, Session } from 'next-auth/react'; // Import Session
+import { signIn, signOut, useSession } from 'next-auth/react'; // Import Session
 import Image, { StaticImageData } from 'next/image'; // Import StaticImageData
 import MainLayout from '../../internals/MainLayout';
 import LoadingFullBox from '../LoadingFullBox/index';
@@ -53,7 +53,7 @@ interface UserCBData {
 
 // --- DiscordHeader Sub-component ---
 interface DiscordHeaderProps {
-  session: Session; // From next-auth
+  session: any; // From next-auth
   cbData?: CBProfilePayload | null; // The 'cb' part of UserCBData
 }
 

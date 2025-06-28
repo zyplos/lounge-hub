@@ -25,7 +25,7 @@ const VisitorCard = ({ enteredTime, playerUUID, name }) => {
   return (
     <div className={styles.visitorCard}>
       <div className={styles.visitorAvatarContainer}>
-        <Image src={`https://crafatar.com/avatars/${playerUUID}?size=64&overlay`} alt={`${name}'s Head`} width="64px" height="64px" />
+        <Image src={`https://crafatar.com/avatars/${playerUUID}?size=64&overlay`} alt={`${name}'s Head`} width="64" height="64" />
       </div>
       <div className={styles.visitorInfoGrid}>
         <h3 className={`${styles.visitorNameHeading} text-heading`}>{name}</h3>
@@ -52,6 +52,11 @@ function VisitorsLogPage() { // Renamed component
     return <MainLayout><ErrorFullBox header="Error" text="Invalid query parameters." /></MainLayout>;
   }
 
+  // TODO temp
+  if (typeof z !== "string" || typeof x !== "string") {
+    return <MainLayout><ErrorFullBox header="Error" text="Invalid query parameters." /></MainLayout>;
+  }
+
   if (logError) {
     return <MainLayout><ErrorFullBox header={logError.status || "Error"} text="Error getting log data." /></MainLayout>;
   }
@@ -74,7 +79,7 @@ function VisitorsLogPage() { // Renamed component
   // This is handled by the map function returning nothing or a "no visits" message.
 
   const ownedChunk = chunkOwnerData.data[0];
-  const mapChunkCenter = findChunkCenter(x, z);
+  const mapChunkCenter = findChunkCenter(parseInt(x), parseInt(z));
   const dimensionColor = DimensionColorMap[ownedChunk.dimension] || '#333';
 
   return (
@@ -87,8 +92,8 @@ function VisitorsLogPage() { // Renamed component
                 <Image
                   src={`https://visage.surgeplay.com/full/304/${ownedChunk.player_id}`}
                   alt={`${ownedChunk.name}'s portrait`}
-                  width="198px"
-                  height="320px"
+                  width="198"
+                  height="320"
                   layout="fixed"
                   priority
                 />
@@ -96,7 +101,7 @@ function VisitorsLogPage() { // Renamed component
               <div className={styles.chunkInfoGrid}>
                 <h1 className={`${styles.chunkNameHeading} text-h1`}>Chunk ({x}, {z})</h1>
                 <p className={styles.chunkDetailText}>
-                  <Image src={PlayerIcon} alt="Head Icon" width="20px" height="20px" />
+                  <Image src={PlayerIcon} alt="Head Icon" width="20" height="20" />
                   <span>Owned by {ownedChunk.name}</span>
                 </p>
                 <p className={styles.chunkDetailText}>
@@ -114,11 +119,11 @@ function VisitorsLogPage() { // Renamed component
           </div>
         </div>
         <div>
-          <iframe
+          {/* <iframe
             className={styles.mapIframe}
-            src={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
+            src={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid[0] ?? dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
             title={"Chunk Map"}
-          ></iframe>
+          ></iframe> */}
         </div>
       </div>
     </MainLayout>

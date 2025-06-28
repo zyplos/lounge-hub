@@ -46,20 +46,20 @@ export const authOptions: NextAuthOptions = {
   // a separate secret is defined explicitly for encrypting the JWT.
   secret: process.env.NEXTAUTH_SECRET,
 
-  session: {
-    // Use JSON Web Tokens for session instead of database sessions.
-    // This option can be used with or without a database for users/accounts.
-    // Note: `jwt` is automatically set to `true` if no database is specified.
-    jwt: true,
+  // session: {
+  //   // Use JSON Web Tokens for session instead of database sessions.
+  //   // This option can be used with or without a database for users/accounts.
+  //   // Note: `jwt` is automatically set to `true` if no database is specified.
+  //   // jwt: true,
 
-    // Seconds - How long until an idle session expires and is no longer valid.
-    // maxAge: 30 * 24 * 60 * 60, // 30 days
+  //   // Seconds - How long until an idle session expires and is no longer valid.
+  //   // maxAge: 30 * 24 * 60 * 60, // 30 days
 
-    // Seconds - Throttle how frequently to write to database to extend a session.
-    // Use it to limit write operations. Set to 0 to always update the database.
-    // Note: This option is ignored if using JSON Web Tokens
-    // updateAge: 24 * 60 * 60, // 24 hours
-  },
+  //   // Seconds - Throttle how frequently to write to database to extend a session.
+  //   // Use it to limit write operations. Set to 0 to always update the database.
+  //   // Note: This option is ignored if using JSON Web Tokens
+  //   // updateAge: 24 * 60 * 60, // 24 hours
+  // },
 
   // JSON Web tokens are only used for sessions if the `jwt: true` session
   // option is set - or by default if no database is specified.
@@ -101,22 +101,22 @@ export const authOptions: NextAuthOptions = {
       (session.user as any).banner = token.banner;
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }: { token: JWT; user?: User | null; account?: Account | null; profile?: DiscordProfile | null; isNewUser?: boolean }) {
+    async jwt({ token, user, account, profile }) {
       // wrapped in if since profile only exists when the user logs in, not subsequent jwt reads
-      if (profile) {
-        // The profile object from DiscordProvider might not have a banner directly,
-        // or it might be named differently or need to be fetched.
-        // For now, assuming profile has id and banner.
-        // Ensure profile.banner is checked correctly.
-        // DiscordProfile type has `banner` as `string | null | undefined`
-        if (profile.banner) {
-          const format = profile.banner.startsWith("a_") ? "gif" : "png";
-          token.banner = `https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.${format}`;
-        } else {
-          // If profile.banner is null or undefined, set token.banner to null or handle as needed
-          token.banner = null;
-        }
-      }
+      // if (profile) {
+      //   // The profile object from DiscordProvider might not have a banner directly,
+      //   // or it might be named differently or need to be fetched.
+      //   // For now, assuming profile has id and banner.
+      //   // Ensure profile.banner is checked correctly.
+      //   // DiscordProfile type has `banner` as `string | null | undefined`
+      //   if (profile.banner) {
+      //     const format = profile.banner.startsWith("a_") ? "gif" : "png";
+      //     token.banner = `https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.${format}`;
+      //   } else {
+      //     // If profile.banner is null or undefined, set token.banner to null or handle as needed
+      //     token.banner = null;
+      //   }
+      // }
       return token;
     },
   },

@@ -5,8 +5,8 @@ import Alert from "../../components/Alert/index"; // Custom Alert
 import styles from "../../styles/ChangelogPage.module.css"; // Adjusted path
 
 // Local components, now using CSS Modules
-const SmallerCardGrid = ({ ...props }) => <SmallCardGrid width="300px" {...props} />;
-const EvenSmallerCardGrid = ({ ...props }) => <SmallCardGrid width="200px" {...props} />;
+const SmallerCardGrid = ({ children, ...props }) => <SmallCardGrid width="300px" {...props}>{children}</SmallCardGrid>;
+const EvenSmallerCardGrid = ({ children, ...props }) => <SmallCardGrid width="200px" {...props}>{children}</SmallCardGrid>;
 
 const FastLink = ({ href, children }) => (
   <a href={href} target="_blank" rel="noreferrer" className={styles.fastLink}>
@@ -15,7 +15,7 @@ const FastLink = ({ href, children }) => (
 );
 
 // Helper for card content
-const SeasonCard = ({ title, details, isCurrent = false, linkHref, linkText }) => (
+const SeasonCard = ({ title, details = null, isCurrent = false, linkHref = null, linkText = null}) => (
   <div>
     <h3 className={styles.cardHeading}>{title}</h3>
     <p className={styles.cardText}>

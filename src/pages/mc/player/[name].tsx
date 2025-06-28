@@ -27,7 +27,7 @@ import Button from '../../../components/Button/index'; // Using new Button
 import styles from '../../../styles/PlayerPage.module.css'; // Adjusted path
 
 // Refactored ChunkCard (local component)
-const ChunkCard = ({ x, z, y, dimension, claimed_on, isHome }) => {
+const ChunkCard = ({ x, z, y, dimension, claimed_on = null, isHome }) => {
   const dimensionColor = DimensionColorMap[dimension] || '#ccc'; // Fallback color
 
   return (
@@ -120,8 +120,8 @@ function PlayerPage() { // Renamed component
                 <Image
                   src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
                   alt={`${player.name}'s portrait`}
-                  width="198px"
-                  height="320px"
+                  width="198"
+                  height="320"
                   layout="fixed"
                   priority
                 />
@@ -139,7 +139,7 @@ function PlayerPage() { // Renamed component
                   Joined on {prettyPrintDate(joinDate)}
                 </p>
                 <div className={styles.communityWatermark}>
-                  <Image src={`/static-assets/community/${communityId}.png`} alt="community watermark" width="45px" height="45px" />
+                  <Image src={`/static-assets/community/${communityId}.png`} alt="community watermark" width="45" height="45" />
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@ function PlayerPage() { // Renamed component
                 key={index}
                 className={styles.chunkCardButton}
               >
-                <ChunkCard x={chunk.x} z={chunk.z} dimension={chunk.dimension} claimed_on={new Date(chunk.claimed_on)} />
+                <ChunkCard isHome={false} x={chunk.x} z={chunk.z} y={1} dimension={chunk.dimension} claimed_on={new Date(chunk.claimed_on)} />
               </Button>
             ))}
              {chunkError && <p className={styles.noChunksText}>Could not load chunk data.</p>}

@@ -8,13 +8,13 @@ import Button, { ButtonProps as CustomButtonProps } from '../Button'; // Use the
 // It combines Next.js LinkProps with styling props from our Button (when 'as="a"')
 // We omit 'href' from ButtonProps as it's taken from LinkProps.
 // We also omit 'as' from ButtonProps because it's fixed to 'a'.
-type ButtonAnchorStylingProps = Omit<Extract<CustomButtonProps, { as: 'a' }>, 'href' | 'as' | 'children'>;
 
-interface ThemedRouterButtonLinkProps extends Omit<LinkProps, 'children' | 'passHref'>, ButtonAnchorStylingProps {
+interface ThemedRouterButtonLinkProps extends LinkProps {
   children: React.ReactNode;
   // onClick is part of ButtonAnchorStylingProps (from React.AnchorHTMLAttributes)
   // passHref is implicitly true for custom components inside Link in newer Next.js versions,
   // but can be explicitly controlled if needed. Here, we let Button handle being an anchor.
+  className: string;
 }
 
 const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
@@ -26,7 +26,6 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
   locale,
   prefetch, // Added prefetch as it's a common LinkProp
   // Button styling props (ButtonAnchorStylingProps)
-  variant,
   className,
   onClick,
   // Children
@@ -48,10 +47,8 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
   // Props for the inner Button component (which will render an <a>)
   // href is not needed here as Link handles navigation.
   // The Button's 'as' prop is fixed to 'a'.
-  const buttonAsAnchorProps: Extract<CustomButtonProps, { as: 'a' }> = {
-    as: 'a',
+  const buttonAsAnchorProps = {
     href: typeof href === 'string' ? href : href.pathname || '', // Button's href for styling/accessibility, Link handles actual nav
-    variant,
     className,
     onClick,
     children,
@@ -60,7 +57,7 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
 
   return (
     <Link href={href} {...nextLinkProps}>
-      <Button {...buttonAsAnchorProps} />
+      {children}
     </Link>
   );
 };
