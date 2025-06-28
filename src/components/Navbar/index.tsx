@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, JSX } from 'react';
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image'; // Import StaticImageData
 import { useMinecraftData, MinecraftDataContextState } from '../../internals/MinecraftContext'; // Adjusted path, import context state type

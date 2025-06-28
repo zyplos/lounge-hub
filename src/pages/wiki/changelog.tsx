@@ -15,7 +15,7 @@ const FastLink = ({ href, children }) => (
 );
 
 // Helper for card content
-const SeasonCard = ({ title, details = null, isCurrent = false, linkHref = null, linkText = null}) => (
+const SeasonCard = ({ title, details = "", isCurrent = false, linkHref = "", linkText = ""}) => (
   <div>
     <h3 className={styles.cardHeading}>{title}</h3>
     <p className={styles.cardText}>

@@ -27,7 +27,7 @@ import Button from '../../../components/Button/index'; // Using new Button
 import styles from '../../../styles/PlayerPage.module.css'; // Adjusted path
 
 // Refactored ChunkCard (local component)
-const ChunkCard = ({ x, z, y, dimension, claimed_on = null, isHome }) => {
+const ChunkCard = ({ x, z, y, dimension, claimed_on = new Date(), isHome }) => {
   const dimensionColor = DimensionColorMap[dimension] || '#ccc'; // Fallback color
 
   return (

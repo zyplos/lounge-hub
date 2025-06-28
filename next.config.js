@@ -1,6 +1,7 @@
 // https://stackoverflow.com/a/67641345
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // reactStrictMode: true,
   webpack(config, { isServer, dev, buildId, config: nextJsConfig, defaultLoaders, webpack }) {
     config.module.rules.push({
       test: /\.svg$/i,
