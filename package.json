@@ -45,13 +45,15 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sass": "^1.89.2",
     "typescript": "^5"
   },
   "trustedDependencies": [
+    "@biomejs/biome",
+    "@parcel/watcher",
     "core-js",
     "core-js-pure",
     "protobufjs",
-    "sharp",
-    "@biomejs/biome"
+    "sharp"
   ]
 }
