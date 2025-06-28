@@ -1,60 +1,29 @@
-.themeToggleButton {
-  background-color: var(--color-text); /* theme-ui sx: bg: "text" */
-  padding: var(--space-1); /* theme-ui sx: p: 1 (maps to space[1]) */
+.themeToggle {
+  background-color: var(--color-text);
+  padding: var(--space-1);
   line-height: 0;
   border-width: 1px;
   border-style: solid;
-  /* theme-ui sx: borderColor: "default" ? "#fff" : "#000"
-     This logic needs to be handled by the dark/light mode styling itself.
-     Assuming "default" means light mode.
-     So, in light mode, border is #fff. In dark mode, border is #000.
-     This means the border color should contrast with the button's background (which is --color-text).
-  */
-  border-color: var(--color-background); /* If bg is --color-text, then border is --color-background for contrast */
+  border-color: var(--color-background);
   cursor: pointer;
-  display: inline-flex; /* To make SVG center nicely */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 /* SVG icon styles */
 .themeToggleButton svg {
+  display: block;
   width: 30px;
   height: 30px;
 }
 
-/* Default (Light Mode) Icon Styles */
-/* Moon Icon in Light Mode: Button bg is dark (text color), icon should be light (background color) */
-.themeToggleButton svg .moon-icon-path {
+.moonShape {
   fill: var(--color-background);
 }
 
-/* Sun Icon in Light Mode: Button bg is dark (text color), icon should be light (background color) */
-.themeToggleButton svg .sun-icon-path,
-.themeToggleButton svg .sun-icon-line {
-  fill: var(--color-background);
-  stroke: var(--color-background);
-}
-
-
-/* Dark Mode Icon Styles */
-:root[data-theme="dark"] .themeToggleButton,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .themeToggleButton {
-  /* In dark mode, button bg is light (text color), border is dark (background color) */
-   /* border-color already correctly set by var(--color-background) which changes with theme */
-}
-
-/* Moon Icon in Dark Mode: Button bg is light (text color), icon should be dark (background color) */
-:root[data-theme="dark"] .themeToggleButton svg .moon-icon-path,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .themeToggleButton svg .moon-icon-path {
-  fill: var(--color-background);
-}
-
-/* Sun Icon in Dark Mode: Button bg is light (text color), icon should be dark (background color) */
-:root[data-theme="dark"] .themeToggleButton svg .sun-icon-path,
-:root[data-theme="dark"] .themeToggleButton svg .sun-icon-line,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .themeToggleButton svg .sun-icon-path,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .themeToggleButton svg .sun-icon-line {
+.sunShape,
+.sunLines {
   fill: var(--color-background);
   stroke: var(--color-background);
 }
