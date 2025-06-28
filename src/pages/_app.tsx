@@ -1,5 +1,4 @@
 import { SWRConfig } from "swr";
-import { SessionProvider } from "next-auth/react";
 
 import { MinecraftDataProvider } from "../internals/MinecraftContext";
 import fetcher from "../internals/fetcher";
@@ -14,9 +13,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig value={{ fetcher }}>
       <MinecraftDataProvider>
-        <SessionProvider refetchInterval={0} session={pageProps.session}>
-          <Component {...pageProps} />
-        </SessionProvider>
+        <Component {...pageProps} />
       </MinecraftDataProvider>
     </SWRConfig>
   );

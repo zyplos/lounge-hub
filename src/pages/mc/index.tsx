@@ -1,10 +1,8 @@
 import React from 'react'; // Removed unused imports like Box, Container etc. from theme-ui
-import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link'; // Keep Link if used by any sub-component, though not directly in this snippet
 
 import MainLayout from '../../internals/MainLayout';
-import Yourspace from '../../components/Yourspace/index'; // Already migrated
 import Button from '../../components/Button/index'; // Custom button
 
 // Assets (ensure paths are correct)
@@ -64,15 +62,7 @@ const CenterSectionBox = ({ children }) => {
   );
 };
 
-const SignInButton = () => {
-  return (
-    <Button variant="discord" onClick={() => signIn("discord", { callbackUrl: "/mc" })}>
-      Sign in with Discord
-    </Button>
-  );
-};
-
-const MCHomeNotSignedIn = () => {
+export default function MCHomePage() { 
   return (
     <MainLayout noPadding>
       <div className={styles.notSignedInContainer}>
@@ -91,7 +81,7 @@ const MCHomeNotSignedIn = () => {
               echoes of the realm
             </p>
             <div className={styles.signInButtonContainer}>
-              <SignInButton />
+              (old sign in button)
             </div>
             <p className={styles.scrollDownText}>
               scroll down!
@@ -102,7 +92,7 @@ const MCHomeNotSignedIn = () => {
         <CenterSectionBox>
           <ModifiedH2>latest vanilla release</ModifiedH2>
           <p className={styles.centerSectionParagraph}>lounge mutuals only. Sign in to see if you're on the allowlist.</p>
-          <SignInButton />
+          (old sign in button)
           <p className={`${styles.centerSectionParagraph} ${styles.centerSectionParagraphMt}`}>Or ask for the IP from anyone you recognize below!</p>
           <div className={styles.cidImageGrid}>
             <Image width="200" height="200" src={CID1} alt="1" layout="fixed" />
@@ -117,14 +107,3 @@ const MCHomeNotSignedIn = () => {
     </MainLayout>
   );
 };
-
-function MCHome() {
-  const { data: session } = useSession(); // status not used directly here
-  if (session) {
-    return <Yourspace />;
-  } else {
-    return <MCHomeNotSignedIn />;
-  }
-}
-
-export default MCHome;
