@@ -41,7 +41,8 @@
 }
 
 /* Responsive player grid columns */
-@media screen and (min-width: 64em) { /* Matches theme-ui's third breakpoint for "repeat(4, 1fr)" */
+@media screen and (min-width: 64em) {
+  /* Matches theme-ui's third breakpoint for "repeat(4, 1fr)" */
   .playerGrid {
     grid-template-columns: repeat(4, 1fr);
   }

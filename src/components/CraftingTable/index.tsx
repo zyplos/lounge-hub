@@ -1,8 +1,8 @@
-import React from 'react';
-import MinecraftContainer from '../MinecraftContainer/index';
-import MinecraftSlot from '../MinecraftSlot/index';
-import MinecraftResultArrow from '../MinecraftResultArrow/index';
-import styles from './styles.module.css';
+import React from "react";
+import MinecraftContainer from "../MinecraftContainer/index";
+import MinecraftSlot from "../MinecraftSlot/index";
+import MinecraftResultArrow from "../MinecraftResultArrow/index";
+import styles from "./styles.module.css";
 
 // Represents a single item in the crafting grid or result
 type CraftingItem = [name: string, imagePath: string] | null;
@@ -24,8 +24,11 @@ const CraftingTable: React.FC<CraftingTableProps> = ({
       <div className={styles.recipeLayout}>
         <div className={styles.inputGrid}>
           {input.map((item, index) => {
-            if (item) { // Item is a tuple [name, imagePath]
-              return <MinecraftSlot key={index} image={item[1]} name={item[0]} />;
+            if (item) {
+              // Item is a tuple [name, imagePath]
+              return (
+                <MinecraftSlot key={index} image={item[1]} name={item[0]} />
+              );
             }
             // Item is null, render an empty slot
             return <MinecraftSlot key={index} />;

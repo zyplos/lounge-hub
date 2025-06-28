@@ -9,9 +9,9 @@
   display: flex;
   flex-direction: row;
   /* background: set via style prop for dynamic gradient */
-  padding-left: var(--space-4);   /* px: 4 */
-  padding-right: var(--space-4);  /* px: 4 */
-  padding-top: var(--space-3);    /* py: 3 */
+  padding-left: var(--space-4); /* px: 4 */
+  padding-right: var(--space-4); /* px: 4 */
+  padding-top: var(--space-3); /* py: 3 */
   padding-bottom: var(--space-3); /* py: 3 */
   align-items: center;
   height: 100%;

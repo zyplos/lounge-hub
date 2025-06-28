@@ -11,7 +11,7 @@
 
 .infoAlert {
   /* Uses .alert and .info from Alert component or _common.css */
-  margin-top: var(--space-4);    /* my: 4 */
+  margin-top: var(--space-4); /* my: 4 */
   margin-bottom: var(--space-4);
 }
 

@@ -25,13 +25,18 @@ const dbConfig: ConnectionOptions = {
   database: "loungeSurvival",
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiPlayerResponse>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiPlayerResponse>
+) {
   const { name: queryName } = req.query;
 
   // console.log("process.env.MAP_VANILLA_URL_BASE", process.env.MAP_VANILLA_URL_BASE); // This seems unused here
 
-  if (!queryName || typeof queryName !== 'string') {
-    res.status(400).json({ error: "No player name specified or name is invalid." });
+  if (!queryName || typeof queryName !== "string") {
+    res
+      .status(400)
+      .json({ error: "No player name specified or name is invalid." });
     return;
   }
 
@@ -60,7 +65,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(200).json({ data: playerData });
   } catch (error: any) {
     console.error("Database Error fetching player data:", error);
-    res.status(500).json({ error: "Failed to retrieve player data. " + error.message });
+    res
+      .status(500)
+      .json({ error: "Failed to retrieve player data. " + error.message });
   } finally {
     if (connection) {
       await connection.end();

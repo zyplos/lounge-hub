@@ -1,12 +1,20 @@
 /* Keyframes */
 @keyframes bounce {
-  from { bottom: var(--space-4); } /* 32px */
-  to { bottom: var(--space-5); }   /* 48px, using space scale */
+  from {
+    bottom: var(--space-4);
+  } /* 32px */
+  to {
+    bottom: var(--space-5);
+  } /* 48px, using space scale */
 }
 
 @keyframes bounceSubtle {
-  from { transform: translateY(-5px); }
-  to { transform: translateY(5px); }
+  from {
+    transform: translateY(-5px);
+  }
+  to {
+    transform: translateY(5px);
+  }
 }
 
 /* MCHomeNotSignedIn styles */
@@ -36,12 +44,14 @@
   animation: bounceSubtle 2s ease-in-out alternate infinite;
   display: block;
 }
-@media screen and (min-width: 40em) { /* First breakpoint for 350px */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for 350px */
   .heroEmblem {
     width: 350px;
   }
 }
-@media screen and (min-width: 52em) { /* Second breakpoint for 500px */
+@media screen and (min-width: 52em) {
+  /* Second breakpoint for 500px */
   .heroEmblem {
     width: 500px;
   }
@@ -54,31 +64,53 @@
 }
 
 .heroHeading {
-  text-shadow: 3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black;
+  text-shadow:
+    3px 3px 0px black,
+    -3px 3px 0px black,
+    -3px -3px 0px black,
+    3px -3px 0px black;
   /* Default h1 styles from _common.css will apply for font size etc. */
 }
 
 .heroSubheading {
   /* This was variant="display" */
   /* Apply .text-display class from _common.css */
-  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black; /* Mobile shadow */
+  text-shadow:
+    1px 1px 0px black,
+    -1px 1px 0px black,
+    -1px -1px 0px black,
+    1px -1px 0px black; /* Mobile shadow */
   display: block;
 }
-@media screen and (min-width: 40em) { /* First breakpoint for larger shadow */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for larger shadow */
   .heroSubheading {
-    text-shadow: 5px 5px 0px black, -5px 5px 0px black, -5px -5px 0px black ,5px -5px 0px black;
+    text-shadow:
+      5px 5px 0px black,
+      -5px 5px 0px black,
+      -5px -5px 0px black,
+      5px -5px 0px black;
   }
 }
 
 .heroSeasonText {
   /* This was variant="displaysm" */
   /* Apply .text-displaysm class from _common.css */
-  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black; /* Mobile shadow */
+  text-shadow:
+    1px 1px 0px black,
+    -1px 1px 0px black,
+    -1px -1px 0px black,
+    1px -1px 0px black; /* Mobile shadow */
   display: block;
 }
-@media screen and (min-width: 40em) { /* First breakpoint for larger shadow */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for larger shadow */
   .heroSeasonText {
-    text-shadow: 3px 3px 0px black, -3px 3px 0px black, -3px -3px 0px black ,3px -3px 0px black;
+    text-shadow:
+      3px 3px 0px black,
+      -3px 3px 0px black,
+      -3px -3px 0px black,
+      3px -3px 0px black;
   }
 }
 
@@ -87,7 +119,11 @@
 }
 
 .scrollDownText {
-  text-shadow: 1px 1px 0px black, -1px 1px 0px black, -1px -1px 0px black ,1px -1px 0px black;
+  text-shadow:
+    1px 1px 0px black,
+    -1px 1px 0px black,
+    -1px -1px 0px black,
+    1px -1px 0px black;
   position: absolute;
   /* bottom: 4 (var(--space-4)) set by animation */
   left: 50%;
@@ -100,14 +136,15 @@
 
 /* CenterSectionBox styles */
 .centerSection {
-  padding-top: var(--space-5);    /* py: 5 */
+  padding-top: var(--space-5); /* py: 5 */
   padding-bottom: var(--space-5);
-  padding-left: var(--space-4);   /* px: 4 */
+  padding-left: var(--space-4); /* px: 4 */
   padding-right: var(--space-4);
   background-color: #131313;
   text-align: left; /* Default */
 }
-@media screen and (min-width: 40em) { /* First breakpoint for text-align: center */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for text-align: center */
   .centerSection {
     text-align: center;
   }
@@ -134,12 +171,14 @@
   justify-items: center;
   margin-bottom: var(--space-5); /* mb: 5 */
 }
-@media screen and (min-width: 40em) { /* First breakpoint for 2 columns */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for 2 columns */
   .cidImageGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media screen and (min-width: 64em) { /* Third breakpoint for 3 columns */
+@media screen and (min-width: 64em) {
+  /* Third breakpoint for 3 columns */
   .cidImageGrid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -153,20 +192,25 @@
 }
 .sectionTextGrid {
   width: 100%; /* Default width */
-  padding-top: var(--space-5);    /* py: [5, 6] */
+  padding-top: var(--space-5); /* py: [5, 6] */
   padding-bottom: var(--space-5);
-  padding-left: var(--space-5);   /* px: 5 */
+  padding-left: var(--space-5); /* px: 5 */
   padding-right: var(--space-5);
   order: 2; /* Default order */
 }
-@media screen and (min-width: 52em) { /* Second breakpoint for 50% width and order changes */
+@media screen and (min-width: 52em) {
+  /* Second breakpoint for 50% width and order changes */
   .sectionTextGrid {
     width: 50%;
     padding-top: var(--space-6);
     padding-bottom: var(--space-6);
   }
-  .sectionTextGridOrder1 { order: 1; }
-  .sectionTextGridOrder2 { order: 2; }
+  .sectionTextGridOrder1 {
+    order: 1;
+  }
+  .sectionTextGridOrder2 {
+    order: 2;
+  }
 }
 
 .sectionImage {
@@ -178,13 +222,18 @@
   height: 300px; /* Default height */
   order: 1; /* Default order */
 }
-@media screen and (min-width: 52em) { /* Second breakpoint for auto width/height and order changes */
+@media screen and (min-width: 52em) {
+  /* Second breakpoint for auto width/height and order changes */
   .sectionImage {
     width: auto;
     height: auto;
   }
-  .sectionImageOrder1 { order: 1; }
-  .sectionImageOrder2 { order: 2; }
+  .sectionImageOrder1 {
+    order: 1;
+  }
+  .sectionImageOrder2 {
+    order: 2;
+  }
 }
 .sectionHeading {
   /* Uses h1 styles from _common.css */

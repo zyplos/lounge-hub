@@ -13,9 +13,9 @@
 }
 
 .articleDivider {
-  margin-top: var(--space-4);    /* my={4} */
+  margin-top: var(--space-4); /* my={4} */
   margin-bottom: var(--space-4); /* my={4} */
-  height: 1px;                   /* Standard divider height */
+  height: 1px; /* Standard divider height */
   background-color: var(--color-muted); /* Example color, adjust if theme had specific divider color */
   border: 0;
 }

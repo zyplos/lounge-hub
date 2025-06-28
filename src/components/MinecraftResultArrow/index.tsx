@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 // Props for SVG elements can be extensive. React.SVGProps covers standard ones.
 interface MinecraftResultArrowProps extends React.SVGProps<SVGSVGElement> {
@@ -9,7 +9,8 @@ interface MinecraftResultArrowProps extends React.SVGProps<SVGSVGElement> {
 
 const MinecraftResultArrow: React.FC<MinecraftResultArrowProps> = (props) => {
   // Combine with default className from styles, allowing override or addition via props.className
-  const combinedClassName = `${styles.arrowSvg} ${props.className || ''}`.trim();
+  const combinedClassName =
+    `${styles.arrowSvg} ${props.className || ""}`.trim();
 
   return (
     <svg

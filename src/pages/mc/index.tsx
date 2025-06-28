@@ -1,31 +1,32 @@
-import React from 'react'; // Removed unused imports like Box, Container etc. from theme-ui
-import Image from 'next/image';
-import Link from 'next/link'; // Keep Link if used by any sub-component, though not directly in this snippet
+import React from "react"; // Removed unused imports like Box, Container etc. from theme-ui
+import Image from "next/image";
+import Link from "next/link"; // Keep Link if used by any sub-component, though not directly in this snippet
 
-import MainLayout from '../../internals/MainLayout';
-import Button from '../../components/Button/index'; // Custom button
+import MainLayout from "../../internals/MainLayout";
+import Button from "../../components/Button/index"; // Custom button
 
 // Assets (ensure paths are correct)
-import InvitationSplashImage from '../../assets/invitation-splash.png';
-import EmblemMCImage from '../../assets/emblem-mc.png';
+import InvitationSplashImage from "../../assets/invitation-splash.png";
+import EmblemMCImage from "../../assets/emblem-mc.png";
 // Unused image assets commented out for now:
 // import ChunkClaimImage from '../../assets/chunk-claim.png';
 // import CloudsMiscImage from '../../assets/clouds-misc.png';
 // import WorldgenPackImage from '../../assets/worldgen-pack.png';
-import CID1 from '../../assets/ref/1.png';
-import CID2 from '../../assets/ref/2.png';
-import CID3 from '../../assets/ref/3.png';
-import CID4 from '../../assets/ref/4.png';
-import CID5 from '../../assets/ref/5.png';
-import CID6 from '../../assets/ref/6.png';
+import CID1 from "../../assets/ref/1.png";
+import CID2 from "../../assets/ref/2.png";
+import CID3 from "../../assets/ref/3.png";
+import CID4 from "../../assets/ref/4.png";
+import CID5 from "../../assets/ref/5.png";
+import CID6 from "../../assets/ref/6.png";
 
-import styles from '../../styles/MCIndexPage.module.css'; // Adjusted path
+import styles from "../../styles/MCIndexPage.module.css"; // Adjusted path
 
 // Local Sub-components, now using CSS Modules
 
 const ModifiedH2 = ({ children }) => {
   return (
-    <h2 className={`${styles.modifiedH2} text-h1`}>{/* text-h1 applies h1 styling from _common.css */}
+    <h2 className={`${styles.modifiedH2} text-h1`}>
+      {/* text-h1 applies h1 styling from _common.css */}
       {children}
     </h2>
   );
@@ -55,45 +56,56 @@ const SectionBox = ({ heading, image, children, isAlt, ...props }) => {
 const CenterSectionBox = ({ children }) => {
   return (
     <div className={styles.centerSection}>
-      <div className="container">{/* Using global .container class */}
+      <div className="container">
+        {/* Using global .container class */}
         {children}
       </div>
     </div>
   );
 };
 
-export default function MCHomePage() { 
+export default function MCHomePage() {
   return (
     <MainLayout noPadding>
       <div className={styles.notSignedInContainer}>
-        <div className={styles.heroSection} style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}>
+        <div
+          className={styles.heroSection}
+          style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}
+        >
           <div className={styles.heroEmblem}>
-            <Image src={EmblemMCImage} alt="Emblem MC" layout="responsive" priority />
+            <Image
+              src={EmblemMCImage}
+              alt="Emblem MC"
+              layout="responsive"
+              priority
+            />
           </div>
           <div className={styles.heroTextContent}>
             <h1 className={`${styles.heroHeading} text-h1`}>
               the lounge SMP server
             </h1>
-            <p className={`${styles.heroSubheading} text-display`}>
-              season 6
-            </p>
+            <p className={`${styles.heroSubheading} text-display`}>season 6</p>
             <p className={`${styles.heroSeasonText} text-displaysm`}>
               echoes of the realm
             </p>
             <div className={styles.signInButtonContainer}>
               (old sign in button)
             </div>
-            <p className={styles.scrollDownText}>
-              scroll down!
-            </p>
+            <p className={styles.scrollDownText}>scroll down!</p>
           </div>
         </div>
 
         <CenterSectionBox>
           <ModifiedH2>latest vanilla release</ModifiedH2>
-          <p className={styles.centerSectionParagraph}>lounge mutuals only. Sign in to see if you're on the allowlist.</p>
+          <p className={styles.centerSectionParagraph}>
+            lounge mutuals only. Sign in to see if you're on the allowlist.
+          </p>
           (old sign in button)
-          <p className={`${styles.centerSectionParagraph} ${styles.centerSectionParagraphMt}`}>Or ask for the IP from anyone you recognize below!</p>
+          <p
+            className={`${styles.centerSectionParagraph} ${styles.centerSectionParagraphMt}`}
+          >
+            Or ask for the IP from anyone you recognize below!
+          </p>
           <div className={styles.cidImageGrid}>
             <Image width="200" height="200" src={CID1} alt="1" layout="fixed" />
             <Image width="200" height="200" src={CID2} alt="2" layout="fixed" />
@@ -106,4 +118,4 @@ export default function MCHomePage() {
       </div>
     </MainLayout>
   );
-};
+}

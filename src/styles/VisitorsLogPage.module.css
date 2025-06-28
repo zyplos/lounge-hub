@@ -58,13 +58,14 @@
   display: flex; /* To align icon and text */
   align-items: center;
 }
-.chunkDetailText > span { /* Targeting the span after PlayerIcon Image */
-    margin-left: var(--space-2); /* ml: 2 */
-    vertical-align: middle; /* from original sx */
+.chunkDetailText > span {
+  /* Targeting the span after PlayerIcon Image */
+  margin-left: var(--space-2); /* ml: 2 */
+  vertical-align: middle; /* from original sx */
 }
 
-
-.chunkDetailIcon { /* For CalendarIcon */
+.chunkDetailIcon {
+  /* For CalendarIcon */
   height: var(--font-size-3); /* theme.fontSizes[3] */
   width: var(--font-size-3);
   fill: white; /* Default, can be overridden by inline style if needed */

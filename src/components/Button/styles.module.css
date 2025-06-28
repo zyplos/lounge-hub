@@ -11,7 +11,9 @@
   font-weight: var(--font-weight-bold);
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .button:hover {

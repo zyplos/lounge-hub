@@ -1,6 +1,6 @@
-import React from 'react';
-import Link, { LinkProps } from 'next/link';
-import Button, { ButtonProps as CustomButtonProps } from '../Button'; // Use the new Button component
+import React from "react";
+import Link, { LinkProps } from "next/link";
+import Button, { ButtonProps as CustomButtonProps } from "../Button"; // Use the new Button component
 // styles import seems unused directly here, but Button component uses its own styles.
 // import styles from './styles.module.css';
 
@@ -33,9 +33,8 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
   // Rest of the props (e.g., id, aria-label, etc. for the anchor)
   ...anchorSpecificProps
 }) => {
-
   // Construct LinkProps object
-  const nextLinkProps: Omit<LinkProps, 'children' | 'href'> = {
+  const nextLinkProps: Omit<LinkProps, "children" | "href"> = {
     replace,
     scroll,
     shallow,
@@ -48,7 +47,7 @@ const ThemedRouterButtonLink: React.FC<ThemedRouterButtonLinkProps> = ({
   // href is not needed here as Link handles navigation.
   // The Button's 'as' prop is fixed to 'a'.
   const buttonAsAnchorProps = {
-    href: typeof href === 'string' ? href : href.pathname || '', // Button's href for styling/accessibility, Link handles actual nav
+    href: typeof href === "string" ? href : href.pathname || "", // Button's href for styling/accessibility, Link handles actual nav
     className,
     onClick,
     children,

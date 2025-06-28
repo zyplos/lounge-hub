@@ -1,11 +1,11 @@
-import React from 'react';
-import Image, { StaticImageData } from 'next/image'; // Import StaticImageData
-import MinecraftStatusSkeleton from '../MinecraftStatusSkeleton/index';
-import Alert from '../Alert/index';
-import defaultServerIcon from '../../assets/defaultServerIcon.png';
+import React from "react";
+import Image, { StaticImageData } from "next/image"; // Import StaticImageData
+import MinecraftStatusSkeleton from "../MinecraftStatusSkeleton/index";
+import Alert from "../Alert/index";
+import defaultServerIcon from "../../assets/defaultServerIcon.png";
 // import offlineServerIcon from '../../assets/offlineServerIcon.png';
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 // Interface for a player in the sample list
 interface PlayerSampleEntry {
@@ -54,7 +54,11 @@ const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
   // Check if data exists and has a motd; if not, server might be offline or data is malformed.
   // data.players should also exist if server is online.
   if (!data.motd || !data.players) {
-    return <Alert variant="info">This server is currently offline or status is unavailable.</Alert>;
+    return (
+      <Alert variant="info">
+        This server is currently offline or status is unavailable.
+      </Alert>
+    );
   }
 
   const getPlayerImage = (uuid: string): string => {
@@ -88,7 +92,6 @@ const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
     // as the original code did, but using `sortedPlayerList` would be safer.
   }
 
-
   return (
     <div className={styles.gridContainer}>
       <div className={styles.headerFlex}>
@@ -102,19 +105,25 @@ const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
         </div>
         <div className={styles.motdContainer}>
           {/* Ensure motd and motd.clean exist before trying to render */}
-          <div>{data.motd?.clean || 'No MOTD available.'}</div>
+          <div>{data.motd?.clean || "No MOTD available."}</div>
         </div>
       </div>
       <p className={styles.statusText}>
-        {numPlayersOnline !== 0 ? numPlayersOnline : "No"} {computedPlural()} online
+        {numPlayersOnline !== 0 ? numPlayersOnline : "No"} {computedPlural()}{" "}
+        online
         {versionName ? ` • ${versionName}` : ""}
       </p>
-      {numPlayersOnline === 0 && <p className={styles.noPlayersText}>No one's online at the moment.</p>}
+      {numPlayersOnline === 0 && (
+        <p className={styles.noPlayersText}>No one's online at the moment.</p>
+      )}
       {/* Use the (potentially sorted) playerList for mapping */}
       {numPlayersOnline > 0 && playerList && playerList.length > 0 && (
         <div className={styles.playerGrid}>
           {playerList.map((player) => (
-            <div key={player.id || player.name} className={styles.playerItemFlex}>
+            <div
+              key={player.id || player.name}
+              className={styles.playerItemFlex}
+            >
               <Image
                 src={getPlayerImage(player.id)}
                 alt={`${player.name}'s avatar`}

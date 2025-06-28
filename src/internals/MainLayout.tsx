@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect
-import Navbar from '../components/Navbar/index';
-import HamburgerIcon from '../assets/hamburger.svg';
-import styles from '../styles/MainLayout.module.css';
+import React, { useState, useEffect } from "react"; // Added useEffect
+import Navbar from "../components/Navbar/index";
+import HamburgerIcon from "../assets/hamburger.svg";
+import styles from "../styles/MainLayout.module.css";
 
 // Local CloseIcon component
 const CloseIcon = (props) => (
@@ -17,16 +17,21 @@ const CloseIcon = (props) => (
   </svg>
 );
 
-
-function MainLayout({ noPadding, children }: { noPadding?: boolean; children: React.ReactNode }) {
+function MainLayout({
+  noPadding,
+  children,
+}: {
+  noPadding?: boolean;
+  children: React.ReactNode;
+}) {
   const [isOpen, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640); // 640px = 40em (first breakpoint)
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   function showNavbar() {
@@ -63,12 +68,16 @@ function MainLayout({ noPadding, children }: { noPadding?: boolean; children: Re
         onClick={showNavbar}
         role="button"
         tabIndex={0}
-        onKeyPress={(e) => e.key === 'Enter' && showNavbar()}
+        onKeyPress={(e) => e.key === "Enter" && showNavbar()}
         aria-expanded={isOpen}
         aria-controls="navbar-section"
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
       >
-        {isOpen ? <CloseIcon className={styles.closeIcon} /> : <HamburgerIcon className={styles.hamburgerIcon} />}
+        {isOpen ? (
+          <CloseIcon className={styles.closeIcon} />
+        ) : (
+          <HamburgerIcon className={styles.hamburgerIcon} />
+        )}
       </div>
 
       {/* The navbar section's visibility on mobile is controlled by navbarSectionOpenMobile or lack thereof.

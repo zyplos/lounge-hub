@@ -61,7 +61,8 @@
   align-items: center;
 }
 
-.playerDetailIcon { /* For CalendarIcon, CommunityIcon */
+.playerDetailIcon {
+  /* For CalendarIcon, CommunityIcon */
   height: var(--font-size-3); /* theme.fontSizes[3] */
   width: var(--font-size-3);
   fill: white; /* Default, can be overridden by inline style if needed */
@@ -85,7 +86,8 @@
   padding: var(--space-4); /* p={4} */
 }
 
-.chunkCardButton { /* Styling for the Button wrapper around ChunkCard */
+.chunkCardButton {
+  /* Styling for the Button wrapper around ChunkCard */
   padding: 0;
   background-color: transparent;
   border: none;
@@ -113,7 +115,8 @@
   margin-right: var(--space-3); /* mr: 3 */
 }
 
-.chunkCardDimensionIcon { /* For DimensionIcon, BaseIcon */
+.chunkCardDimensionIcon {
+  /* For DimensionIcon, BaseIcon */
   width: 64px;
   height: 64px;
   /* Fill is set dynamically via props */

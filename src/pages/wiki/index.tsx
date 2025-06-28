@@ -12,8 +12,8 @@ import commandBlock from "../../assets/command-block.png";
 import jigsawBlock from "../../assets/jigsaw-block.png";
 // import endPortal from "../../assets/end-portal-frame-filled.png"; // Unused
 
-
-function WikiHomePage() { // Renamed component
+function WikiHomePage() {
+  // Renamed component
   return (
     <MainLayout>
       <div className={styles.wikiGrid}>

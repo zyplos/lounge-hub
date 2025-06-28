@@ -27,7 +27,8 @@
 }
 
 /* Responsive justify-items */
-@media screen and (max-width: 40em) { /* Example breakpoint, adjust as needed for original ["flex-start", "center"] behavior */
+@media screen and (max-width: 40em) {
+  /* Example breakpoint, adjust as needed for original ["flex-start", "center"] behavior */
   .navGrid {
     justify-items: flex-start;
   }
@@ -49,7 +50,6 @@
   text-decoration: none;
   color: var(--color-text); /* Default link color */
 }
-
 
 /* NavMinecraftItem specific styles */
 .minecraftItemContainer {
@@ -100,12 +100,12 @@
   vertical-align: text-bottom;
 }
 
-@media screen and (min-width: 40em) { /* First breakpoint in theme.ts */
+@media screen and (min-width: 40em) {
+  /* First breakpoint in theme.ts */
   .navText {
     display: none; /* Hidden on screens >= 40em */
   }
 }
-
 
 /* Icon styles */
 .navIcon {

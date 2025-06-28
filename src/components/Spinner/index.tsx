@@ -1,7 +1,8 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
-interface SpinnerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+interface SpinnerProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   // Omit 'title' from HTMLAttributes as we handle it explicitly.
   // If other div props like id, style, custom data-* attributes are needed, they can be passed.
   title?: string;
@@ -14,7 +15,7 @@ const Spinner: React.FC<SpinnerProps> = ({
   className, // Capture className if passed
   ...props
 }) => {
-  const combinedClassName = `${styles.spinner} ${className || ''}`.trim();
+  const combinedClassName = `${styles.spinner} ${className || ""}`.trim();
   return (
     <div
       className={combinedClassName}

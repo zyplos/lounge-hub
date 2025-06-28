@@ -17,7 +17,8 @@ function Home() {
         <div className={styles.serversGrid}>
           <div className={styles.serverSection}>
             <h2 className={styles.sectionHeading}>Minecraft • Main Server</h2>
-            <MinecraftStatus data={vanilla} /> {/* ip prop removed as it was unused */}
+            <MinecraftStatus data={vanilla} />{" "}
+            {/* ip prop removed as it was unused */}
           </div>
           <div className={styles.serverSection}>
             <h2 className={styles.sectionHeading}>Minecraft • Off-season</h2>
@@ -31,7 +32,9 @@ function Home() {
           are updated for the new version.
         </Alert> */}
 
-        <h2 className={`${styles.sectionHeading} ${styles.loungeHeading}`}>the lounge</h2>
+        <h2 className={`${styles.sectionHeading} ${styles.loungeHeading}`}>
+          the lounge
+        </h2>
         <DiscordServer />
       </div>
     </MainLayout>

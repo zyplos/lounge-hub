@@ -22,18 +22,22 @@ const dbConfig: ConnectionOptions = {
   database: "loungeSurvival",
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiLogEntryResponse>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiLogEntryResponse>
+) {
   const { x: queryX, z: queryZ, dimension: queryDimension } = req.query;
 
   if (!queryX || !queryZ || !queryDimension) {
-    res.status(400).json({ error: "Chunk X, Z, and dimension must be specified." });
+    res
+      .status(400)
+      .json({ error: "Chunk X, Z, and dimension must be specified." });
     return;
   }
 
-  const x = typeof queryX === 'string' ? parseInt(queryX, 10) : NaN;
-  const z = typeof queryZ === 'string' ? parseInt(queryZ, 10) : NaN;
-  const dimension = typeof queryDimension === 'string' ? queryDimension : "";
-
+  const x = typeof queryX === "string" ? parseInt(queryX, 10) : NaN;
+  const z = typeof queryZ === "string" ? parseInt(queryZ, 10) : NaN;
+  const dimension = typeof queryDimension === "string" ? queryDimension : "";
 
   if (isNaN(x) || isNaN(z)) {
     res.status(400).json({ error: "Chunk X and Z must be valid numbers." });
@@ -57,7 +61,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(200).json({ data: rows as LogEntryData[] });
   } catch (error: any) {
     console.error("Database Error fetching log entries by coords:", error);
-    res.status(500).json({ error: "Failed to retrieve data from the database. " + error.message });
+    res
+      .status(500)
+      .json({
+        error: "Failed to retrieve data from the database. " + error.message,
+      });
   } finally {
     if (connection) {
       await connection.end();

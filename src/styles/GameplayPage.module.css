@@ -32,6 +32,7 @@
   font-size: var(--font-size-1);
 }
 
-.boldText { /* For <b>Looting</b> */
+.boldText {
+  /* For <b>Looting</b> */
   font-weight: var(--font-weight-bold);
 }

@@ -13,7 +13,11 @@
 }
 
 .memberFlexStreaming {
-  background: linear-gradient(0deg, rgba(145,70,255,0.7) 0%, rgba(255,0,185,0) 75%);
+  background: linear-gradient(
+    0deg,
+    rgba(145, 70, 255, 0.7) 0%,
+    rgba(255, 0, 185, 0) 75%
+  );
   color: white;
 }
 
@@ -25,12 +29,14 @@
   position: relative; /* for status border positioning if needed, or direct on img */
 }
 
-.iconWrapperBase img { /* Target Next.js Image component's img tag */
+.iconWrapperBase img {
+  /* Target Next.js Image component's img tag */
   border-radius: 100%; /* from iconStyle */
 }
 
-.discordIcon { /* For the voice channel SVG icon */
-  border: 2px solid #7289DA; /* from iconStyle */
+.discordIcon {
+  /* For the voice channel SVG icon */
+  border: 2px solid #7289da; /* from iconStyle */
 }
 
 .statusIcon {
@@ -46,10 +52,10 @@
 .statusDnd {
   border: 2px solid #ff3e3e;
 }
-.statusStreaming { /* Specific to the avatar image border when streaming */
+.statusStreaming {
+  /* Specific to the avatar image border when streaming */
   border: 2px solid #8f48ff;
 }
-
 
 .textContainer {
   display: flex;
@@ -88,7 +94,7 @@
   width: 64px; /* from iconStyle */
   height: 64px; /* from iconStyle */
   margin-right: var(--space-2); /* mr: 2 from iconStyle */
-  border: 2px solid #7289DA; /* from iconStyle */
+  border: 2px solid #7289da; /* from iconStyle */
   border-radius: 100%; /* from iconStyle */
   box-sizing: border-box; /* Ensure border is included in dimensions */
 }

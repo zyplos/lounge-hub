@@ -1,21 +1,24 @@
-import React, { Fragment, JSX } from 'react';
-import Link from 'next/link';
-import Image, { StaticImageData } from 'next/image'; // Import StaticImageData
-import { useMinecraftData, MinecraftDataContextState } from '../../internals/MinecraftContext'; // Adjusted path, import context state type
-import ThemeToggle from '../ThemeToggle/index';
-import { mapUrlBase } from '../../internals/Utils'; // Adjusted path
+import React, { Fragment, JSX } from "react";
+import Link from "next/link";
+import Image, { StaticImageData } from "next/image"; // Import StaticImageData
+import {
+  useMinecraftData,
+  MinecraftDataContextState,
+} from "../../internals/MinecraftContext"; // Adjusted path, import context state type
+import ThemeToggle from "../ThemeToggle/index";
+import { mapUrlBase } from "../../internals/Utils"; // Adjusted path
 
 // Import assets
-import emblem from '../../assets/emblem.png';
-import HomeIconImg from '../../assets/home-icon.png';
-import WikiIconImg from '../../assets/wiki-icon.png';
-import PlayerIconImg from '../../assets/player-icon.png';
-import CompassIcon from '../../assets/compass-icon.svg'; // SVG as ReactComponent
-import BlockIcon from '../../assets/block-icon.svg';   // SVG as ReactComponent
-import playerHead from '../../assets/head.png';
-import computerHead from '../../assets/computer.png';
+import emblem from "../../assets/emblem.png";
+import HomeIconImg from "../../assets/home-icon.png";
+import WikiIconImg from "../../assets/wiki-icon.png";
+import PlayerIconImg from "../../assets/player-icon.png";
+import CompassIcon from "../../assets/compass-icon.svg"; // SVG as ReactComponent
+import BlockIcon from "../../assets/block-icon.svg"; // SVG as ReactComponent
+import playerHead from "../../assets/head.png";
+import computerHead from "../../assets/computer.png";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 // Props for NavMinecraftItem
 interface NavMinecraftItemProps {
@@ -24,10 +27,15 @@ interface NavMinecraftItemProps {
   playerAmount?: number | null;
 }
 
-const NavMinecraftItem: React.FC<NavMinecraftItemProps> = ({ image, name, playerAmount }) => {
+const NavMinecraftItem: React.FC<NavMinecraftItemProps> = ({
+  image,
+  name,
+  playerAmount,
+}) => {
   return (
     <div className={styles.minecraftItemContainer}>
-      <Image src={image} alt={name} width={32} height={32} /> {/* Use numbers */}
+      <Image src={image} alt={name} width={32} height={32} />{" "}
+      {/* Use numbers */}
       {playerAmount !== undefined && playerAmount !== null && (
         <div className={styles.minecraftItemLabel}>{playerAmount}</div>
       )}
@@ -58,11 +66,17 @@ const Navbar: React.FC = () => {
   // Ensure minecraftData and its properties exist before accessing them
   if (minecraftData) {
     // Check if 'online' is a number. Treat undefined 'online' as server being offline for this display logic.
-    const isVanillaOnline = typeof minecraftData.vanilla?.players?.online === 'number';
-    const vanillaPlayersOnline = isVanillaOnline ? minecraftData.vanilla!.players!.online : null;
+    const isVanillaOnline =
+      typeof minecraftData.vanilla?.players?.online === "number";
+    const vanillaPlayersOnline = isVanillaOnline
+      ? minecraftData.vanilla!.players!.online
+      : null;
 
-    const isModdedOnline = typeof minecraftData.modded?.players?.online === 'number';
-    const moddedPlayersOnline = isModdedOnline ? minecraftData.modded!.players!.online : null;
+    const isModdedOnline =
+      typeof minecraftData.modded?.players?.online === "number";
+    const moddedPlayersOnline = isModdedOnline
+      ? minecraftData.modded!.players!.online
+      : null;
 
     if (vanillaPlayersOnline !== null || moddedPlayersOnline !== null) {
       minecraftFragments.push(<NavDivider key="mc-divider" />);
@@ -94,41 +108,63 @@ const Navbar: React.FC = () => {
       <div className={styles.navbarOuterContainer}>
         <div className={styles.navGrid}>
           <div className={styles.emblemContainer}>
-            <Link href="/"  className={styles.emblemLink} >
-              <Image src={emblem} alt="Emblem" layout="fixed" width={48} height={28} /> {/* Use numbers */}
+            <Link href="/" className={styles.emblemLink}>
+              <Image
+                src={emblem}
+                alt="Emblem"
+                layout="fixed"
+                width={48}
+                height={28}
+              />{" "}
+              {/* Use numbers */}
             </Link>
           </div>
 
           <NavDivider />
 
-          <Link href="/"  className={styles.navLink} >
-            <Image src={HomeIconImg} alt="Home Icon" width={32} height={32} /> {/* Use numbers */}
+          <Link href="/" className={styles.navLink}>
+            <Image src={HomeIconImg} alt="Home Icon" width={32} height={32} />{" "}
+            {/* Use numbers */}
             <NavText>Home</NavText>
           </Link>
 
-          <Link href="/wiki"  className={styles.navLink} >
+          <Link href="/wiki" className={styles.navLink}>
             <span>
-              <Image src={WikiIconImg} alt="Wiki Icon" width={32} height={32} /> {/* Use numbers */}
+              <Image src={WikiIconImg} alt="Wiki Icon" width={32} height={32} />{" "}
+              {/* Use numbers */}
               <NavText>Wiki</NavText>
             </span>
           </Link>
 
-          <Link href="/mc"  className={styles.navLink} >
+          <Link href="/mc" className={styles.navLink}>
             <span>
-              <BlockIcon className={styles.navIcon} /> {/* SVG components accept className */}
+              <BlockIcon className={styles.navIcon} />{" "}
+              {/* SVG components accept className */}
               <NavText>Minecraft</NavText>
             </span>
           </Link>
 
-          <Link href="/mc/player"  className={styles.navLink} >
+          <Link href="/mc/player" className={styles.navLink}>
             <span>
-              <Image src={PlayerIconImg} alt="Player Icon" width={32} height={32} /> {/* Use numbers */}
+              <Image
+                src={PlayerIconImg}
+                alt="Player Icon"
+                width={32}
+                height={32}
+              />{" "}
+              {/* Use numbers */}
               <NavText>Player Lookup</NavText>
             </span>
           </Link>
 
-          <a href={mapUrlBase} target="_blank" rel="noreferrer" className={styles.navLink}>
-            <CompassIcon className={styles.navIcon} /> {/* SVG components accept className */}
+          <a
+            href={mapUrlBase}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.navLink}
+          >
+            <CompassIcon className={styles.navIcon} />{" "}
+            {/* SVG components accept className */}
             <NavText>Server Map</NavText>
           </a>
 

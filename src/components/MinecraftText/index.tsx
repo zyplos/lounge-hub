@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 interface MinecraftTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface MinecraftTextProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const MinecraftText: React.FC<MinecraftTextProps> = ({
   children,
-  className = '', // Default to empty string
+  className = "", // Default to empty string
   ...props
 }) => {
   // Combine the default component style with any passed-in className

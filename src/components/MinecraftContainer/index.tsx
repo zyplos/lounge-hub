@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 interface MinecraftContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface MinecraftContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const MinecraftContainer: React.FC<MinecraftContainerProps> = ({
   children,
-  className = '', // Default to empty string
+  className = "", // Default to empty string
   ...props
 }) => {
   // Combine the default component style with any passed-in className

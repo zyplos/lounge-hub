@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import CraftingTable from "../../components/CraftingTable/index";
 import Stonecutter from "../../components/Stonecutter/index";
 import Furnace from "../../components/Furnace/index";
@@ -6,13 +6,15 @@ import recipes from "../../internals/recipes";
 import MainLayout from "../../internals/MainLayout";
 import styles from "../../styles/CraftingRecipesPage.module.css"; // Adjusted path
 
-function CraftingRecipesPage() { // Renamed component
+function CraftingRecipesPage() {
+  // Renamed component
   return (
     <MainLayout>
       <div className={styles.pageGrid}>
         <h1 className={styles.pageHeading}>Crafting Recipes</h1>
         <p className={styles.pageDescription}>
-          The server has a few quality of life crafting recipes that should make obtaining stuff a bit easier.
+          The server has a few quality of life crafting recipes that should make
+          obtaining stuff a bit easier.
         </p>
 
         {/* TODO */}

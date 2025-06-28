@@ -24,7 +24,8 @@
   gap: var(--space-3); /* Assuming a default gap */
 }
 
-@media screen and (min-width: 40em) { /* First breakpoint for larger recipe card size */
+@media screen and (min-width: 40em) {
+  /* First breakpoint for larger recipe card size */
   .recipesGrid {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }

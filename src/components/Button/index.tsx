@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
-type ButtonVariant = 'discord' | 'default'; // Example variants
+type ButtonVariant = "discord" | "default"; // Example variants
 
 // Base props common to both button and anchor
 interface BaseButtonProps {
@@ -13,14 +13,14 @@ interface BaseButtonProps {
 
 // Props specific to when the component is a button
 interface AsButtonProps extends BaseButtonProps {
-  as?: 'button';
-  type?: 'button' | 'submit' | 'reset';
+  as?: "button";
+  type?: "button" | "submit" | "reset";
   href?: undefined; // Ensure href is not passed when it's a button
 }
 
 // Props specific to when the component is an anchor
 interface AsAnchorProps extends BaseButtonProps {
-  as: 'a';
+  as: "a";
   href: string; // href is required for an anchor
   type?: undefined; // Ensure type is not passed when it's an anchor
 }
@@ -31,20 +31,22 @@ export type ButtonProps = AsButtonProps | AsAnchorProps;
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
-  type = 'button', // Default for button type
-  variant = 'default',
-  className = '',
-  as = 'button', // Default to 'button'
+  type = "button", // Default for button type
+  variant = "default",
+  className = "",
+  as = "button", // Default to 'button'
   href, // Will be undefined if 'as' is 'button' due to discriminated union
   ...props
 }) => {
   const combinedClasses = [
     styles.button,
-    variant === 'discord' ? styles.discord : '', // Add more variant styles if needed
+    variant === "discord" ? styles.discord : "", // Add more variant styles if needed
     className,
-  ].join(' ').trim();
+  ]
+    .join(" ")
+    .trim();
 
-  if (as === 'a') {
+  if (as === "a") {
     // props are cast because TypeScript can't perfectly infer the discriminated union's props after spreading
     // However, the ButtonProps definition ensures that `href` is string and other anchor props are valid.
     return (

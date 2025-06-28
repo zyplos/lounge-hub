@@ -7,13 +7,15 @@ import Button from "../../../components/Button/index"; // Custom Button
 import Alert from "../../../components/Alert/index"; // Custom Alert
 import styles from "../../../styles/PlayerIndexPage.module.css"; // Adjusted path
 
-function PlayerIndexPage() { // Renamed component
+function PlayerIndexPage() {
+  // Renamed component
   const [playerName, setPlayerName] = useState("");
   const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (playerName.trim()) { // Ensure playerName is not just whitespace
+    if (playerName.trim()) {
+      // Ensure playerName is not just whitespace
       router.push("/mc/player/" + playerName.trim());
     }
   };
@@ -23,7 +25,9 @@ function PlayerIndexPage() { // Renamed component
       <FullBox useDims={true}>
         <form onSubmit={handleSubmit}>
           <div className={styles.formGrid}>
-            <p className={`${styles.todoText} text-muted`}>TODO: make this look better</p>
+            <p className={`${styles.todoText} text-muted`}>
+              TODO: make this look better
+            </p>
             <h1 className={styles.pageHeading}>Player Lookup</h1>
 
             {router.query.notfound && (

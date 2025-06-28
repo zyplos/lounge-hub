@@ -52,14 +52,17 @@ export default async function handler(
   req: NextApiRequest, // req is unused but part of NextApiHandler
   res: NextApiResponse<ApiPingStatusResponse>
 ) {
-  const getServerData = async (ip: string, port: number): Promise<ServerPingResult> => {
+  const getServerData = async (
+    ip: string,
+    port: number
+  ): Promise<ServerPingResult> => {
     if (!ip) {
-        return { error: "Server IP address is not defined." };
+      return { error: "Server IP address is not defined." };
     }
     try {
       // minecraft-server-ping's ping function is likely promisified if it's from a 'const { ping } = require'
       // It might not be strictly typed, so we cast the result.
-      const response = await ping(ip, port) as PingResponse; // Type assertion
+      const response = (await ping(ip, port)) as PingResponse; // Type assertion
 
       // The commented out MOTD parsing logic:
       // if (response.description && response.description.extra && response.description.text === "") {

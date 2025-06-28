@@ -22,11 +22,16 @@ const dbConfig: ConnectionOptions = {
   database: "loungeSurvival",
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponseDataByUUID>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ApiResponseDataByUUID>
+) {
   const { uuid: queryUuid } = req.query;
 
-  if (!queryUuid || typeof queryUuid !== 'string') {
-    res.status(400).json({ error: "Player UUID must be specified as a string." });
+  if (!queryUuid || typeof queryUuid !== "string") {
+    res
+      .status(400)
+      .json({ error: "Player UUID must be specified as a string." });
     return;
   }
 
@@ -44,7 +49,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(200).json({ data: rows as ChunkDataByUUID[] });
   } catch (error: any) {
     console.error("Database Error fetching chunks by UUID:", error);
-    res.status(500).json({ error: "Failed to retrieve data from the database. " + error.message });
+    res
+      .status(500)
+      .json({
+        error: "Failed to retrieve data from the database. " + error.message,
+      });
   } finally {
     if (connection) {
       await connection.end();

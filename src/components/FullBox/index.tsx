@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 export interface FullBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   useDims?: boolean;
@@ -17,10 +17,12 @@ const FullBox: React.FC<FullBoxProps> = ({
 }) => {
   const classNames = [
     styles.fullBox,
-    useDims ? styles.useDims : '',
-    usePadding ? styles.usePadding : '',
-    className || '' // Include external className if provided
-  ].join(' ').trim();
+    useDims ? styles.useDims : "",
+    usePadding ? styles.usePadding : "",
+    className || "", // Include external className if provided
+  ]
+    .join(" ")
+    .trim();
 
   return (
     <div className={classNames} {...props}>

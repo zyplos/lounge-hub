@@ -2,7 +2,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
-  webpack(config, { isServer, dev, buildId, config: nextJsConfig, defaultLoaders, webpack }) {
+  webpack(
+    config,
+    { isServer, dev, buildId, config: nextJsConfig, defaultLoaders, webpack }
+  ) {
     config.module.rules.push({
       test: /\.svg$/i,
       // issuer: { and: [/\.(js|ts|md)x?$/] }, // Original issuer condition
@@ -16,22 +19,22 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'cdn.discordapp.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'visage.surgeplay.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "visage.surgeplay.com",
+        port: "",
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'crafatar.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "crafatar.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

@@ -1,12 +1,13 @@
-import React from 'react';
-import FullBox, { FullBoxProps } from '../FullBox'; // Import FullBoxProps
-import Spinner from '../Spinner';
-import styles from './styles.module.css';
+import React from "react";
+import FullBox, { FullBoxProps } from "../FullBox"; // Import FullBoxProps
+import Spinner from "../Spinner";
+import styles from "./styles.module.css";
 
 // Props for LoadingFullBox, extending FullBoxProps but omitting 'children'
 // as LoadingFullBox defines its own children.
 // We also make `useDims` optional here if we always want to set it from LoadingFullBox
-interface LoadingFullBoxProps extends Omit<FullBoxProps, 'children' | 'useDims'> {
+interface LoadingFullBoxProps
+  extends Omit<FullBoxProps, "children" | "useDims"> {
   text?: string;
 }
 

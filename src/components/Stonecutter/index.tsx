@@ -1,12 +1,14 @@
-import React from 'react';
-import MinecraftContainer from '../MinecraftContainer/index';
-import MinecraftSlot from '../MinecraftSlot/index';
-import MinecraftResultArrow from '../MinecraftResultArrow/index';
-import styles from './styles.module.css';
-import type { StaticImageData } from 'next/image'; // For typing image paths
+import React from "react";
+import MinecraftContainer from "../MinecraftContainer/index";
+import MinecraftSlot from "../MinecraftSlot/index";
+import MinecraftResultArrow from "../MinecraftResultArrow/index";
+import styles from "./styles.module.css";
+import type { StaticImageData } from "next/image"; // For typing image paths
 
 // Reusing or adapting a similar type from CraftingTable/Furnace
-type StonecutterItem = [name: string, imagePath: string | StaticImageData] | null;
+type StonecutterItem =
+  | [name: string, imagePath: string | StaticImageData]
+  | null;
 
 interface StonecutterProps {
   input?: StonecutterItem;
@@ -26,9 +28,9 @@ const Stonecutter: React.FC<StonecutterProps> = ({
       <p className={styles.stonecutterTitle}>Stonecutter</p>
       <div className={styles.recipeLayout}>
         {input && input[1] ? ( // Check if input and its image exist
-          (<MinecraftSlot image={input[1]} name={input[0]} />)
+          <MinecraftSlot image={input[1]} name={input[0]} />
         ) : (
-          (<MinecraftSlot />) // Render empty slot
+          <MinecraftSlot /> // Render empty slot
         )}
 
         <MinecraftResultArrow />

@@ -1,6 +1,7 @@
 .craftingTitle {
   margin-bottom: var(--space-1); /* mb: 1 */
-  font-family: "Minecraft", monospace; /* Assuming titles in these containers use Minecraft font */
+  font-family:
+    "Minecraft", monospace; /* Assuming titles in these containers use Minecraft font */
   color: var(--color-text); /* Match MinecraftContainer's text color */
 }
 
