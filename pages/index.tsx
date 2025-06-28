@@ -1,8 +1,6 @@
-import React from "react"; // useContext and useSWR are not directly used here, but kept if needed by hooks
 import MainLayout from "../internals/MainLayout";
 import DiscordServer from "../components/DiscordServer/index";
 import MinecraftStatus from "../components/MinecraftStatus/index";
-import Alert from "../components/Alert/index"; // Import new Alert component
 import { useMinecraftData } from "../internals/MinecraftContext";
 import styles from "../styles/IndexPage.module.css";
 
