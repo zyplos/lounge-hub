@@ -4,7 +4,7 @@ import { MinecraftDataProvider } from "../internals/MinecraftContext";
 import fetcher from "../internals/fetcher";
 
 import "normalize.css";
-import "../styles/_common.css"; // Import common styles
+import "../styles/_globals.scss"; // Import common styles
 import "./app.css";
 import { AppProps } from "next/app";
 require("@south-paw/typeface-minecraft");
