@@ -1,4 +1,10 @@
 // ===== global styles
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   color: var(--color-text);
   background-color: var(--color-background);
