@@ -1,21 +1,23 @@
-import MainLayout from "../internals/MainLayout";
-import FullBox from "../components/FullBox/index"; // Updated path
-import styles from "../styles/ErrorPage.module.css";
-import { NextPageContext } from "next";
+import type { NextPageContext } from "next";
+
+import MainLayout from "@/internals/MainLayout";
+import FullBox from "@/components/FullBox";
+import styles from "@/styles/ErrorPages.module.css";
 
 interface ErrorProps {
-  statusCode: number;
+  statusCode?: number;
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: thats how nextjs wants it
 function Error({ statusCode }: ErrorProps) {
   return (
     <MainLayout noPadding>
       <FullBox useDims={true}>
-        <h1 className={styles.heading}>oops</h1>
-        <p className={styles.message}>
+        <h1 className={styles.heading}>{statusCode ?? "oops"}</h1>
+        <p>
           {statusCode
-            ? `An error ${statusCode} occurred on the server.`
-            : "An error occurred on client."}
+            ? "Sorry, an unexpected error occurred on the server."
+            : "Sorry, an unexpected error occurred."}
         </p>
       </FullBox>
     </MainLayout>

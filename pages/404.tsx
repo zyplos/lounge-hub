@@ -1,20 +1,14 @@
-import MainLayout from "../internals/MainLayout";
-import FullBox from "../components/FullBox/index"; // Updated path
-import styles from "../styles/404.module.css";
-import React from "react";
+import MainLayout from "@/internals/MainLayout";
+import FullBox from "@/components/FullBox";
+import styles from "@/styles/ErrorPages.module.css";
 
-const Error404: React.FC = () => {
-  // Renamed to avoid conflict with global Error if any
+export default function Custom404() {
   return (
     <MainLayout noPadding>
       <FullBox useDims={true}>
         <h1 className={styles.heading}>404</h1>
-        <p className={styles.message}>
-          Whatever you tried to access doesn't exist.
-        </p>
+        <p>Whatever you tried to access doesn't exist. Sorry!</p>
       </FullBox>
     </MainLayout>
   );
-};
-
-export default Error404;
+}

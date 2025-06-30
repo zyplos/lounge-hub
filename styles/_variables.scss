@@ -10,6 +10,7 @@
   --font-size-m: calc(var(--font-size) * var(--fontSizeIncrement));
   --font-size-l: calc(var(--font-size-m) * var(--fontSizeIncrement));
   --font-size-xl: calc(var(--font-size-l) * var(--fontSizeIncrement));
+  --font-size-xxl: calc(var(--font-size-xl) * var(--fontSizeIncrement));
 
   --lineHeightFixedAmount: 0.35rem;
   --lineHeightRelativeAmount: 1.1em;
