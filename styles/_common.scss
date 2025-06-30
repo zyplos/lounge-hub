@@ -3,13 +3,13 @@
   max-width: var(--max-width-pixel);
 }
 
-@mixin mobileMediaQuery {
+@mixin mobileScreenStyles {
   @media (max-width: 990px) {
     @content;
   }
 }
 
-@mixin desktopMediaQuery {
+@mixin desktopScreenStyles {
   @media (min-width: 990px) {
     @content;
   }
