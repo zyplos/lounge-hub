@@ -52,6 +52,11 @@ const nextConfig = {
       },
     ];
   },
+  sassOptions: {
+    prependData: `
+        @use "@/styles/_common.scss" as common;
+      `,
+  },
 };
 
 module.exports = nextConfig;

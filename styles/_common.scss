@@ -1,0 +1,16 @@
+@mixin responsiveMaxWidth {
+  width: 80%;
+  max-width: var(--max-width-pixel);
+}
+
+@mixin mobileMediaQuery {
+  @media (max-width: 990px) {
+    @content;
+  }
+}
+
+@mixin desktopMediaQuery {
+  @media (min-width: 990px) {
+    @content;
+  }
+}
