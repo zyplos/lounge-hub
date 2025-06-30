@@ -4,9 +4,9 @@ import DiscordServer from "@/components/DiscordServer";
 import MinecraftStatus from "@/components/MinecraftStatus";
 import { useMinecraftData } from "@/internals/MinecraftContext";
 
-import styles from "@/styles/IndexPage.module.css";
+import styles from "@/styles/HomePage.module.css";
 
-function Home() {
+export default function HomePage() {
   const minecraftData = useMinecraftData();
   const vanilla = minecraftData ? minecraftData.vanilla : null;
   const modded = minecraftData ? minecraftData.modded : null;
@@ -35,5 +35,3 @@ function Home() {
     </MainLayout>
   );
 }
-
-export default Home;
