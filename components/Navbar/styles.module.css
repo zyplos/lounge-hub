@@ -1,10 +1,9 @@
 .navbarOuterContainer {
   background-color: var(--color-background-secondary);
   padding: var(--space-4); /* padding: 4 */
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) var(--color-dark-gray-accent); /* #ff3e3e #242424 */
-  height: 100vh; /* Assuming navbar is full height */
   box-sizing: border-box;
 }
 

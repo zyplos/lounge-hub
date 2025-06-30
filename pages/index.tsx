@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import MainLayout from "@/internals/MainLayout";
-import DiscordServer from "@/components/DiscordServer";
+// import DiscordServer from "@/components/DiscordServer";
 import MinecraftStatus from "@/components/MinecraftStatus";
 import { useMinecraftData } from "@/internals/MinecraftContext";
 
@@ -25,12 +25,12 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <h2 className={clsx(styles.sectionHeading, styles.loungeHeading)}>
             the lounge
           </h2>
           <DiscordServer />
-        </section>
+        </section> */}
       </div>
     </MainLayout>
   );
