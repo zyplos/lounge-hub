@@ -1,7 +1,7 @@
 import type { NextPageContext } from "next";
 
 import MainLayout from "@/internals/MainLayout";
-import FullBox from "@/components/FullBox";
+import { Fullbox } from "@/components/Fullbox";
 import styles from "@/styles/ErrorPages.module.css";
 
 interface ErrorProps {
@@ -12,14 +12,14 @@ interface ErrorProps {
 function Error({ statusCode }: ErrorProps) {
   return (
     <MainLayout noPadding>
-      <FullBox useDims={true}>
+      <Fullbox useDims={true}>
         <h1 className={styles.heading}>{statusCode ?? "oops"}</h1>
         <p>
           {statusCode
             ? "Sorry, an unexpected error occurred on the server."
             : "Sorry, an unexpected error occurred."}
         </p>
-      </FullBox>
+      </Fullbox>
     </MainLayout>
   );
 }

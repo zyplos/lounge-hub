@@ -19,8 +19,7 @@ import {
   prettyPrintDateAndTime,
 } from "../../../internals/Utils"; // Adjusted path
 
-import ErrorFullBox from "../../../components/ErrorFullBox/index";
-import LoadingFullBox from "../../../components/LoadingFullBox/index";
+import { Fullbox, FullboxHeading } from "@/components/Fullbox";
 import MainLayout from "../../../internals/MainLayout";
 import Button from "../../../components/Button/index"; // Using new Button
 
@@ -98,7 +97,10 @@ function PlayerPage() {
   if (!playerName) {
     return (
       <MainLayout>
-        <ErrorFullBox header="Error" text="No username provided." />
+        <Fullbox>
+          <FullboxHeading>Error</FullboxHeading>
+          <p>No username provided.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
@@ -106,10 +108,10 @@ function PlayerPage() {
   if (playerError) {
     return (
       <MainLayout>
-        <ErrorFullBox
-          header={playerError.status || "Error"}
-          text="Error getting player data."
-        />
+        <Fullbox>
+          <FullboxHeading>{playerError.status || "Error"}</FullboxHeading>
+          <p>Error getting player data.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
@@ -119,13 +121,20 @@ function PlayerPage() {
   }
 
   if (!playerData) {
-    return <LoadingFullBox text="Grabbing player data..." />;
+    return (
+      <Fullbox>
+        <p>Grabbing player data...</p>
+      </Fullbox>
+    );
   }
 
   if (playerData.data.length === 0) {
     return (
       <MainLayout>
-        <ErrorFullBox header="404" text="Player not found." />
+        <Fullbox>
+          <FullboxHeading>not found</FullboxHeading>
+          <p>That player's data couldn't be found.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
@@ -219,7 +228,7 @@ function PlayerPage() {
                 </Button>
               )}
             {!chunkData && !chunkError && (
-              <LoadingFullBox text="Loading chunk claims..." />
+              <Fullbox>Loading chunk claims...</Fullbox>
             )}
             {chunkData && chunkData.data.length === 0 && (
               <p className={styles.noChunksText}>

@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR, { SWRResponse } from "swr"; // Import SWRResponse for typing
 import Image from "next/image";
-import FullBox from "../FullBox/index";
+import { Fullbox } from "../Fullbox";
 import Spinner from "../Spinner/index";
 // Alert component might be needed if error display changes from preformatted text
 // import Alert from '../Alert/index';
@@ -66,18 +66,18 @@ const DiscordServer: React.FC = () => {
 
   if (error) {
     return (
-      <FullBox useDims={false} usePadding>
-        <p className="text-fullbox">Error getting Discord status.</p>
+      <Fullbox useDims={false} usePadding>
+        <p>Error getting Discord status.</p>
         <pre>{JSON.stringify(error, null, 2)}</pre>
-      </FullBox>
+      </Fullbox>
     );
   }
   if (!discordData) {
     return (
-      <FullBox useDims={false} usePadding>
+      <Fullbox useDims={false} usePadding>
         <Spinner title="Loading Discord Status" />
-        <p style={{ marginTop: "var(--space-2)" }}>Loading Discord status.</p>
-      </FullBox>
+        <p>Loading Discord status.</p>
+      </Fullbox>
     );
   }
 

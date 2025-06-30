@@ -14,8 +14,7 @@ import {
 
 import CalendarIcon from "../../../../../../assets/calendar-icon.svg"; // Adjusted path
 import PlayerIcon from "../../../../../../assets/player-icon.png"; // Adjusted path
-import ErrorFullBox from "../../../../../../components/ErrorFullBox/index";
-import LoadingFullBox from "../../../../../../components/LoadingFullBox/index";
+import { Fullbox, FullboxHeading } from "@/components/Fullbox";
 import MainLayout from "../../../../../../internals/MainLayout";
 
 import styles from "../../../../../../styles/VisitorsLogPage.module.css"; // Adjusted path
@@ -64,7 +63,10 @@ function VisitorsLogPage() {
   if (!dimensionUuid || !x || !z) {
     return (
       <MainLayout>
-        <ErrorFullBox header="Error" text="Invalid query parameters." />
+        <Fullbox>
+          <FullboxHeading>Error</FullboxHeading>
+          <p>Invalid query parameters.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
@@ -73,7 +75,10 @@ function VisitorsLogPage() {
   if (typeof z !== "string" || typeof x !== "string") {
     return (
       <MainLayout>
-        <ErrorFullBox header="Error" text="Invalid query parameters." />
+        <Fullbox>
+          <FullboxHeading>Error</FullboxHeading>
+          <p>Invalid query parameters.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
@@ -81,39 +86,47 @@ function VisitorsLogPage() {
   if (logError) {
     return (
       <MainLayout>
-        <ErrorFullBox
-          header={logError.status || "Error"}
-          text="Error getting log data."
-        />
+        <Fullbox>
+          <FullboxHeading>{logError.status || "Error"}</FullboxHeading>
+          <p>Error getting log data.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
   if (chunkOwnerError) {
     return (
       <MainLayout>
-        <ErrorFullBox
-          header={chunkOwnerError.status || "Error"}
-          text="Error getting chunk owner data."
-        />
+        <Fullbox>
+          <FullboxHeading>{chunkOwnerError.status || "Error"}</FullboxHeading>
+          <p>Error getting log data.</p>
+        </Fullbox>
       </MainLayout>
     );
   }
 
   if (!logData) {
-    return <LoadingFullBox text="Grabbing log entries..." />;
+    return (
+      <Fullbox>
+        <p>Grabbing log entries...</p>
+      </Fullbox>
+    );
   }
   if (!chunkOwnerData) {
-    return <LoadingFullBox text="Loading chunk owner data..." />;
+    return (
+      <Fullbox>
+        <p>Loading chunk owner data...</p>
+      </Fullbox>
+    );
   }
 
   if (chunkOwnerData.data.length === 0) {
     // A chunk must have an owner to have visit logs in this context
     return (
       <MainLayout>
-        <ErrorFullBox
-          header="404"
-          text="This chunk has no owner data or is unclaimed."
-        />
+        <Fullbox>
+          <FullboxHeading>not found</FullboxHeading>
+          <p>This chunk is unclaimed and isn't owned by anyone.</p>
+        </Fullbox>
       </MainLayout>
     );
   }

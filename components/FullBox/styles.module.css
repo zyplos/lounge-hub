@@ -1,9 +1,10 @@
-.fullBox {
+.fullbox {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  gap: var(--space);
 }
 
 .useDims {
@@ -12,5 +13,9 @@
 }
 
 .usePadding {
-  padding: 2em; /* This could use a --space variable if 2em matches one */
+  padding: var(--space);
+}
+
+.heading {
+  font-size: var(--font-size-xxl);
 }

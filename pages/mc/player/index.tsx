@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 // Link is not used in this component
 import MainLayout from "../../../internals/MainLayout";
-import FullBox from "../../../components/FullBox/index"; // Updated path
+import { Fullbox } from "@/components/Fullbox";
 import Button from "../../../components/Button/index"; // Custom Button
 import Alert from "../../../components/Alert/index"; // Custom Alert
 import styles from "../../../styles/PlayerIndexPage.module.css"; // Adjusted path
@@ -22,7 +22,7 @@ function PlayerIndexPage() {
 
   return (
     <MainLayout noPadding>
-      <FullBox useDims={true}>
+      <Fullbox useDims={true}>
         <form onSubmit={handleSubmit}>
           <div className={styles.formGrid}>
             <p className={`${styles.todoText} text-muted`}>
@@ -50,7 +50,7 @@ function PlayerIndexPage() {
             <Button type="submit">View Profile</Button>
           </div>
         </form>
-      </FullBox>
+      </Fullbox>
     </MainLayout>
   );
 }
