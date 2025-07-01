@@ -12,10 +12,6 @@
   --font-size-xl: calc(var(--font-size-l) * var(--fontSizeIncrement));
   --font-size-xxl: calc(var(--font-size-xl) * var(--fontSizeIncrement));
 
-  --lineHeightFixedAmount: 0.35rem;
-  --lineHeightRelativeAmount: 1.1em;
-  --globalLineHeight: calc(var(--lineHeightFixedAmount) + var(--lineHeightRelativeAmount));
-
   --font-body:
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", sans-serif;

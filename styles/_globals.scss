@@ -19,7 +19,7 @@ body {
   background-color: var(--color-background);
 
   font-family: var(--font-body);
-  line-height: var(--globalLineHeight);
+  line-height: 1.2;
   font-weight: var(--font-weight-body);
 }
 
@@ -80,6 +80,30 @@ a {
 
 .textMuted {
   color: var(--color-muted);
+}
+
+.sectionMargin {
+  margin-bottom: var(--space-xl)
+}
+
+.paragraphMargin {
+  margin-bottom: var(--space-l)
+}
+
+.textContent {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: var(--space);
+  }
+
+  p {
+    margin-top: var(--space);
+  }
 }
 
 .responsiveCenteredContainer {

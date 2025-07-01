@@ -7,12 +7,12 @@ import styles from "@/styles/ChangelogPage.module.scss";
 export default function ChangelogPage() {
   return (
     <ArticleLayout title="Server History">
-      <div className={styles.pageGrid}>
+      <div>
         {/* <Alert variant="info" className={styles.infoAlert}>
           i'll add world backups here sometime soon
         </Alert> */}
 
-        <section>
+        <section className="sectionMargin">
           <h2 className={styles.sectionHeading}>Vanilla Minecraft</h2>
           <div className={clsx(styles.grid, styles.biggerGrid)}>
             <SeasonCard title="Season 6: Echoes of the Realm" details="1.20" />
@@ -26,7 +26,7 @@ export default function ChangelogPage() {
           </div>
         </section>
 
-        <section>
+        <section className="sectionMargin">
           <h2 className={styles.sectionHeading}>Modded Minecraft</h2>
           <div className={styles.grid}>
             <SeasonCard
