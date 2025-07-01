@@ -1,0 +1,85 @@
+.navbarWrapper {
+  background-color: var(--color-background-secondary);
+  padding: var(--space-m);
+  height: 100%;
+
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-background-tertiary) var(--color-background-secondary);
+}
+
+.navbarWrapper::-webkit-scrollbar {
+  width: 1px;
+}
+
+.navbarWrapper::-webkit-scrollbar-track {
+  background-color: var(--color-background-secondary);
+}
+
+.navbarWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--color-background-tertiary);
+}
+
+.navGrid {
+  display: grid;
+  gap: var(--space-l);
+  justify-items: center;
+}
+
+@include common.mobileScreenStyles {
+  .navGrid {
+    justify-items: flex-start;
+  }
+}
+
+.navDivider {
+  width: 100%;
+  background: var(--color-background-tertiary);
+  height: 3px;
+}
+
+.centerItem {
+  justify-self: center;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.navText {
+  display: inline-block;
+  margin-left: var(--space);
+  vertical-align: text-bottom;
+}
+
+@include common.desktopScreenStyles {
+  .navText {
+    display: none;
+  }
+}
+
+.navIcon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  fill: white;
+}
+
+.minecraftItemContainer {
+  font-family: "Minecraft", monospace;
+  position: relative;
+  display: inline-block;
+}
+
+.minecraftItemLabel {
+  color: #fff;
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  font-size: var(--font-size-1);
+  line-height: 1;
+  text-shadow: 1px 1px #000;
+}
