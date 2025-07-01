@@ -1,21 +1,15 @@
-import React from "react";
-import Image, { StaticImageData } from "next/image"; // Import StaticImageData
-import MinecraftStatusSkeleton from "../MinecraftStatusSkeleton/index";
-import Alert from "../Alert/index";
-import defaultServerIcon from "../../assets/defaultServerIcon.png";
-// import offlineServerIcon from '../../assets/offlineServerIcon.png';
+import Image, { type StaticImageData } from "next/image";
+import Alert from "../Alert";
+import MinecraftStatusSkeleton from "../MinecraftStatusSkeleton";
+import styles from "./styles.module.scss";
 
-import styles from "./styles.module.css";
+import defaultServerIcon from "@/assets/defaultServerIcon.png";
 
-// Interface for a player in the sample list
 interface PlayerSampleEntry {
-  id: string; // UUID
+  id: string;
   name: string;
 }
 
-// Interface for the server status data
-// This should align with the actual data structure provided by your server status fetching logic
-// (e.g., from minecraft-server-util or minecraft-server-ping)
 interface ServerStatusData {
   motd?: {
     raw?: string; // Original raw MOTD (often with formatting codes)
@@ -35,16 +29,13 @@ interface ServerStatusData {
   favicon?: string | StaticImageData; // Base64 string or imported image data
   roundTripLatency?: number; // Example: from minecraft-server-util
   // Add any other properties your status objects might have
-  [key: string]: any; // Allow other properties for flexibility
 }
 
 interface MinecraftStatusProps {
   data?: ServerStatusData | null; // Data can be null or undefined if loading/error
 }
 
-const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
-  const { data } = props;
-
+export default function MinecraftStatus({ data }: MinecraftStatusProps) {
   // console.log(data);
 
   if (!data) {
@@ -93,43 +84,40 @@ const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
   }
 
   return (
-    <div className={styles.gridContainer}>
-      <div className={styles.headerFlex}>
-        <div className={styles.serverIconContainer}>
-          <Image
-            src={data.favicon || defaultServerIcon}
-            alt="server icon"
-            width={64} // Use number
-            height={64} // Use number
-          />
-        </div>
-        <div className={styles.motdContainer}>
-          {/* Ensure motd and motd.clean exist before trying to render */}
-          <div>{data.motd?.clean || "No MOTD available."}</div>
-        </div>
+    <div className={styles.serverDisplayContainer}>
+      <div className={styles.motdWrapper}>
+        <Image
+          src={data.favicon || defaultServerIcon}
+          alt="server icon"
+          width={64}
+          height={64}
+          className={styles.serverIcon}
+        />
+
+        <p className={styles.motd}>{data.motd?.clean || "(empty motd)"}</p>
       </div>
-      <p className={styles.statusText}>
+
+      <p>
         {numPlayersOnline !== 0 ? numPlayersOnline : "No"} {computedPlural()}{" "}
         online
         {versionName ? ` • ${versionName}` : ""}
       </p>
+
       {numPlayersOnline === 0 && (
         <p className={styles.noPlayersText}>No one's online at the moment.</p>
       )}
-      {/* Use the (potentially sorted) playerList for mapping */}
+
       {numPlayersOnline > 0 && playerList && playerList.length > 0 && (
         <div className={styles.playerGrid}>
           {playerList.map((player) => (
-            <div
-              key={player.id || player.name}
-              className={styles.playerItemFlex}
-            >
+            <div key={player.id || player.name} className={styles.playerItem}>
               <Image
                 src={getPlayerImage(player.id)}
-                alt={`${player.name}'s avatar`}
-                width={45} // Use number
-                height={45} // Use number
+                alt={`${player.name}'s portrait`}
+                width={45}
+                height={45}
               />
+
               <p className={styles.playerNameText}>{player.name}</p>
             </div>
           ))}
@@ -137,6 +125,4 @@ const MinecraftStatus: React.FC<MinecraftStatusProps> = (props) => {
       )}
     </div>
   );
-};
-
-export default MinecraftStatus;
+}

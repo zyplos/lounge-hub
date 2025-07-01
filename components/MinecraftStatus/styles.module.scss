@@ -1,0 +1,50 @@
+.serverDisplayContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.motdWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.motd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Minecraft", monospace;
+  white-space: pre-wrap;
+}
+
+.serverIcon {
+  margin-right: var(--space);
+}
+
+.noPlayersText {
+  color: var(--color-muted);
+}
+
+.playerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space);
+}
+
+@include common.desktopScreenStyles {
+  .playerGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.playerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.playerNameText {
+  margin-top: var(--space-xs);
+}
