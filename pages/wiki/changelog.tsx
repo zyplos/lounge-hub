@@ -1,9 +1,6 @@
-import clsx from "clsx";
 import ArticleLayout from "@/internals/ArticleLayout";
 import { NewTabLink } from "@/components/NewTabLink";
 import { Card, CardHeading, type CardProps } from "@/components/Card";
-
-import styles from "@/styles/ChangelogPage.module.scss";
 
 export default function ChangelogPage() {
   return (
@@ -13,9 +10,10 @@ export default function ChangelogPage() {
           i'll add world backups here sometime soon
         </Alert> */}
 
-        <section className="sectionMargin">
-          <h2 className={styles.sectionHeading}>Vanilla Minecraft</h2>
-          <div className={clsx(styles.grid, styles.biggerGrid)}>
+        <section className="textContent sectionMargin">
+          <h2>Vanilla Minecraft</h2>
+
+          <div className="cardGrid biggerCardGrid">
             <SeasonCard title="Season 6: Echoes of the Realm" details="1.20" />
             <SeasonCard title="Season 6" details="1.19" />
             <SeasonCard title="Season 5: Part II" details="1.18" />
@@ -27,9 +25,10 @@ export default function ChangelogPage() {
           </div>
         </section>
 
-        <section className="sectionMargin">
-          <h2 className={styles.sectionHeading}>Modded Minecraft</h2>
-          <div className={styles.grid}>
+        <section className="textContent sectionMargin">
+          <h2>Modded Minecraft</h2>
+
+          <div className="cardGrid">
             <SeasonCard
               title="Season 11"
               details={
@@ -154,9 +153,10 @@ export default function ChangelogPage() {
           </div>
         </section>
 
-        <section>
-          <h2 className={styles.sectionHeading}>Terraria</h2>
-          <div className={styles.grid}>
+        <section className="textContent">
+          <h2>Terraria</h2>
+
+          <div className="cardGrid">
             <SeasonCard title="Season 2" details="Journey's End" />
             <SeasonCard title="Season 1" details="1.3" />
           </div>
