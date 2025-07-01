@@ -1,30 +1,29 @@
-import React from "react";
-import Link, { LinkProps } from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Link, { type LinkProps } from "next/link";
+import Image, { type StaticImageData } from "next/image";
 import styles from "./styles.module.css";
 
 interface GradientColors {
-  left: string; // CSS color value
-  right: string; // CSS color value
+  // CSS color values
+  left: string;
+  right: string;
 }
 
 interface WikiCardProps {
-  link: LinkProps["href"]; // Use Href from LinkProps for flexibility (string or UrlObject)
-  image: string | StaticImageData; // Path string or StaticImageData object
+  link: LinkProps["href"];
+  image: string | StaticImageData;
   gradient: GradientColors;
   heading: string;
-  description: React.ReactNode; // Allow more than just string for description
+  description: React.ReactNode;
 }
 
-const WikiCard: React.FC<WikiCardProps> = ({
+export default function WikiCard({
   link,
   image,
   gradient,
   heading,
   description,
-}) => {
+}: WikiCardProps) {
   const flexStyle: React.CSSProperties = {
-    // Type the style object
     background: `linear-gradient( 135deg, ${gradient.left} 10%, ${gradient.right} 100%)`,
   };
 
@@ -32,8 +31,7 @@ const WikiCard: React.FC<WikiCardProps> = ({
     <Link href={link} className={styles.link}>
       <div className={styles.flexContainer} style={flexStyle}>
         <div className={styles.imageContainer}>
-          <Image src={image} alt={heading} height={128} width={128} />{" "}
-          {/* Use numbers */}
+          <Image src={image} alt={heading} height={128} width={128} />
         </div>
         <div className={styles.textContainer}>
           <h2 className={styles.heading}>{heading}</h2>
@@ -42,6 +40,4 @@ const WikiCard: React.FC<WikiCardProps> = ({
       </div>
     </Link>
   );
-};
-
-export default WikiCard;
+}

@@ -1,40 +1,22 @@
 .link {
   display: block;
-  color: white; /* Default from sx prop */
+  color: #fff;
   text-decoration: none;
-  height: 100%; /* To make the card fill its container if needed */
 }
 
 .flexContainer {
   display: flex;
   flex-direction: row;
-  /* background: set via style prop for dynamic gradient */
-  padding-left: var(--space-4); /* px: 4 */
-  padding-right: var(--space-4); /* px: 4 */
-  padding-top: var(--space-3); /* py: 3 */
-  padding-bottom: var(--space-3); /* py: 3 */
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space);
+
+  padding: var(--space-l) var(--space-m);
+  border-radius: var(--radius-l);
   height: 100%;
-  border-radius: 10px; /* Overrides global --border-radius if it's 0 */
-  flex-wrap: wrap; /* From sx prop */
-  box-sizing: border-box; /* Ensure padding doesn't expand beyond height 100% */
-}
-
-.imageContainer {
-  /* Styles for the div wrapping Image if any specific layout needed */
-  /* Image component itself handles its dimensions */
-}
-
-.textContainer {
-  margin-left: var(--space-3); /* ml: 3 */
 }
 
 .heading {
-  font-size: var(--font-size-5); /* fontSize: 5 */
-  margin-bottom: var(--space-2); /* mb: 2 */
-  /* Inherits h2 styles from _common.css (font-family, line-height, font-weight) */
-}
-
-.description {
-  /* Default p or span styling is likely fine, add if specific Text variant was implied */
+  font-size: var(--font-size-l);
+  margin-bottom: var(--space);
 }

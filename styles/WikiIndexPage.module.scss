@@ -1,0 +1,50 @@
+.wikiGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--space-m);
+}
+
+@include common.desktopScreenStyles {
+  .wikiGrid {
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  }
+}
+
+.heroCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space);
+  background: linear-gradient(135deg, #f06e6e 10%, #ff3e3e 100%);
+  padding: var(--space-m);
+  border-radius: var(--radius-l);
+
+  font-family: "Minecraft", monospace;
+}
+
+@include common.desktopScreenStyles {
+  .heroCard {
+    padding: var(--space-xl);
+    align-items: flex-start;
+  }
+}
+
+.heroTextLine1 {
+  font-size: var(--font-size);
+}
+
+.heroTextLine2 {
+  font-size: var(--font-size-l);
+}
+
+@include common.desktopScreenStyles {
+  .heroTextLine1 {
+    font-size: var(--font-size);
+  }
+
+  .heroTextLine2 {
+    font-size: var(--font-size-xxl);
+  }
+}

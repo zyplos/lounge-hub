@@ -1,19 +1,14 @@
-import React from "react";
-import WikiCard from "../../components/WikiCard/index";
-import MainLayout from "../../internals/MainLayout";
-import styles from "../../styles/WikiIndexPage.module.css"; // Adjusted path
+import MainLayout from "@/internals/MainLayout";
+import WikiCard from "@/components/WikiCard";
 
-// Import assets directly if they are not dynamically chosen based on props
-import craftingTable from "../../assets/crafting-table.png";
-// import glowstone from "../../assets/glowstone.png"; // Unused in this component
-import grassBlock from "../../assets/grass-block.png";
-import commandBlock from "../../assets/command-block.png";
-// import skulkSensor from "../../assets/sculk_sensor.gif"; // Unused
-import jigsawBlock from "../../assets/jigsaw-block.png";
-// import endPortal from "../../assets/end-portal-frame-filled.png"; // Unused
+import styles from "@/styles/WikiIndexPage.module.scss";
 
-function WikiHomePage() {
-  // Renamed component
+import craftingTable from "@/assets/crafting-table.png";
+import grassBlock from "@/assets/grass-block.png";
+import commandBlock from "@/assets/command-block.png";
+import jigsawBlock from "@/assets/jigsaw-block.png";
+
+export default function WikiHomePage() {
   return (
     <MainLayout>
       <div className={styles.wikiGrid}>
@@ -53,5 +48,3 @@ function WikiHomePage() {
     </MainLayout>
   );
 }
-
-export default WikiHomePage;
