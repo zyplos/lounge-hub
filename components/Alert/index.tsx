@@ -1,33 +1,26 @@
-import React from "react";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
-type AlertVariant = "info" | "success" | "warning" | "error" | "neutral"; // Added neutral as a common one
+type AlertVariant = "neutral" | "info";
 
 interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: AlertVariant;
-  // className is already part of HTMLAttributes<HTMLDivElement>
 }
 
-const Alert: React.FC<AlertProps> = ({
+export default function Alert({
   children,
-  variant = "info",
+  variant = "neutral",
   className = "",
   ...props
-}) => {
-  const alertClasses = [
-    styles.alert,
-    styles[variant] || styles.info, // Default to info style if variant doesn't exist in CSS Modules
-    className,
-  ]
-    .join(" ")
-    .trim();
-
+}: AlertProps) {
   return (
-    <div className={alertClasses} role="alert" {...props}>
+    <div
+      className={clsx(styles.alert, styles[variant] || styles.info, className)}
+      role="alert"
+      {...props}
+    >
       {children}
     </div>
   );
-};
-
-export default Alert;
+}
