@@ -46,9 +46,7 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
   // data.players should also exist if server is online.
   if (!data.motd || !data.players) {
     return (
-      <Alert variant="info">
-        This server is currently offline or status is unavailable.
-      </Alert>
+      <Alert>This server is currently offline or status is unavailable.</Alert>
     );
   }
 
