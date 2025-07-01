@@ -1,21 +1,11 @@
-.articleContainer {
-  /* Replicates theme-ui Container. Equivalent to using .container from _common.css */
-  /* If .container from _common.css is sufficient, this class might not be strictly needed */
-  /* but is kept for semantic clarity corresponding to the original <Container> component */
-  width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .articleTitle {
-  /* Styles for h1 if needed beyond default h1 from _common.css */
-  /* For example, if the original <Heading as="h1"> had specific variants or sx props */
+  margin-bottom: var(--space);
 }
 
 .articleDivider {
-  margin-top: var(--space-4); /* my={4} */
-  margin-bottom: var(--space-4); /* my={4} */
-  height: 1px; /* Standard divider height */
-  background-color: var(--color-muted); /* Example color, adjust if theme had specific divider color */
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+  height: 1px;
+  background-color: var(--color-muted);
   border: 0;
 }

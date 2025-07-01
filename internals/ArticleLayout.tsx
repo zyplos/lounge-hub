@@ -1,6 +1,5 @@
-import React from "react";
 import MainLayout from "./MainLayout";
-import styles from "../styles/ArticleLayout.module.css"; // Adjusted path
+import styles from "@/styles/ArticleLayout.module.css";
 
 function ArticleLayout({
   title,
@@ -11,9 +10,7 @@ function ArticleLayout({
 }) {
   return (
     <MainLayout>
-      <div className={`${styles.articleContainer} container`}>
-        {" "}
-        {/* Using both for clarity or if _common.container is preferred */}
+      <div className={`${styles.articleContainer} responsiveCenteredContainer`}>
         <h1 className={styles.articleTitle}>{title}</h1>
         <hr className={styles.articleDivider} />
         {children}
