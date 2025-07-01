@@ -50,7 +50,9 @@
   --radius-xs: 10px;
   --radius-s: 0.2rem;
   --radius: 0.5rem;
-  --radius-l: 0.5rem;
+  --radius-m: 0.8rem;
+  --radius-l: 1.2rem;
+  --radius-circle: 1000px;
 }
 
 // colors
@@ -61,7 +63,7 @@
   --color-text: #fff;
   --color-background: #383332;
   --color-background-secondary: #212020;
-  --color-background-tertiary: #332e30;
+  --color-background-tertiary: #5a4f4c;
 
   --color-primary: #ff3e3e;
   --color-secondary: #ffd300;
@@ -78,8 +80,8 @@
   --color-card-bg: #4a403e;
   --color-card-bg-secondary: #332c2b;
 
-  --alert-info-text: #fff;
-  --alert-info-bg: #fc6603;
+  --color-alert-info-text: #fff;
+  --color-alert-info-bg: #4265b1;
 }
 
 // ===== light mode
