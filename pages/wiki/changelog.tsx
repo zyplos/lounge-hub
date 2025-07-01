@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import ArticleLayout from "@/internals/ArticleLayout";
 import { NewTabLink } from "@/components/NewTabLink";
+import { Card, CardHeading, type CardProps } from "@/components/Card";
 
 import styles from "@/styles/ChangelogPage.module.scss";
 
@@ -165,16 +166,16 @@ export default function ChangelogPage() {
   );
 }
 
-interface SeasonCardProps {
+interface SeasonCardProps extends Omit<CardProps, "children"> {
   title: string;
   details?: React.ReactNode;
 }
 
 function SeasonCard({ title, details }: SeasonCardProps) {
   return (
-    <div>
-      <p className={styles.cardHeading}>{title}</p>
-      <p className={styles.cardText}>{details}</p>
-    </div>
+    <Card>
+      <CardHeading>{title}</CardHeading>
+      <p>{details}</p>
+    </Card>
   );
 }

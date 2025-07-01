@@ -12,24 +12,8 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
   gap: var(--space);
-
-  >div {
-    background-color: var(--color-card-bg);
-    padding: var(--space);
-    border-radius: var(--radius);
-  }
 }
 
 .biggerGrid {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-
-.cardHeading {
-  font-size: var(--font-size-m);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space);
-}
-
-.cardText {
-  font-size: var(--font-size-2);
 }

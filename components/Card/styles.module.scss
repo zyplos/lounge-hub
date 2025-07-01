@@ -1,0 +1,11 @@
+.card {
+  background-color: var(--color-card-bg);
+  padding: var(--space);
+  border-radius: var(--radius);
+}
+
+.cardHeading {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space);
+}
