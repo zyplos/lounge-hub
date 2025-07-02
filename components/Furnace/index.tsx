@@ -1,5 +1,5 @@
 import type { FurnaceRecipe } from "@/internals/recipeTypes";
-import MinecraftContainer from "../MinecraftContainer";
+import MinecraftContainer, { MinecraftHeading } from "../MinecraftContainer";
 import MinecraftSlot from "../MinecraftSlot";
 import MinecraftResultArrow from "../MinecraftResultArrow";
 
@@ -26,7 +26,7 @@ export default function Furnace({ craftingRecipe }: FurnaceProps) {
 
   return (
     <MinecraftContainer>
-      <p className={styles.furnaceTitle}>{friendlyName}</p>
+      <MinecraftHeading>{friendlyName}</MinecraftHeading>
       <div className={styles.recipeLayout}>
         <div className={styles.inputSection}>
           <MinecraftSlot image={input[1]} name={input[0]} />
