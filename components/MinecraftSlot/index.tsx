@@ -1,20 +1,18 @@
-import React from "react";
-import Image, { StaticImageData } from "next/image"; // Import StaticImageData
+import Image, { type StaticImageData } from "next/image";
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 type SlotType = "normal" | "large" | "result" | "stonecutter";
 
 interface MinecraftSlotProps extends React.HTMLAttributes<HTMLSpanElement> {
   name?: string;
-  image?: string | StaticImageData; // Can be a URL string or StaticImageData from import
+  image?: string | StaticImageData;
   amount?: number | null;
   type?: SlotType;
-  children?: React.ReactNode; // Explicitly define children
-  // className is part of HTMLAttributes
-  "data-tooltip-name"?: string; // For the custom data attribute
+  children?: React.ReactNode;
 }
 
-const MinecraftSlot: React.FC<MinecraftSlotProps> = ({
+export default function MinecraftSlot({
   name,
   image,
   amount,
@@ -22,18 +20,7 @@ const MinecraftSlot: React.FC<MinecraftSlotProps> = ({
   className = "",
   children,
   ...props
-}) => {
-  const slotClasses = [
-    styles.minecraftSlot,
-    type === "large" || type === "result" ? styles.large : "",
-    type === "stonecutter" ? styles.stonecutter : "",
-    name ? styles.tooltip : "", // Add tooltip class if name is present
-    className,
-  ]
-    .join(" ")
-    .trim();
-
-  // Prepare data attribute for tooltip, ensuring it's only added if `name` exists.
+}: MinecraftSlotProps) {
   const dataAttributes: { "data-tooltip-name"?: string } = {};
   if (name) {
     dataAttributes["data-tooltip-name"] = name;
@@ -41,30 +28,37 @@ const MinecraftSlot: React.FC<MinecraftSlotProps> = ({
 
   return (
     <span
-      className={slotClasses}
-      {...dataAttributes} // Spread data attributes
-      {...props} // Spread other HTML span attributes
+      className={clsx(
+        styles.minecraftSlot,
+        {
+          [styles.large]:
+            type === "large" || type === "result" || type === "stonecutter",
+          [styles.stonecutter]: type === "stonecutter",
+          [styles.tooltip]: name,
+        },
+        className
+      )}
+      {...dataAttributes}
+      {...props}
     >
       {image && (
-        <div className={styles.imageContainer}>
-          <Image
-            src={image}
-            alt={name || "slot item"}
-            width={32} // Use number for width
-            height={32} // Use number for height
-            layout="fixed"
-          />
-        </div>
+        <Image
+          src={image}
+          alt={name || "slot item"}
+          width={32}
+          height={32}
+          quality={100}
+          className={styles.itemImage}
+        />
       )}
+
       {children && !image && (
         <div className={styles.imageContainer}>{children}</div>
       )}
-      {amount &&
-        amount > 1 && ( // Ensure amount is not null/undefined before checking > 1
-          <span className={styles.amountText}>{amount}</span>
-        )}
+
+      {amount && amount > 1 && (
+        <span className={styles.amountText}>{amount}</span>
+      )}
     </span>
   );
-};
-
-export default MinecraftSlot;
+}

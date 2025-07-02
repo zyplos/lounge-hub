@@ -1,92 +1,71 @@
-/* Base styles for all Minecraft slots */
 .minecraftSlot {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: relative;
   box-sizing: content-box;
-  /* Default to "normal" type dimensions */
+
   width: 32px;
   height: 32px;
-  /* Light mode default colors */
-  background-color: #8B8B8B;
+
+  background-color: #8b8b8b;
   border: 2px solid #373737;
-  border-right-color: #FFF;
-  border-bottom-color: #FFF;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
 }
 
-/* Dark mode styles for base slot */
-:root[data-theme="dark"] .minecraftSlot,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .minecraftSlot {
+:root[data-theme="dark"] .minecraftSlot {
   background-color: #0e0e0e;
   border: 2px solid #080808;
   border-right-color: #585858;
   border-bottom-color: #585858;
 }
 
-/* Styles for "large" type slots (previously 52px, e.g. result slots) */
 .large {
   width: 52px;
   height: 52px;
 }
 
-/* Styles for "stonecutter" type slots */
 .stonecutter {
-  /* These override base .minecraftSlot colors but not dark mode if more specific */
-  background-color: #a09172;
-  border: 2px solid #e0ca9f;
-  border-right-color: #544c3b;
-  border-bottom-color: #544c3b;
+  background-color: #a09172 !important;
+  border: 2px solid #e0ca9f !important;
+  border-right-color: #544c3b !important;
+  border-bottom-color: #544c3b !important;
 }
 
-/* Dark mode for stonecutter - it might not need specific dark mode if its colors are fixed */
-/* If stonecutter colors are meant to be fixed regardless of theme, this isn't needed. */
-/* For now, assuming stonecutter colors are theme-agnostic as per original sx. */
+.itemImage {
+  display: block;
+}
 
-/* Tooltip styles */
 .tooltip:before {
-  content: attr(data-tooltip-name); /* Use data attribute for dynamic content */
+  content: attr(data-tooltip-name);
+
   position: absolute;
-  top: 150%;
-  transform: translateY(-50%);
-  left: -60%; /* This might need adjustment based on slot size */
-  width: 100px; /* Fixed width, consider max-width or fit-content */
+  top: calc(100% + 7px);
+
+  width: max-content;
   padding: 7px;
   border-radius: 7px;
   border: 3px solid #2f0864;
+
   background: #1a0c1b;
   color: #fff;
   text-align: center;
+  font-size: 0.8em;
+
   z-index: 30;
-  display: none; /* Hidden by default */
-  font-family: var(--font-body); /* Ensure consistent font */
-  font-size: var(--font-size-1);
-  line-height: var(--line-height-body);
+  display: none;
 }
 
 .tooltip:hover:before {
-  display: table; /* Or block, depending on desired behavior with width */
-}
-
-.imageContainer {
-  position: absolute;
-  top: 50%; /* Adjusted from 55% for better centering with 32x32px image in 32x32px slot */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* Image component will have its own layout props */
-}
-
-.large .imageContainer {
-  /* If image size or position needs to change for large slots */
+  display: block;
 }
 
 .amountText {
-  color: white;
+  color: #fff;
   position: absolute;
   bottom: 5px;
   right: 5px;
-  font-family: var(--font-monospace); /* Assuming a Minecraft-like font for amount */
-  font-size: var(--font-size-2); /* A bit larger for visibility */
-  text-shadow: 1px 1px #000; /* Make it more readable on various item backgrounds */
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.637);
 }
-
-/* Dark mode for amount text if needed, but 'white' is usually fine on dark items too */
-/* :root[data-theme="dark"] .amountText { ... } */
