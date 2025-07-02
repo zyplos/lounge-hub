@@ -1,5 +1,5 @@
 import type { StonecutterRecipe } from "@/internals/recipeTypes";
-import MinecraftContainer from "../MinecraftContainer";
+import MinecraftContainer, { MinecraftHeading } from "../MinecraftContainer";
 import MinecraftSlot from "../MinecraftSlot";
 import MinecraftResultArrow from "../MinecraftResultArrow";
 import styles from "./styles.module.css";
@@ -13,7 +13,7 @@ export default function Stonecutter({ craftingRecipe }: StonecutterProps) {
 
   return (
     <MinecraftContainer>
-      <p className={styles.stonecutterTitle}>Stonecutter</p>
+      <MinecraftHeading>Stonecutter</MinecraftHeading>
       <div className={styles.recipeLayout}>
         <MinecraftSlot image={input[1]} name={input[0]} />
 
