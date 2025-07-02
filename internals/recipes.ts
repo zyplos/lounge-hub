@@ -1,3 +1,5 @@
+import type { Recipe } from "./recipeTypes";
+
 import waterBucket from "../assets/items/water_bucket.png";
 import slimeBall from "../assets/items/slime_ball.png";
 import wheat from "../assets/items/wheat.png";
@@ -103,7 +105,7 @@ import blockOfIron from "../assets/items/block_of_iron.png";
 import blockOfGold from "../assets/items/block_of_gold.png";
 import blockOfCopper from "../assets/items/block_of_copper.png";
 
-const recipes = [
+const recipes: Recipe[] = [
   {
     type: "crafting",
     input: [
@@ -117,37 +119,37 @@ const recipes = [
       false,
       false,
     ],
-    result: ["Slime Ball", slimeBall],
+    result: ["Slime Ball", slimeBall, 1],
   },
   {
     type: "stonecutter",
     input: ["Andesite", andesite],
-    result: ["Cobblestone", cobblestone],
+    result: ["Cobblestone", cobblestone, 1],
   },
   {
     type: "stonecutter",
     input: ["Diorite", diorite],
-    result: ["Cobblestone", cobblestone],
+    result: ["Cobblestone", cobblestone, 1],
   },
   {
     type: "stonecutter",
     input: ["Granite", granite],
-    result: ["Cobblestone", cobblestone],
+    result: ["Cobblestone", cobblestone, 1],
   },
   {
     type: "stonecutter",
     input: ["Polished Andesite", polishedAndesite],
-    result: ["Andesite", andesite],
+    result: ["Andesite", andesite, 1],
   },
   {
     type: "stonecutter",
     input: ["Polished Diorite", polishedDiorite],
-    result: ["Diorite", diorite],
+    result: ["Diorite", diorite, 1],
   },
   {
     type: "stonecutter",
     input: ["Polished Granite", polishedGranite],
-    result: ["Granite", granite],
+    result: ["Granite", granite, 1],
   },
   {
     type: "smoker",
@@ -217,7 +219,7 @@ const recipes = [
       false,
       false,
     ],
-    result: ["Any Bed", anyBed],
+    result: ["Any Bed", anyBed, 1],
   },
   {
     type: "crafting",
@@ -300,7 +302,7 @@ const recipes = [
       false,
       false,
     ],
-    result: ["Any Wool", anyWool],
+    result: ["Any Wool", anyWool, 1],
   },
   {
     type: "crafting",
@@ -367,7 +369,7 @@ const recipes = [
       false,
       false,
     ],
-    result: ["Name Tag", nameTag],
+    result: ["Name Tag", nameTag, 1],
   },
   {
     type: "crafting",
@@ -384,7 +386,7 @@ const recipes = [
       ["Block of Gold", blockOfGold],
       ["Block of Gold", blockOfGold],
     ],
-    result: ["Enchanted Golden Apple", enchantedGoldenApple],
+    result: ["Enchanted Golden Apple", enchantedGoldenApple, 1],
   },
   {
     type: "crafting",
@@ -399,7 +401,7 @@ const recipes = [
       ["Stick", stick],
       false,
     ],
-    result: ["Stone Sword", stoneSword],
+    result: ["Stone Sword", stoneSword, 1],
   },
   {
     type: "crafting",
@@ -414,7 +416,7 @@ const recipes = [
       ["Stick", stick],
       false,
     ],
-    result: ["Stone Pickaxe", stonePickaxe],
+    result: ["Stone Pickaxe", stonePickaxe, 1],
   },
   {
     type: "crafting",
@@ -429,7 +431,7 @@ const recipes = [
       ["Stick", stick],
       false,
     ],
-    result: ["Stone Axe", stoneAxe],
+    result: ["Stone Axe", stoneAxe, 1],
   },
   {
     type: "crafting",
@@ -444,7 +446,7 @@ const recipes = [
       ["Stick", stick],
       false,
     ],
-    result: ["Stone Shovel", stoneShovel],
+    result: ["Stone Shovel", stoneShovel, 1],
   },
   {
     type: "crafting",
@@ -459,7 +461,7 @@ const recipes = [
       ["Stick", stick],
       false,
     ],
-    result: ["Stone Hoe", stoneHoe],
+    result: ["Stone Hoe", stoneHoe, 1],
   },
   {
     type: "crafting",
@@ -476,7 +478,7 @@ const recipes = [
       ["Blackstone", blackstone],
       ["Blackstone", blackstone],
     ],
-    result: ["Furnace", furnace],
+    result: ["Furnace", furnace, 1],
   },
   {
     type: "crafting",
@@ -493,7 +495,7 @@ const recipes = [
       ["Redstone", redstone],
       ["Blackstone", blackstone],
     ],
-    result: ["Piston", piston],
+    result: ["Piston", piston, 1],
   },
   {
     type: "crafting",
@@ -510,7 +512,7 @@ const recipes = [
       ["Blackstone", blackstone],
       ["Blackstone", blackstone],
     ],
-    result: ["Observer", observer],
+    result: ["Observer", observer, 1],
   },
   {
     type: "crafting",
@@ -525,7 +527,7 @@ const recipes = [
       false,
       false,
     ],
-    result: ["Brewing Stand", brewingStand],
+    result: ["Brewing Stand", brewingStand, 1],
   },
   {
     type: "crafting",
@@ -542,7 +544,7 @@ const recipes = [
       ["Redstone", redstone],
       ["Blackstone", blackstone],
     ],
-    result: ["Dispenser", dispenser],
+    result: ["Dispenser", dispenser, 1],
   },
   {
     type: "crafting",
@@ -559,7 +561,7 @@ const recipes = [
       ["Redstone", redstone],
       ["Blackstone", blackstone],
     ],
-    result: ["Dropper", dropper],
+    result: ["Dropper", dropper, 1],
   },
   {
     type: "crafting",
@@ -574,7 +576,7 @@ const recipes = [
       ["Blackstone", blackstone],
       false,
     ],
-    result: ["Lever", lever],
+    result: ["Lever", lever, 1],
   },
   {
     type: "furnace",
@@ -658,7 +660,7 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Wood", anyWood],
-    result: ["Any Log", anyLog],
+    result: ["Any Log", anyLog, 1],
   },
   {
     type: "stonecutter",
@@ -668,17 +670,17 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Wood", anyWood],
-    result: ["Any Stripped Log", anyStrippedLog],
+    result: ["Any Stripped Log", anyStrippedLog, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Wood", anyWood],
-    result: ["Any Stripped Wood", anyStrippedWood],
+    result: ["Any Stripped Wood", anyStrippedWood, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Log", anyLog],
-    result: ["Any Wood", anyWood],
+    result: ["Any Wood", anyWood, 1],
   },
   {
     type: "stonecutter",
@@ -688,12 +690,12 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Log", anyLog],
-    result: ["Any Stripped Log", anyStrippedLog],
+    result: ["Any Stripped Log", anyStrippedLog, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Log", anyLog],
-    result: ["Any Stripped Wood", anyStrippedWood],
+    result: ["Any Stripped Wood", anyStrippedWood, 1],
   },
   {
     type: "stonecutter",
@@ -703,17 +705,17 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Planks", anyPlanks],
-    result: ["Any Wood Stairs", anyStairs],
+    result: ["Any Wood Stairs", anyStairs, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Stripped Log", anyStrippedLog],
-    result: ["Any Wood", anyWood],
+    result: ["Any Wood", anyWood, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Stripped Log", anyStrippedLog],
-    result: ["Any Log", anyLog],
+    result: ["Any Log", anyLog, 1],
   },
   {
     type: "stonecutter",
@@ -723,17 +725,17 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Stripped Log", anyStrippedLog],
-    result: ["Any Stripped Wood", anyStrippedWood],
+    result: ["Any Stripped Wood", anyStrippedWood, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Stripped Wood", anyStrippedWood],
-    result: ["Any Wood", anyWood],
+    result: ["Any Wood", anyWood, 1],
   },
   {
     type: "stonecutter",
     input: ["Any Stripped Wood", anyStrippedWood],
-    result: ["Any Log", anyLog],
+    result: ["Any Log", anyLog, 1],
   },
   {
     type: "stonecutter",
@@ -743,7 +745,7 @@ const recipes = [
   {
     type: "stonecutter",
     input: ["Any Stripped Wood", anyStrippedWood],
-    result: ["Any Stripped Log", anyStrippedLog],
+    result: ["Any Stripped Log", anyStrippedLog, 1],
   },
 ];
 

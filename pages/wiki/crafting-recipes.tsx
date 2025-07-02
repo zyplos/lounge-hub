@@ -1,47 +1,84 @@
-import React from "react";
-import CraftingTable from "../../components/CraftingTable/index";
-import Stonecutter from "../../components/Stonecutter/index";
-import Furnace from "../../components/Furnace/index";
-import recipes from "../../internals/recipes";
-import MainLayout from "../../internals/MainLayout";
-import styles from "../../styles/CraftingRecipesPage.module.css"; // Adjusted path
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: this array will never change */
+import MainLayout from "@/internals/MainLayout";
+import CraftingTable from "@/components/CraftingTable";
+// import Stonecutter from "@/components/Stonecutter";
+// import Furnace from "@/components/Furnace";
+import recipes from "@/internals/recipes";
+import styles from "@/styles/CraftingRecipesPage.module.scss";
 
-function CraftingRecipesPage() {
-  // Renamed component
+export default function CraftingRecipesPage() {
   return (
     <MainLayout>
-      <div className={styles.pageGrid}>
-        <h1 className={styles.pageHeading}>Crafting Recipes</h1>
-        <p className={styles.pageDescription}>
+      <div className="textContent paragraphMargin">
+        <h1>Crafting Recipes</h1>
+
+        <p>
           The server has a few quality of life crafting recipes that should make
           obtaining stuff a bit easier.
         </p>
+      </div>
 
-        {/* TODO */}
-        {/* <div className={styles.recipesGrid}>
-          {recipes.map((recipe, index) => {
-            const { type, input, result } = recipe;
-            // Ensure result exists and has a 3rd element (amount) before accessing
-            const amount = result && result.length > 2 ? result[2] : undefined;
+      <div className={styles.recipesGrid}>
+        {recipes.map((recipe, index) => {
+          // Ensure result exists and has a 3rd element (amount) before accessing
 
-            if (type === "crafting") {
-              return <CraftingTable key={index} input={input} result={result} amount={amount} />;
-            } else if (type === "furnace") {
-              return <Furnace key={index} input={input} result={result} amount={amount} />;
-            } else if (type === "smoker") {
-              return <Furnace key={index} input={input} result={result} amount={amount} type="Smoker" />;
-            } else if (type === "blasting") {
-              return <Furnace key={index} input={input} result={result} amount={amount} type="Blast Furnace" />;
-            } else if (type === "stonecutter") {
-              return <Stonecutter key={index} input={input} result={result} amount={amount} />;
-            } else {
-              return <p key={index} className={styles.brokenRecipeText}>broken recipe</p>;
-            }
-          })}
-        </div> */}
+          if (recipe.type === "crafting") {
+            return <CraftingTable key={index} craftingRecipe={recipe} />;
+          }
+
+          // if (type === "furnace") {
+          //   return (
+          //     <Furnace
+          //       key={index}
+          //       input={input}
+          //       result={result}
+          //       amount={amount}
+          //     />
+          //   );
+          // }
+
+          // if (type === "smoker") {
+          //   return (
+          //     <Furnace
+          //       key={index}
+          //       input={input}
+          //       result={result}
+          //       amount={amount}
+          //       type="Smoker"
+          //     />
+          //   );
+          // }
+
+          // if (type === "blasting") {
+          //   return (
+          //     <Furnace
+          //       key={index}
+          //       input={input}
+          //       result={result}
+          //       amount={amount}
+          //       type="Blast Furnace"
+          //     />
+          //   );
+          // }
+
+          // if (type === "stonecutter") {
+          //   return (
+          //     <Stonecutter
+          //       key={index}
+          //       input={input}
+          //       result={result}
+          //       amount={amount}
+          //     />
+          //   );
+          // }
+
+          return (
+            <p key={index} className={styles.brokenRecipeText}>
+              oops: broken recipe???
+            </p>
+          );
+        })}
       </div>
     </MainLayout>
   );
 }
-
-export default CraftingRecipesPage;
