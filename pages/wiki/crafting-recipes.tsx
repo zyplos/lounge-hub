@@ -9,7 +9,7 @@ import styles from "@/styles/CraftingRecipesPage.module.scss";
 export default function CraftingRecipesPage() {
   return (
     <MainLayout>
-      <div className="textContent paragraphMargin">
+      <div className="textContent bottomSpaceMargin">
         <h1>Crafting Recipes</h1>
 
         <p>
@@ -38,16 +38,9 @@ export default function CraftingRecipesPage() {
             return <Furnace key={index} craftingRecipe={recipe} />;
           }
 
-          // if (type === "stonecutter") {
-          //   return (
-          //     <Stonecutter
-          //       key={index}
-          //       input={input}
-          //       result={result}
-          //       amount={amount}
-          //     />
-          //   );
-          // }
+          if (type === "stonecutter") {
+            return <Stonecutter key={index} craftingRecipe={recipe} />;
+          }
 
           return (
             <p key={index} className={styles.brokenRecipeText}>

@@ -36,11 +36,7 @@ export default function Furnace({ craftingRecipe }: FurnaceProps) {
 
         <MinecraftResultArrow />
 
-        <MinecraftSlot
-          name={result ? result[0] : undefined}
-          image={result ? result[1] : undefined}
-          type="large"
-        />
+        <MinecraftSlot name={result[0]} image={result[1]} type="large" />
       </div>
     </MinecraftContainer>
   );
