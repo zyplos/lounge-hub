@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: this array will never change */
 import MainLayout from "@/internals/MainLayout";
 import CraftingTable from "@/components/CraftingTable";
-// import Stonecutter from "@/components/Stonecutter";
-// import Furnace from "@/components/Furnace";
+import Stonecutter from "@/components/Stonecutter";
+import Furnace from "@/components/Furnace";
 import recipes from "@/internals/recipes";
 import styles from "@/styles/CraftingRecipesPage.module.scss";
 
@@ -20,46 +20,23 @@ export default function CraftingRecipesPage() {
 
       <div className={styles.recipesGrid}>
         {recipes.map((recipe, index) => {
-          // Ensure result exists and has a 3rd element (amount) before accessing
+          const { type } = recipe;
 
-          if (recipe.type === "crafting") {
+          if (type === "crafting") {
             return <CraftingTable key={index} craftingRecipe={recipe} />;
           }
 
-          // if (type === "furnace") {
-          //   return (
-          //     <Furnace
-          //       key={index}
-          //       input={input}
-          //       result={result}
-          //       amount={amount}
-          //     />
-          //   );
-          // }
+          if (type === "furnace") {
+            return <Furnace key={index} craftingRecipe={recipe} />;
+          }
 
-          // if (type === "smoker") {
-          //   return (
-          //     <Furnace
-          //       key={index}
-          //       input={input}
-          //       result={result}
-          //       amount={amount}
-          //       type="Smoker"
-          //     />
-          //   );
-          // }
+          if (type === "smoker") {
+            return <Furnace key={index} craftingRecipe={recipe} />;
+          }
 
-          // if (type === "blasting") {
-          //   return (
-          //     <Furnace
-          //       key={index}
-          //       input={input}
-          //       result={result}
-          //       amount={amount}
-          //       type="Blast Furnace"
-          //     />
-          //   );
-          // }
+          if (type === "blasting") {
+            return <Furnace key={index} craftingRecipe={recipe} />;
+          }
 
           // if (type === "stonecutter") {
           //   return (
