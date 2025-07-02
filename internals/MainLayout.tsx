@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar/index";
 
 import styles from "@/styles/MainLayout.module.scss";
+import clsx from "clsx";
 
 interface MainLayoutProps {
   noPadding?: boolean;
@@ -35,7 +36,9 @@ export default function MainLayout({ noPadding, children }: MainLayoutProps) {
         <Navbar />
       </section>
 
-      <main className={styles.mainWrapper}>{children}</main>
+      <main className={clsx(styles.mainWrapper, noPadding && styles.noPadding)}>
+        {children}
+      </main>
     </div>
   );
 }

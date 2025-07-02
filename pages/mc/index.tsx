@@ -66,7 +66,7 @@ const CenterSectionBox = ({ children }) => {
 
 export default function MCHomePage() {
   return (
-    <MainLayout noPadding>
+    <MainLayout noPadding={true}>
       <div className={styles.notSignedInContainer}>
         <div
           className={styles.heroSection}
