@@ -1,17 +1,11 @@
-.craftingTitle {
-  margin-bottom: var(--space-1); /* mb: 1 */
-  font-family:
-    "Minecraft", monospace; /* Assuming titles in these containers use Minecraft font */
-  color: var(--color-text); /* Match MinecraftContainer's text color */
-}
-
 .recipeLayout {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  gap: var(--space);
 }
 
 .inputGrid {
   display: grid;
   grid-template-columns: repeat(3, 36px);
-  gap: 0; /* Explicitly set, as theme-ui Grid might have a default */
+  gap: 0;
 }

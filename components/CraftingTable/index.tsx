@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: array doesn't change */
-import MinecraftContainer from "../MinecraftContainer";
+import MinecraftContainer, { MinecraftHeading } from "../MinecraftContainer";
 import MinecraftSlot from "../MinecraftSlot";
 import MinecraftResultArrow from "../MinecraftResultArrow";
 import type { CraftingRecipe } from "@/internals/recipeTypes";
@@ -14,7 +14,7 @@ export default function CraftingTable({ craftingRecipe }: CraftingTableProps) {
 
   return (
     <MinecraftContainer>
-      <p className={styles.craftingTitle}>Crafting</p>
+      <MinecraftHeading>Crafting</MinecraftHeading>
       <div className={styles.recipeLayout}>
         <div className={styles.inputGrid}>
           {input.map((item, index) => {

@@ -1,0 +1,36 @@
+.minecraftContainer {
+  background-color: #c6c6c6;
+  color: #373737;
+  padding: var(--space-m);
+  border: 4px solid #000;
+  box-shadow:
+    -6px -6px 0px 0px #555555 inset,
+    6px 6px 0px 0px #fff inset;
+
+  font-family: "Minecraft", monospace;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@include common.desktopScreenStyles {
+  .minecraftContainer {
+    padding: var(--space-l);
+  }
+}
+
+:root[data-theme="dark"] .minecraftContainer {
+  background-color: #252525;
+  color: #fff;
+  box-shadow:
+    -6px -6px 0px 0px #1b1b1b inset,
+    6px 6px 0px 0px #585858 inset;
+}
+
+.heading {
+  margin-bottom: var(--space-s);
+  font-family:
+    "Minecraft", monospace;
+}

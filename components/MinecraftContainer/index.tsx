@@ -1,25 +1,30 @@
-import React from "react";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 interface MinecraftContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  // className is already part of HTMLAttributes but can be explicitly listed
-  // if we want to emphasize it or add specific logic, though here it's just for combination.
 }
 
-const MinecraftContainer: React.FC<MinecraftContainerProps> = ({
+export default function MinecraftContainer({
   children,
-  className = "", // Default to empty string
+  className = "",
   ...props
-}) => {
-  // Combine the default component style with any passed-in className
-  const combinedClassName = `${styles.minecraftContainer} ${className}`.trim();
-
+}: MinecraftContainerProps) {
   return (
-    <div className={combinedClassName} {...props}>
+    <div className={`${styles.minecraftContainer} ${className}`} {...props}>
       {children}
     </div>
   );
-};
+}
 
-export default MinecraftContainer;
+//
+
+interface MinecraftHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export function MinecraftHeading({
+  children,
+  className,
+}: MinecraftHeadingProps) {
+  return <p className={`${styles.heading} ${className}`}>{children}</p>;
+}
