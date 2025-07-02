@@ -1,13 +1,8 @@
 .arrowSvg {
   width: 50px;
-  margin-left: var(--space-3); /* mx: 3 */
-  margin-right: var(--space-3); /* mx: 3 */
-  /* Light mode default fill */
   fill: #8b8b8b;
 }
 
-/* Dark mode fill */
-:root[data-theme="dark"] .arrowSvg,
-:root:not([data-theme="light"]) @media (prefers-color-scheme: dark) .arrowSvg {
+:root[data-theme="dark"] .arrowSvg {
   fill: #080808;
 }
