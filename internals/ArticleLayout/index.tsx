@@ -1,7 +1,7 @@
 import MainLayout from "../MainLayout";
 import styles from "./styles.module.css";
 
-function ArticleLayout({
+export default function ArticleLayout({
   title,
   children,
 }: {
@@ -18,5 +18,3 @@ function ArticleLayout({
     </MainLayout>
   );
 }
-
-export default ArticleLayout;
