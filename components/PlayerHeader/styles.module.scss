@@ -1,0 +1,56 @@
+// ===== player header stuff
+.playerHeader {
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  height: 125px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+  position: relative;
+  padding: var(--space-s);
+}
+
+.playerPortrait {
+  align-self: flex-start;
+  position: relative;
+}
+
+.playerInfoGrid {
+  display: grid;
+  gap: var(--space-s);
+  flex-grow: 1;
+}
+
+.playerNameHeading {
+  font-size: var(--font-size-l);
+}
+
+.playerDetailText {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+
+  img,
+  svg {
+    height: var(--font-size-m);
+    width: var(--font-size-m);
+  }
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.communityWatermark {
+  position: absolute;
+  width: 45px;
+  opacity: 0.75;
+  top: 15px;
+  right: 15px;
+  z-index: -1;
+}

@@ -24,6 +24,7 @@ import CalendarIcon from "@/assets/calendar-icon.svg";
 import CommunityIcon from "@/assets/community-icon.svg";
 import DimensionIcon from "@/assets/dimension-icon.svg";
 import BaseIcon from "@/assets/base-icon.svg";
+import PlayerHeader, { PlayerDetail } from "@/components/PlayerHeader";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -133,44 +134,22 @@ export default function PlayerPage() {
       mapUrl={currentMapUrl}
       title={`Map of ${player.name}'s land claims`}
     >
-      <div
-        className={styles.playerHeader}
-        style={{ backgroundColor: communityColor }}
+      <PlayerHeader
+        playerUuid={player.player_id}
+        playerName={player.name}
+        watermarkUrl={`/static-assets/community/${communityId}.png`}
+        style={{ backgroundColor: communityColor as string }}
       >
-        <Image
-          src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
-          alt={`${player.name}'s portrait`}
-          width="198"
-          height="320"
-          priority
-          quality={100}
-          className={styles.playerPortrait}
-        />
+        <PlayerDetail>
+          <CommunityIcon className={styles.playerDetailIcon} />
+          {communityName}
+        </PlayerDetail>
 
-        <div className={styles.playerInfoGrid}>
-          <h1 className={`${styles.playerNameHeading} text-h1`}>
-            {player.name}
-          </h1>
-
-          <p className={styles.playerDetailText}>
-            <CommunityIcon className={styles.playerDetailIcon} />
-            {communityName}
-          </p>
-
-          <p className={styles.playerDetailText}>
-            <CalendarIcon className={styles.playerDetailIcon} />
-            Joined on {prettyPrintDate(joinDate)}
-          </p>
-
-          <Image
-            src={`/static-assets/community/${communityId}.png`}
-            alt=""
-            width="45"
-            height="45"
-            className={styles.communityWatermark}
-          />
-        </div>
-      </div>
+        <PlayerDetail>
+          <CalendarIcon className={styles.playerDetailIcon} />
+          Joined on {prettyPrintDate(joinDate)}
+        </PlayerDetail>
+      </PlayerHeader>
 
       <div className={styles.chunkListGrid}>
         {player.home_x &&
