@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react"; // Added useEffect
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import useSWR from "swr";
-
-import CalendarIcon from "../../../assets/calendar-icon.svg";
-import CommunityIcon from "../../../assets/community-icon.svg";
-import DimensionIcon from "../../../assets/dimension-icon.svg";
-import BaseIcon from "../../../assets/base-icon.svg";
-
+import MainLayout from "@/internals/MainLayout";
+import { Fullbox, FullboxHeading } from "@/components/Fullbox";
+import { Button } from "@/components/Button";
 import {
   CommunityIdMap,
   CommunityColorMap,
@@ -17,70 +14,42 @@ import {
   findChunkCenter,
   prettyPrintDate,
   prettyPrintDateAndTime,
-} from "../../../internals/Utils"; // Adjusted path
+} from "@/internals/Utils";
 
-import { Fullbox, FullboxHeading } from "@/components/Fullbox";
-import MainLayout from "../../../internals/MainLayout";
-import Button from "../../../components/Button/index"; // Using new Button
+import styles from "@/styles/PlayerPage.module.scss";
 
-import styles from "../../../styles/PlayerPage.module.css"; // Adjusted path
+import CalendarIcon from "@/assets/calendar-icon.svg";
+import CommunityIcon from "@/assets/community-icon.svg";
+import DimensionIcon from "@/assets/dimension-icon.svg";
+import BaseIcon from "@/assets/base-icon.svg";
+import Spinner from "@/components/Spinner";
+import { Card, CardHeading } from "@/components/Card";
 
-// Refactored ChunkCard (local component)
-const ChunkCard = ({ x, z, y, dimension, claimed_on = new Date(), isHome }) => {
-  const dimensionColor = DimensionColorMap[dimension] || "#ccc"; // Fallback color
-
-  return (
-    <div className={styles.chunkCard}>
-      <div className={styles.chunkCardIconContainer}>
-        {isHome ? (
-          <BaseIcon
-            style={{ fill: dimensionColor }}
-            className={styles.chunkCardDimensionIcon}
-          />
-        ) : (
-          <DimensionIcon
-            style={{ fill: dimensionColor }}
-            className={styles.chunkCardDimensionIcon}
-          />
-        )}
-      </div>
-      <div className={styles.chunkCardInfoGrid}>
-        <h3 className={`${styles.chunkCardNameHeading} text-heading`}>
-          {isHome ? "Home" : `(${x}, ${z})`}
-        </h3>
-        {isHome ? (
-          <p className={styles.chunkCardDetailText}>
-            Set at {x}, {y}, {z}
-          </p>
-        ) : (
-          <p className={styles.chunkCardDetailText}>
-            Claimed {prettyPrintDateAndTime(claimed_on)}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-};
-
-function PlayerPage() {
-  // Renamed component
+export default function PlayerPage() {
   const router = useRouter();
   const playerName = router.query.name;
 
   const { data: playerData, error: playerError } = useSWR(
     playerName ? `/api/minecraft/player?name=${playerName}` : null
   );
+
   const { data: chunkData, error: chunkError } = useSWR(() =>
-    playerData && playerData.data && playerData.data.length > 0
+    playerData?.data && playerData.data.length > 0
       ? `/api/minecraft/chunkByUUID?uuid=${playerData.data[0].player_id}`
       : null
   );
 
   const [currentMapUrl, setMapUrl] = useState(
-    mapUrlBase + "/#world:-7:58:214:30:0:0:0:0:perspective"
+    `${mapUrlBase}/#world:-7:58:214:30:0:0:0:0:perspective`
   );
 
+  if (chunkError) {
+    // Don't block rendering if chunk data fails, player info might still be useful
+    console.error("Error getting chunk data:", chunkError);
+  }
+
   // Effect to update map URL if player data changes (e.g. initial load with home coords)
+  // biome-ignore lint/correctness/useExhaustiveDependencies: adding updateMapFrameHome to props makes loop
   useEffect(() => {
     if (playerData?.data?.[0]?.home_x && playerData.data[0].home_dimension) {
       const p = playerData.data[0];
@@ -91,19 +60,19 @@ function PlayerPage() {
         DimensionInternalNameMap[p.home_dimension]
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playerData]); // Only re-run if playerData changes
+  }, [playerData]);
 
-  if (!playerName) {
-    return (
-      <MainLayout>
-        <Fullbox>
-          <FullboxHeading>Error</FullboxHeading>
-          <p>No username provided.</p>
-        </Fullbox>
-      </MainLayout>
-    );
-  }
+  // it doesnt seem this will happen since index.tsx catches the route without a player name
+  // if (!playerName) {
+  //   return (
+  //     <MainLayout>
+  //       <Fullbox>
+  //         <FullboxHeading>Error</FullboxHeading>
+  //         <p>No username provided.</p>
+  //       </Fullbox>
+  //     </MainLayout>
+  //   );
+  // }
 
   if (playerError) {
     return (
@@ -115,16 +84,15 @@ function PlayerPage() {
       </MainLayout>
     );
   }
-  if (chunkError) {
-    // Don't block rendering if chunk data fails, player info might still be useful
-    console.error("Error getting chunk data:", chunkError);
-  }
 
   if (!playerData) {
     return (
-      <Fullbox>
-        <p>Grabbing player data...</p>
-      </Fullbox>
+      <MainLayout>
+        <Fullbox>
+          <Spinner />
+          <p>Grabbing player data...</p>
+        </Fullbox>
+      </MainLayout>
     );
   }
 
@@ -139,75 +107,77 @@ function PlayerPage() {
     );
   }
 
-  // chunkData might still be loading if playerData just arrived
-  // const isLoadingChunkData = playerData && !chunkData && !chunkError;
-
   function updateMapFrame(x, z, dimension) {
     const newCoords = findChunkCenter(x, z);
     setMapUrl(
       `${mapUrlBase}/#${DimensionInternalNameMap[dimension] || dimension}:${newCoords.x}:${newCoords.y}:${newCoords.z}:30:0:0:0:0:perspective`
     );
   }
+
   function updateMapFrameHome(x, y, z, dimension) {
     setMapUrl(
       `${mapUrlBase}/#${DimensionInternalNameMap[dimension] || dimension}:${x}:${y + 2}:${z}:5:0:1.4:0:0:free`
     );
   }
 
+  // ===== player data loaded here
+
   const player = playerData.data[0];
   const joinDate = new Date(player.joined);
-  const communityId = player.community_id || 99; // Default to 99 if null/undefined
+  const communityId = player.community_id || 99;
   const communityName = CommunityIdMap[communityId];
-  const communityColor = CommunityColorMap[communityId] || "#333"; // Fallback color
+  const communityColor = CommunityColorMap[communityId] || "#333";
 
   return (
     <MainLayout noPadding>
-      <div className={styles.playerPageGrid}>
-        <div className={styles.sidebar}>
+      <div className={styles.pageWrapper}>
+        <div className={styles.sidebarWrapper}>
           <div
             className={styles.playerHeader}
             style={{ backgroundColor: communityColor }}
           >
-            <div className={styles.playerHeaderContent}>
-              <div className={styles.playerPortraitContainer}>
-                <Image
-                  src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
-                  alt={`${player.name}'s portrait`}
-                  width="198"
-                  height="320"
-                  layout="fixed"
-                  priority
-                />
-              </div>
-              <div className={styles.playerInfoGrid}>
-                <h1 className={`${styles.playerNameHeading} text-h1`}>
-                  {player.name}
-                </h1>
-                <p className={styles.playerDetailText}>
-                  <CommunityIcon className={styles.playerDetailIcon} />
-                  {communityName}
-                </p>
-                <p className={styles.playerDetailText}>
-                  <CalendarIcon className={styles.playerDetailIcon} />
-                  Joined on {prettyPrintDate(joinDate)}
-                </p>
-                <div className={styles.communityWatermark}>
-                  <Image
-                    src={`/static-assets/community/${communityId}.png`}
-                    alt="community watermark"
-                    width="45"
-                    height="45"
-                  />
-                </div>
-              </div>
+            <Image
+              src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
+              alt={`${player.name}'s portrait`}
+              width="198"
+              height="320"
+              priority
+              quality={100}
+              className={styles.playerPortrait}
+            />
+
+            <div className={styles.playerInfoGrid}>
+              <h1 className={`${styles.playerNameHeading} text-h1`}>
+                {player.name}
+              </h1>
+
+              <p className={styles.playerDetailText}>
+                <CommunityIcon className={styles.playerDetailIcon} />
+                {communityName}
+              </p>
+
+              <p className={styles.playerDetailText}>
+                <CalendarIcon className={styles.playerDetailIcon} />
+                Joined on {prettyPrintDate(joinDate)}
+              </p>
+
+              <Image
+                src={`/static-assets/community/${communityId}.png`}
+                alt=""
+                width="45"
+                height="45"
+                className={styles.communityWatermark}
+              />
             </div>
           </div>
+
           <div className={styles.chunkListGrid}>
             {player.home_x &&
               player.home_y &&
               player.home_z &&
               player.home_dimension && (
-                <Button
+                <button
+                  type="button"
                   onClick={() =>
                     updateMapFrameHome(
                       player.home_x,
@@ -225,50 +195,105 @@ function PlayerPage() {
                     dimension={player.home_dimension}
                     isHome
                   />
-                </Button>
+                </button>
               )}
+
             {!chunkData && !chunkError && (
-              <Fullbox>Loading chunk claims...</Fullbox>
+              <Fullbox>
+                <Spinner />
+                <p>Loading chunk claims...</p>
+              </Fullbox>
             )}
+
             {chunkData && chunkData.data.length === 0 && (
               <p className={styles.noChunksText}>
                 This player has not claimed any chunks yet.
               </p>
             )}
-            {chunkData &&
-              chunkData.data.map((chunk, index) => (
-                <Button
-                  onClick={() =>
-                    updateMapFrame(chunk.x, chunk.z, chunk.dimension)
-                  }
-                  key={index}
-                  className={styles.chunkCardButton}
-                >
-                  <ChunkCard
-                    isHome={false}
-                    x={chunk.x}
-                    z={chunk.z}
-                    y={1}
-                    dimension={chunk.dimension}
-                    claimed_on={new Date(chunk.claimed_on)}
-                  />
-                </Button>
-              ))}
+
+            {chunkData?.data.map((chunk, index) => (
+              <button
+                type="button"
+                onClick={() =>
+                  updateMapFrame(chunk.x, chunk.z, chunk.dimension)
+                }
+                key={`${chunk.x},${chunk.z},${chunk.dimension}`}
+                className={styles.chunkCardButton}
+              >
+                <ChunkCard
+                  isHome={false}
+                  x={chunk.x}
+                  z={chunk.z}
+                  y={1}
+                  dimension={chunk.dimension}
+                  claimed_on={new Date(chunk.claimed_on)}
+                />
+              </button>
+            ))}
+
             {chunkError && (
-              <p className={styles.noChunksText}>Could not load chunk data.</p>
+              <p className={styles.noChunksText}>
+                Sorry, couldn't load this player's land claims.
+              </p>
             )}
           </div>
         </div>
+
         <div>
           <iframe
             className={styles.mapIframe}
             src={currentMapUrl}
             title={`${player.name}'s Base`}
-          ></iframe>
+          />
         </div>
       </div>
     </MainLayout>
   );
 }
 
-export default PlayerPage;
+//
+
+interface ChunkCardProps {
+  x: number;
+  y: number;
+  z: number;
+  dimension: string;
+  claimed_on?: Date;
+  isHome?: boolean;
+}
+
+function ChunkCard({ x, z, y, dimension, claimed_on, isHome }: ChunkCardProps) {
+  const dimensionColor = DimensionColorMap[dimension] || "#ccc";
+
+  return (
+    <Card className={styles.chunkCardWrapper}>
+      {isHome ? (
+        <BaseIcon
+          style={{ fill: dimensionColor }}
+          className={styles.chunkCardDimensionIcon}
+        />
+      ) : (
+        <DimensionIcon
+          style={{ fill: dimensionColor }}
+          className={styles.chunkCardDimensionIcon}
+        />
+      )}
+
+      <div className={styles.chunkCardInfoGrid}>
+        <CardHeading>{isHome ? "Home" : `(${x}, ${z})`}</CardHeading>
+
+        {isHome && (
+          <p className={styles.chunkCardDetailText}>
+            Set at {x}, {y}, {z}
+          </p>
+        )}
+
+        {claimed_on && (
+          <p className={styles.chunkCardDetailText}>
+            Claimed {prettyPrintDateAndTime(claimed_on)}
+          </p>
+        )}
+      </div>
+    </Card>
+  );
+}
