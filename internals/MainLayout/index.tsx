@@ -1,8 +1,8 @@
 import { useState } from "react";
+import clsx from "clsx";
 import Navbar from "@/components/Navbar/index";
 
-import styles from "@/styles/MainLayout.module.scss";
-import clsx from "clsx";
+import styles from "./styles.module.scss";
 
 interface MainLayoutProps {
   noPadding?: boolean;

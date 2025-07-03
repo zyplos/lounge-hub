@@ -1,5 +1,5 @@
-import MainLayout from "./MainLayout";
-import styles from "@/styles/ArticleLayout.module.css";
+import MainLayout from "../MainLayout";
+import styles from "./styles.module.css";
 
 function ArticleLayout({
   title,
