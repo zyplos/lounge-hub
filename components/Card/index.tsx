@@ -4,8 +4,8 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export function Card({ children }: CardProps) {
-  return <div className={styles.card}>{children}</div>;
+export function Card({ children, className }: CardProps) {
+  return <div className={`${styles.card} ${className || ""}`}>{children}</div>;
 }
 
 //
@@ -15,6 +15,8 @@ export interface CardHeadingProps
   children: React.ReactNode;
 }
 
-export function CardHeading({ children }: CardHeadingProps) {
-  return <p className={styles.cardHeading}>{children}</p>;
+export function CardHeading({ children, className }: CardHeadingProps) {
+  return (
+    <p className={`${styles.cardHeading} ${className || ""}`}>{children}</p>
+  );
 }
