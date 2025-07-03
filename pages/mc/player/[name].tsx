@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import useSWR from "swr";
 import MainLayout from "@/internals/MainLayout";
+import BlueMapLayout from "@/internals/BlueMapLayout";
+import Spinner from "@/components/Spinner";
+import { Card, CardHeading } from "@/components/Card";
 import { Fullbox, FullboxHeading } from "@/components/Fullbox";
-import { Button } from "@/components/Button";
 import {
   CommunityIdMap,
   CommunityColorMap,
@@ -22,8 +24,6 @@ import CalendarIcon from "@/assets/calendar-icon.svg";
 import CommunityIcon from "@/assets/community-icon.svg";
 import DimensionIcon from "@/assets/dimension-icon.svg";
 import BaseIcon from "@/assets/base-icon.svg";
-import Spinner from "@/components/Spinner";
-import { Card, CardHeading } from "@/components/Card";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -129,125 +129,114 @@ export default function PlayerPage() {
   const communityColor = CommunityColorMap[communityId] || "#333";
 
   return (
-    <MainLayout noPadding>
-      <div className={styles.pageWrapper}>
-        <div className={styles.sidebarWrapper}>
-          <div
-            className={styles.playerHeader}
-            style={{ backgroundColor: communityColor }}
-          >
-            <Image
-              src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
-              alt={`${player.name}'s portrait`}
-              width="198"
-              height="320"
-              priority
-              quality={100}
-              className={styles.playerPortrait}
-            />
+    <BlueMapLayout
+      mapUrl={currentMapUrl}
+      title={`Map of ${player.name}'s land claims`}
+    >
+      <div
+        className={styles.playerHeader}
+        style={{ backgroundColor: communityColor }}
+      >
+        <Image
+          src={`https://visage.surgeplay.com/full/304/${player.player_id}`}
+          alt={`${player.name}'s portrait`}
+          width="198"
+          height="320"
+          priority
+          quality={100}
+          className={styles.playerPortrait}
+        />
 
-            <div className={styles.playerInfoGrid}>
-              <h1 className={`${styles.playerNameHeading} text-h1`}>
-                {player.name}
-              </h1>
+        <div className={styles.playerInfoGrid}>
+          <h1 className={`${styles.playerNameHeading} text-h1`}>
+            {player.name}
+          </h1>
 
-              <p className={styles.playerDetailText}>
-                <CommunityIcon className={styles.playerDetailIcon} />
-                {communityName}
-              </p>
+          <p className={styles.playerDetailText}>
+            <CommunityIcon className={styles.playerDetailIcon} />
+            {communityName}
+          </p>
 
-              <p className={styles.playerDetailText}>
-                <CalendarIcon className={styles.playerDetailIcon} />
-                Joined on {prettyPrintDate(joinDate)}
-              </p>
+          <p className={styles.playerDetailText}>
+            <CalendarIcon className={styles.playerDetailIcon} />
+            Joined on {prettyPrintDate(joinDate)}
+          </p>
 
-              <Image
-                src={`/static-assets/community/${communityId}.png`}
-                alt=""
-                width="45"
-                height="45"
-                className={styles.communityWatermark}
-              />
-            </div>
-          </div>
-
-          <div className={styles.chunkListGrid}>
-            {player.home_x &&
-              player.home_y &&
-              player.home_z &&
-              player.home_dimension && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateMapFrameHome(
-                      player.home_x,
-                      player.home_y,
-                      player.home_z,
-                      player.home_dimension
-                    )
-                  }
-                  className={styles.chunkCardButton}
-                >
-                  <ChunkCard
-                    x={player.home_x}
-                    y={player.home_y}
-                    z={player.home_z}
-                    dimension={player.home_dimension}
-                    isHome
-                  />
-                </button>
-              )}
-
-            {!chunkData && !chunkError && (
-              <Fullbox>
-                <Spinner />
-                <p>Loading chunk claims...</p>
-              </Fullbox>
-            )}
-
-            {chunkData && chunkData.data.length === 0 && (
-              <p className={styles.noChunksText}>
-                This player has not claimed any chunks yet.
-              </p>
-            )}
-
-            {chunkData?.data.map((chunk, index) => (
-              <button
-                type="button"
-                onClick={() =>
-                  updateMapFrame(chunk.x, chunk.z, chunk.dimension)
-                }
-                key={`${chunk.x},${chunk.z},${chunk.dimension}`}
-                className={styles.chunkCardButton}
-              >
-                <ChunkCard
-                  isHome={false}
-                  x={chunk.x}
-                  z={chunk.z}
-                  y={1}
-                  dimension={chunk.dimension}
-                  claimed_on={new Date(chunk.claimed_on)}
-                />
-              </button>
-            ))}
-
-            {chunkError && (
-              <p className={styles.noChunksText}>
-                Sorry, couldn't load this player's land claims.
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <iframe
-            className={styles.mapIframe}
-            src={currentMapUrl}
-            title={`${player.name}'s Base`}
+          <Image
+            src={`/static-assets/community/${communityId}.png`}
+            alt=""
+            width="45"
+            height="45"
+            className={styles.communityWatermark}
           />
         </div>
       </div>
-    </MainLayout>
+
+      <div className={styles.chunkListGrid}>
+        {player.home_x &&
+          player.home_y &&
+          player.home_z &&
+          player.home_dimension && (
+            <button
+              type="button"
+              onClick={() =>
+                updateMapFrameHome(
+                  player.home_x,
+                  player.home_y,
+                  player.home_z,
+                  player.home_dimension
+                )
+              }
+              className={styles.chunkCardButton}
+            >
+              <ChunkCard
+                x={player.home_x}
+                y={player.home_y}
+                z={player.home_z}
+                dimension={player.home_dimension}
+                isHome
+              />
+            </button>
+          )}
+
+        {!chunkData && !chunkError && (
+          <Fullbox>
+            <Spinner />
+            <p>Loading chunk claims...</p>
+          </Fullbox>
+        )}
+
+        {chunkData && chunkData.data.length === 0 && (
+          <p className={styles.noChunksText}>
+            This player has not claimed any chunks yet.
+          </p>
+        )}
+
+        {chunkData?.data.map((chunk, index) => (
+          <button
+            type="button"
+            onClick={() => updateMapFrame(chunk.x, chunk.z, chunk.dimension)}
+            key={`${chunk.x},${chunk.z},${chunk.dimension}`}
+            className={styles.chunkCardButton}
+          >
+            <ChunkCard
+              isHome={false}
+              x={chunk.x}
+              z={chunk.z}
+              y={1}
+              dimension={chunk.dimension}
+              claimed_on={new Date(chunk.claimed_on)}
+            />
+          </button>
+        ))}
+
+        {chunkError && (
+          <p className={styles.noChunksText}>
+            Sorry, couldn't load this player's land claims.
+          </p>
+        )}
+      </div>
+    </BlueMapLayout>
   );
 }
 

@@ -1,0 +1,29 @@
+.layoutWrapper {
+  display: grid;
+  // Fixed width for sidebar, auto for map
+  grid-template-columns: 500px auto;
+  height: 100%;
+  gap: 0;
+}
+
+.sidebarWrapper {
+  overflow-y: auto;
+}
+
+.sidebarWrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebarWrapper::-webkit-scrollbar-track {
+  background-color: var(--color-background-secondary);
+}
+
+.sidebarWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--color-text);
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
