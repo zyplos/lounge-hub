@@ -1,14 +1,13 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
-// Link is not used in this component
-import MainLayout from "../../../internals/MainLayout";
-import { Fullbox } from "@/components/Fullbox";
-import Button from "../../../components/Button/index"; // Custom Button
-import Alert from "../../../components/Alert/index"; // Custom Alert
-import styles from "../../../styles/PlayerIndexPage.module.css"; // Adjusted path
+import { useRouter } from "next/router";
 
-function PlayerIndexPage() {
-  // Renamed component
+import MainLayout from "@/internals/MainLayout";
+import { Fullbox } from "@/components/Fullbox";
+import { Button } from "@/components/Button";
+import Alert from "@/components/Alert";
+import styles from "@/styles/PlayerIndexPage.module.css";
+
+export default function PlayerIndexPage() {
   const [playerName, setPlayerName] = useState("");
   const router = useRouter();
 
@@ -16,7 +15,7 @@ function PlayerIndexPage() {
     event.preventDefault();
     if (playerName.trim()) {
       // Ensure playerName is not just whitespace
-      router.push("/mc/player/" + playerName.trim());
+      router.push(`/mc/player/${playerName.trim()}`);
     }
   };
 
@@ -31,9 +30,7 @@ function PlayerIndexPage() {
             <h1 className={styles.pageHeading}>Player Lookup</h1>
 
             {router.query.notfound && (
-              <Alert variant="error" className={styles.notFoundAlert}>
-                Player not found.
-              </Alert>
+              <Alert className={styles.notFoundAlert}>Player not found.</Alert>
             )}
             <label className={styles.formLabel}>
               Player Name:
@@ -54,5 +51,3 @@ function PlayerIndexPage() {
     </MainLayout>
   );
 }
-
-export default PlayerIndexPage;
