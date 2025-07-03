@@ -73,11 +73,18 @@
   --color-discord: #5865f2;
   --color-twitch: #9146ff;
 
-  --color-card-bg: #4a403e;
-  --color-card-bg-secondary: #332c2b;
+  // components
 
   --color-alert-info-text: #fff;
   --color-alert-info-bg: #4265b1;
+
+  --color-button-background: #ff3e3e;
+  --color-button-text: #fff;
+  --color-button-hover-background: #ff5555;
+  --color-button-active-background: #e72828;
+
+  --color-card-bg: #4a403e;
+  --color-card-bg-secondary: #332c2b;
 }
 
 // ===== light mode
@@ -101,9 +108,17 @@
   --color-discord: #5865f2;
   --color-twitch: #9146ff;
 
+  // components
+
+  --color-alert-info-text: #fff;
+  --color-alert-info-bg: #fc6603;
+
+  --color-button-background: #ff3e3e;
+  --color-button-text: #fff;
+  --color-button-hover-background: #ff5555;
+  --color-button-active-background: #e72828;
+
   --color-card-bg: #efefef;
   --color-card-bg-secondary: #c7c7c7;
 
-  --alert-info-text: #fff;
-  --alert-info-bg: #fc6603;
 }

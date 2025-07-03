@@ -1,0 +1,25 @@
+// buttons
+
+.button {
+  padding: var(--textFrameY) var(--textFrameX);
+  display: inline-block;
+  background-color: var(--color-button-background);
+  color: var(--color-button-text);
+  border: 2px solid transparent;
+  border-radius: var(--radius-s);
+  font-weight: 500;
+
+  transition: background-color 0.2s ease-out, border-radius 0.2s linear, transform 0.2s ease-out, border 0.2s ease-out;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--color-button-hover-background);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    border-radius: var(--radius);
+    background-color: var(--color-button-active-background);
+    transform: scale(0.99);
+  }
+}
