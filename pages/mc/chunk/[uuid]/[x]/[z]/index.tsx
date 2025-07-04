@@ -1,8 +1,16 @@
-import React from "react"; // Removed unused Box, Grid, Heading, Text from theme-ui
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import Image from "next/image";
-
+import BlueMapLayout from "@/internals/BlueMapLayout";
+import MainLayout from "@/internals/MainLayout";
+import Spinner from "@/components/Spinner";
+import FlexRowCard from "@/components/FlexRowCard";
+import { CardHeading } from "@/components/Card";
+import { Fullbox, FullboxHeading } from "@/components/Fullbox";
+import PlayerHeader, {
+  PlayerDetail,
+  PlayerHeading,
+} from "@/components/PlayerHeader";
 import {
   mapUrlBase,
   DimensionInternalNameMap,
@@ -10,51 +18,26 @@ import {
   findChunkCenter,
   prettyPrintDate,
   prettyPrintDateAndTime,
-} from "../../../../../../internals/Utils"; // Adjusted path
+} from "@/internals/Utils";
 
-import CalendarIcon from "../../../../../../assets/calendar-icon.svg"; // Adjusted path
-import PlayerIcon from "../../../../../../assets/player-icon.png"; // Adjusted path
-import { Fullbox, FullboxHeading } from "@/components/Fullbox";
-import MainLayout from "../../../../../../internals/MainLayout";
+import CalendarIcon from "@/assets/calendar-icon.svg";
+import PlayerIcon from "@/assets/player-icon.png";
 
-import styles from "../../../../../../styles/VisitorsLogPage.module.css"; // Adjusted path
+import styles from "@/styles/ChunkPages.module.scss";
 
-// Refactored VisitorCard (previously ChunkCard in this file)
-const VisitorCard = ({ enteredTime, playerUUID, name }) => {
-  return (
-    <div className={styles.visitorCard}>
-      <div className={styles.visitorAvatarContainer}>
-        <Image
-          src={`https://crafatar.com/avatars/${playerUUID}?size=64&overlay`}
-          alt={`${name}'s Head`}
-          width="64"
-          height="64"
-        />
-      </div>
-      <div className={styles.visitorInfoGrid}>
-        <h3 className={`${styles.visitorNameHeading} text-heading`}>{name}</h3>
-        <p className={styles.visitorDetailText}>
-          Visited {prettyPrintDateAndTime(enteredTime)}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-function VisitorsLogPage() {
-  // Renamed component
+export default function VisitorsLogPage() {
   const router = useRouter();
-  // console.log("===========QUERY", router.query); // Keep for debugging
+  // console.log("===========QUERY", router.query);
 
-  const { uuid: dimensionUuid, x, z } = router.query; // Renamed uuid to dimensionUuid for clarity
+  const { uuid: dimensionUuid, x, z } = router.query;
 
   const { data: logData, error: logError } = useSWR(
     dimensionUuid && x && z
       ? `/api/minecraft/logEntryByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}`
       : null
   );
+
   const { data: chunkOwnerData, error: chunkOwnerError } = useSWR(
-    // Renamed from chunkData
     dimensionUuid && x && z
       ? `/api/minecraft/chunkByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}`
       : null
@@ -87,18 +70,19 @@ function VisitorsLogPage() {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>{logError.status || "Error"}</FullboxHeading>
-          <p>Error getting log data.</p>
+          <FullboxHeading>{logError.status || "oops"}</FullboxHeading>
+          <p>Couldn't get the visitor's log.</p>
         </Fullbox>
       </MainLayout>
     );
   }
+
   if (chunkOwnerError) {
     return (
       <MainLayout>
         <Fullbox>
           <FullboxHeading>{chunkOwnerError.status || "Error"}</FullboxHeading>
-          <p>Error getting log data.</p>
+          <p>Couldn't get this chunk's data.</p>
         </Fullbox>
       </MainLayout>
     );
@@ -107,14 +91,17 @@ function VisitorsLogPage() {
   if (!logData) {
     return (
       <Fullbox>
+        <Spinner />
         <p>Grabbing log entries...</p>
       </Fullbox>
     );
   }
+
   if (!chunkOwnerData) {
     return (
       <Fullbox>
-        <p>Loading chunk owner data...</p>
+        <Spinner />
+        <p>Grabbing this chunk's owner data...</p>
       </Fullbox>
     );
   }
@@ -135,74 +122,63 @@ function VisitorsLogPage() {
   // This is handled by the map function returning nothing or a "no visits" message.
 
   const ownedChunk = chunkOwnerData.data[0];
-  const mapChunkCenter = findChunkCenter(parseInt(x), parseInt(z));
+  const mapChunkCenter = findChunkCenter(
+    Number.parseInt(x),
+    Number.parseInt(z)
+  );
   const dimensionColor = DimensionColorMap[ownedChunk.dimension] || "#333";
 
   return (
-    <MainLayout noPadding>
-      <div className={styles.pageGrid}>
-        <div className={styles.sidebar}>
-          <div
-            className={styles.chunkHeader}
-            style={{ backgroundColor: dimensionColor }}
-          >
-            <div className={styles.chunkHeaderContent}>
-              <div className={styles.ownerPortraitContainer}>
-                <Image
-                  src={`https://visage.surgeplay.com/full/304/${ownedChunk.player_id}`}
-                  alt={`${ownedChunk.name}'s portrait`}
-                  width="198"
-                  height="320"
-                  layout="fixed"
-                  priority
-                />
-              </div>
-              <div className={styles.chunkInfoGrid}>
-                <h1 className={`${styles.chunkNameHeading} text-h1`}>
-                  Chunk ({x}, {z})
-                </h1>
-                <p className={styles.chunkDetailText}>
-                  <Image
-                    src={PlayerIcon}
-                    alt="Head Icon"
-                    width="20"
-                    height="20"
-                  />
-                  <span>Owned by {ownedChunk.name}</span>
-                </p>
-                <p className={styles.chunkDetailText}>
-                  <CalendarIcon className={styles.chunkDetailIcon} />
-                  Claimed {prettyPrintDate(new Date(ownedChunk.claimed_on))}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.logListGrid}>
-            {logData.data.length === 0 && (
-              <p className={styles.noDataText}>
-                Seems no one has visited this chunk yet.
-              </p>
-            )}
-            {logData.data.map((logEntry, index) => (
-              <VisitorCard
-                key={index}
-                enteredTime={new Date(logEntry.entered_time)}
-                playerUUID={logEntry.player_id}
-                name={logEntry.name}
+    <BlueMapLayout
+      mapUrl={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid[0] ?? dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
+      title={"Chunk Map"}
+    >
+      <PlayerHeader
+        playerUuid={ownedChunk.player_id}
+        playerName={ownedChunk.name}
+        style={{ backgroundColor: dimensionColor }}
+      >
+        <PlayerHeading>
+          Chunk ({x}, {z})
+        </PlayerHeading>
+
+        <PlayerDetail>
+          <Image src={PlayerIcon} alt="Head Icon" width="20" height="20" />
+          <span>Owned by {ownedChunk.name}</span>
+        </PlayerDetail>
+
+        <PlayerDetail>
+          <CalendarIcon className={styles.chunkDetailIcon} />
+          Claimed {prettyPrintDate(new Date(ownedChunk.claimed_on))}
+        </PlayerDetail>
+      </PlayerHeader>
+
+      <div className={styles.listGrid}>
+        {logData.data.length === 0 && (
+          <p className={styles.noRecordsText}>
+            Seems no one has visited this chunk yet.
+          </p>
+        )}
+
+        {logData.data.map((logEntry, index) => (
+          <FlexRowCard
+            key=""
+            leftContent={
+              <Image
+                src={`https://crafatar.com/avatars/${logEntry.player_id}?size=64&overlay`}
+                alt={`${logEntry.name}'s Head`}
+                width="64"
+                height="64"
               />
-            ))}
-          </div>
-        </div>
-        <div>
-          {/* <iframe
-            className={styles.mapIframe}
-            src={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid[0] ?? dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
-            title={"Chunk Map"}
-          ></iframe> */}
-        </div>
+            }
+          >
+            <CardHeading>{logEntry.name}</CardHeading>
+            <p className={styles.visitorDetailText}>
+              Visited {prettyPrintDateAndTime(new Date(logEntry.entered_time))}
+            </p>
+          </FlexRowCard>
+        ))}
       </div>
-    </MainLayout>
+    </BlueMapLayout>
   );
 }
-
-export default VisitorsLogPage;

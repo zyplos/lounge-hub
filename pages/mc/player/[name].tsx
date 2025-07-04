@@ -6,7 +6,10 @@ import BlueMapLayout from "@/internals/BlueMapLayout";
 import Spinner from "@/components/Spinner";
 import { CardHeading } from "@/components/Card";
 import { Fullbox, FullboxHeading } from "@/components/Fullbox";
-import PlayerHeader, { PlayerDetail } from "@/components/PlayerHeader";
+import PlayerHeader, {
+  PlayerDetail,
+  PlayerHeading,
+} from "@/components/PlayerHeader";
 import { CalendarIcon, CommunityIcon } from "@/components/Icon";
 import FlexRowCard from "@/components/FlexRowCard";
 import {
@@ -20,7 +23,7 @@ import {
   prettyPrintDateAndTime,
 } from "@/internals/Utils";
 
-import styles from "@/styles/PlayerPage.module.scss";
+import styles from "@/styles/ChunkPages.module.scss";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -136,6 +139,8 @@ export default function PlayerPage() {
         watermarkUrl={`/static-assets/community/${communityId}.png`}
         style={{ backgroundColor: communityColor as string }}
       >
+        <PlayerHeading>{player.name}</PlayerHeading>
+
         <PlayerDetail>
           <CommunityIcon />
           {communityName}
@@ -147,7 +152,7 @@ export default function PlayerPage() {
         </PlayerDetail>
       </PlayerHeader>
 
-      <div className={styles.chunkListGrid}>
+      <div className={styles.listGrid}>
         {player.home_x &&
           player.home_y &&
           player.home_z &&
@@ -182,7 +187,7 @@ export default function PlayerPage() {
         )}
 
         {chunkData && chunkData.data.length === 0 && (
-          <p className={styles.noChunksText}>
+          <p className={styles.noRecordsText}>
             This player has not claimed any chunks yet.
           </p>
         )}

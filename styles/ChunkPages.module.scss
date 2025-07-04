@@ -1,9 +1,15 @@
-.chunkListGrid {
+// common
+.listGrid {
   display: grid;
   gap: var(--space-m);
   padding: var(--space-m);
 }
 
+.noRecordsText {
+  color: var(--color-muted);
+}
+
+// players land claims page specific classes
 .chunkCard:hover {
   transform: scale(1.03);
 }
@@ -15,6 +21,8 @@
   text-align: left;
   cursor: pointer;
   width: 100%;
+  font-size: var(--font-size);
+  color: var(--color-text);
 }
 
 .chunkCardDimensionIcon {
@@ -24,8 +32,4 @@
 
 .chunkCardIconPaths {
   fill: #fff;
-}
-
-.noChunksText {
-  color: var(--color-muted);
 }

@@ -32,11 +32,7 @@ export default function PlayerHeader({
         className={styles.playerPortrait}
       />
 
-      <div className={styles.playerInfoGrid}>
-        <h1 className={styles.playerNameHeading}>{playerName}</h1>
-
-        {children}
-      </div>
+      <div className={styles.playerInfoGrid}>{children}</div>
 
       {watermarkUrl && (
         <Image
@@ -65,5 +61,21 @@ export function PlayerDetail({
     <p className={`${styles.playerDetailText} ${className || ""}`} {...props}>
       {children}
     </p>
+  );
+}
+
+//
+
+interface PlayerHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+export function PlayerHeading({
+  className,
+  children,
+  ...props
+}: PlayerHeadingProps) {
+  return (
+    <h1 className={`${styles.playerNameHeading} ${className || ""}`} {...props}>
+      {children}
+    </h1>
   );
 }
