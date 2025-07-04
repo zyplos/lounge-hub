@@ -22,29 +22,82 @@
   margin-right: var(--space);
 }
 
-.noPlayersText {
-  color: var(--color-muted);
-}
-
 .playerGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
   gap: var(--space);
+  margin-top: var(--space-s);
 }
 
-@include common.desktopScreenStyles {
-  .playerGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
+// @include common.desktopScreenStyles {
+//   .playerGrid {
+//     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+//   }
+// }
 
 .playerItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: 0;
 }
 
 .playerNameText {
+  margin-top: var(--space-xs);
+}
+
+// skeleton styles
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background-color: var(--color-background-tertiary);
+  border-radius: var(--radius-s);
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Specific skeleton element styles
+.skeletonIcon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  margin-right: var(--space);
+}
+
+.skeletonText {
+  height: 1em;
+  width: 200px;
+  margin-bottom: var(--space-xs);
+}
+
+.skeletonTextShort {
+  @extend .skeletonText;
+  width: 120px;
+  margin-bottom: 0;
+}
+
+.skeletonTextLine {
+  height: 1em;
+  width: 30%;
+}
+
+.skeletonAvatar {
+  width: 45px;
+  height: 45px;
+}
+
+.skeletonPlayerName {
+  height: 1em;
+  width: 60px;
   margin-top: var(--space-xs);
 }
