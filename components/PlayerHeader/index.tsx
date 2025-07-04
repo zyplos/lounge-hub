@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 interface PlayerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   playerUuid: string;
   playerName: string;
-  watermarkUrl: string | StaticImageData;
+  watermarkUrl?: string | StaticImageData;
 }
 
 export default function PlayerHeader({
@@ -38,13 +38,15 @@ export default function PlayerHeader({
         {children}
       </div>
 
-      <Image
-        src={watermarkUrl}
-        alt=""
-        width="45"
-        height="45"
-        className={styles.communityWatermark}
-      />
+      {watermarkUrl && (
+        <Image
+          src={watermarkUrl}
+          alt=""
+          width="45"
+          height="45"
+          className={styles.communityWatermark}
+        />
+      )}
     </div>
   );
 }
