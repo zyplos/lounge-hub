@@ -1,5 +1,5 @@
 .minecraftText {
   font-family: "Minecraft", monospace;
   font-size: 0.8em;
-  color: #ffff55;
+  color: var(--color-secondary);
 }

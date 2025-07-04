@@ -56,7 +56,7 @@
 :root {
   color-scheme: dark;
 
-  --color-text: #fff;
+  --color-text: #fff5f5;
   --color-background: #383332;
   --color-background-secondary: #212020;
   --color-background-tertiary: #5a4f4c;
@@ -66,9 +66,10 @@
   --color-accent: #fff;
   --color-highlight: #ff4000;
 
-  --color-muted: #8e8e8e;
+  --color-muted: #958a8a;
   --color-dark-gray: #000;
   --color-dark-gray-accent: #353535;
+  --color-link: #ffa5a5;
 
   --color-discord: #5865f2;
   --color-twitch: #9146ff;
@@ -91,19 +92,20 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-text: #000;
-  --color-background: #fff;
+  --color-text: #292222;
+  --color-background: #f2e9e9;
   --color-background-secondary: #171717;
-  --color-background-tertiary: #737373;
+  --color-background-tertiary: #bfb4b4;
 
   --color-primary: #ff3e3e;
-  --color-secondary: #ffd300;
+  --color-secondary: #ab8f00;
   --color-accent: #fff;
   --color-highlight: #ff4000;
 
-  --color-muted: #808080;
+  --color-muted: #9d8787;
   --color-dark-gray: #242424;
   --color-dark-gray-accent: #353535;
+  --color-link: #ff3e3e;
 
   --color-discord: #5865f2;
   --color-twitch: #9146ff;
@@ -118,7 +120,6 @@
   --color-button-hover-background: #ff5555;
   --color-button-active-background: #e72828;
 
-  --color-card-bg: #efefef;
+  --color-card-bg: #fdf4f4;
   --color-card-bg-secondary: #c7c7c7;
-
 }

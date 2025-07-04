@@ -20,11 +20,11 @@
 }
 
 .moonShape {
-  fill: #fff;
+  fill: var(--color-text);
 }
 
 .sunShape,
 .sunLines {
-  fill: #fff;
-  stroke: #fff;
+  fill: var(--color-text);
+  stroke: var(--color-text);
 }

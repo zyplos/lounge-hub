@@ -1,11 +1,12 @@
 .alert {
   padding: var(--space);
   border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .neutral {
   color: var(--color-text);
-  background-color: var(--color-background-tertiary);
+  background-color: var(--color-card-bg);
 }
 
 .info {
