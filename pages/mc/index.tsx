@@ -16,7 +16,7 @@ import clsx from "clsx";
 
 export default function MCHomePage() {
   return (
-    <MainLayout noPadding={true}>
+    <MainLayout noPadding={true} className={styles.forceDarkMode}>
       <div
         className={clsx(styles.heroSection, "paragraphMargin")}
         style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}
