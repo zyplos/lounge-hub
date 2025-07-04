@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
-    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

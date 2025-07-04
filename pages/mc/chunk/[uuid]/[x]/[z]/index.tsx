@@ -7,6 +7,7 @@ import Spinner from "@/components/Spinner";
 import FlexRowCard from "@/components/FlexRowCard";
 import { CardHeading } from "@/components/Card";
 import { Fullbox, FullboxHeading } from "@/components/Fullbox";
+import { CalendarIcon, PlayerIcon } from "@/components/Icon";
 import PlayerHeader, {
   PlayerDetail,
   PlayerHeading,
@@ -19,9 +20,6 @@ import {
   prettyPrintDate,
   prettyPrintDateAndTime,
 } from "@/internals/Utils";
-
-import CalendarIcon from "@/assets/calendar-icon.svg";
-import PlayerIcon from "@/assets/player-icon.png";
 
 import styles from "@/styles/ChunkPages.module.scss";
 
@@ -143,7 +141,7 @@ export default function VisitorsLogPage() {
         </PlayerHeading>
 
         <PlayerDetail>
-          <Image src={PlayerIcon} alt="Head Icon" width="20" height="20" />
+          <PlayerIcon className={styles.chunkDetailIcon} />
           <span>Owned by {ownedChunk.name}</span>
         </PlayerDetail>
 

@@ -2,20 +2,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
-  webpack(
-    config,
-    { isServer, dev, buildId, config: nextJsConfig, defaultLoaders, webpack }
-  ) {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      // issuer: { and: [/\.(js|ts|md)x?$/] }, // Original issuer condition
-      // Updated issuer to be more specific for Next.js 13+ as per some common practices,
-      // though the original should also work. Keeping original for now.
-      issuer: { and: [/\.(js|ts|md)x?$/] },
-      use: ["@svgr/webpack"],
-    });
-    return config;
-  },
   images: {
     remotePatterns: [
       {
