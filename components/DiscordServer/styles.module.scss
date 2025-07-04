@@ -64,6 +64,14 @@
   margin-top: var(--space-m);
 }
 
+.botBadge {
+  background-color: var(--color-discord);
+  padding: var(--space-xxs) var(--space-xs);
+  margin-left: var(--space-xs);
+  border-radius: var(--radius-s);
+  display: inline-block;
+}
+
 // voice icon stuff
 
 .voiceIconSvg {
