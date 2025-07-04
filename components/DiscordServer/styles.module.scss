@@ -34,6 +34,10 @@
   border-color: #3eff58;
 }
 
+:root[data-theme="light"] .statusOnline {
+  border-color: #12ca22;
+}
+
 .statusIdle {
   border-color: #ffde00;
 }
