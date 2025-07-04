@@ -22,12 +22,12 @@
 
   display: none;
 
+  align-items: center;
+  gap: 3px;
+
   @include common.desktopScreenStyles {
     display: flex;
   }
-
-  align-items: center;
-  gap: 3px;
 
   svg {
     display: inline-block;
