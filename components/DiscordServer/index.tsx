@@ -1,9 +1,8 @@
-import useSWR, { type SWRResponse } from "swr";
 import Image from "next/image";
-import { Fullbox } from "../Fullbox";
+import clsx from "clsx";
+import useSWR, { type SWRResponse } from "swr";
 import Spinner from "../Spinner";
 import styles from "./styles.module.scss";
-import clsx from "clsx";
 
 // Types for Discord Widget API
 interface DiscordGame {
@@ -66,10 +65,10 @@ export default function DiscordServer() {
   }
   if (!discordData) {
     return (
-      <Fullbox useDims={false} usePadding>
+      <>
         <Spinner title="Loading Discord Status" />
         <p>Loading Discord status.</p>
-      </Fullbox>
+      </>
     );
   }
 
@@ -98,8 +97,7 @@ export default function DiscordServer() {
           <div className={styles.textContainer}>
             <p className={styles.usernameText}>voice</p>
             <p className={styles.statusText}>
-              <span className="bold">{numberInVoice}</span> in
-              channel.
+              <span className="bold">{numberInVoice}</span> in channel.
             </p>
           </div>
         </div>
@@ -126,20 +124,13 @@ export default function DiscordServer() {
               <p className={styles.usernameText}>
                 {member.username}
                 {knownBots.includes(member.username) && (
-                  <span
-                    className={styles.botBadge}
-                  >
-                    Bot
-                  </span>
+                  <span className={styles.botBadge}>Bot</span>
                 )}
               </p>
-             
+
               {member.game && (
-                <p
-                  className={styles.statusText}
-                >
-                  <span className="bold">Playing</span>{" "}
-                  {member.game.name}
+                <p className={styles.statusText}>
+                  <span className="bold">Playing</span> {member.game.name}
                 </p>
               )}
             </div>
