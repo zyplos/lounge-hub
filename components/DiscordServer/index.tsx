@@ -115,8 +115,8 @@ export default function DiscordServer() {
               <Image
                 alt={`${member.username}'s profile picture`}
                 src={member.avatar_url}
-                width={60}
-                height={60}
+                width={64}
+                height={64}
               />
             </div>
 
