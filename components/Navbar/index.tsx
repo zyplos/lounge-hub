@@ -70,13 +70,7 @@ export default function Navbar() {
       <div className={styles.navbarWrapper}>
         <div className={styles.navGrid}>
           <Link href="/" className={styles.centerItem}>
-            <Image
-              src={emblem}
-              alt="Emblem"
-              layout="fixed"
-              width={48}
-              height={28}
-            />
+            <Image src={emblem} alt="Emblem" width={48} height={28} />
           </Link>
 
           <div className={styles.navDivider} />

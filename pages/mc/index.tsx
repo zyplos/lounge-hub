@@ -44,12 +44,12 @@ export default function MCHomePage() {
         </div>
 
         <div className={styles.cbImageGrid}>
-          <Image width="200" height="200" src={CID1} alt="1" layout="fixed" />
-          <Image width="200" height="200" src={CID2} alt="2" layout="fixed" />
-          <Image width="200" height="200" src={CID3} alt="3" layout="fixed" />
-          <Image width="200" height="200" src={CID4} alt="4" layout="fixed" />
-          <Image width="200" height="200" src={CID5} alt="5" layout="fixed" />
-          <Image width="200" height="200" src={CID6} alt="6" layout="fixed" />
+          <Image width="200" height="200" src={CID1} alt="" />
+          <Image width="200" height="200" src={CID2} alt="" />
+          <Image width="200" height="200" src={CID3} alt="" />
+          <Image width="200" height="200" src={CID4} alt="" />
+          <Image width="200" height="200" src={CID5} alt="" />
+          <Image width="200" height="200" src={CID6} alt="" />
         </div>
       </div>
     </MainLayout>
