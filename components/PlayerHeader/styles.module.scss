@@ -1,4 +1,4 @@
-// ===== player header stuff
+// ===== wrapper stuff
 .playerHeader {
   color: #fff;
   position: sticky;
@@ -11,10 +11,26 @@
   display: flex;
   align-items: center;
   gap: var(--space);
-  position: relative;
   padding: var(--space-s);
 }
 
+@keyframes fadeShadow {
+  from {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  to {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.playerHeader {
+  animation: fadeShadow linear forwards;
+  animation-timeline: scroll();
+  animation-range: 0rem 3rem;
+}
+
+// ===== content stuff
 .playerPortrait {
   align-self: flex-start;
   position: relative;
