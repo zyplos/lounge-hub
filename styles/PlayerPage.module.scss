@@ -1,8 +1,11 @@
-// ===== chunk list stuff
 .chunkListGrid {
   display: grid;
   gap: var(--space-m);
   padding: var(--space-m);
+}
+
+.chunkCard:hover {
+  transform: scale(1.03);
 }
 
 .chunkCardButton {
@@ -14,21 +17,13 @@
   width: 100%;
 }
 
-// ===== chunk card stuff
-.chunkCardWrapper {
-  display: flex;
-  align-items: center;
-  transition: transform 0.15s ease;
-  gap: var(--space);
-}
-
-.chunkCardWrapper:hover {
-  transform: scale(1.03);
-}
-
 .chunkCardDimensionIcon {
   width: 64px;
   height: 64px;
+}
+
+.chunkCardIconPaths {
+  fill: #fff;
 }
 
 .noChunksText {
