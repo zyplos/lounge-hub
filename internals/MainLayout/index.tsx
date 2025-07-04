@@ -4,12 +4,17 @@ import Navbar from "@/components/Navbar/index";
 
 import styles from "./styles.module.scss";
 
-interface MainLayoutProps {
+interface MainLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
   children: React.ReactNode;
 }
 
-export default function MainLayout({ noPadding, children }: MainLayoutProps) {
+export default function MainLayout({
+  noPadding,
+  children,
+  className,
+  ...props
+}: MainLayoutProps) {
   const [isOpen, setOpen] = useState(false);
 
   function showNavbar() {
@@ -17,7 +22,10 @@ export default function MainLayout({ noPadding, children }: MainLayoutProps) {
   }
 
   return (
-    <div className={styles.mainLayoutWrapper}>
+    <div
+      className={`${styles.mainLayoutWrapper} ${className || ""}`}
+      {...props}
+    >
       <button
         type="button"
         className={styles.navToggle}
