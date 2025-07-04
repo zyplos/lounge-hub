@@ -9,9 +9,13 @@ export default function FlexRowCard({
   leftContent,
   children,
   className,
+  ...props
 }: FlexRowCardProps) {
   return (
-    <Card className={`${styles.flexRowCardWrapper} ${className || ""}`}>
+    <Card
+      className={`${styles.flexRowCardWrapper} ${className || ""}`}
+      {...props}
+    >
       {leftContent}
 
       <div>{children}</div>
