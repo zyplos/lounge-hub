@@ -130,7 +130,7 @@ function NavMinecraftItem({
   playerAmount,
 }: NavMinecraftItemProps) {
   return (
-    <div className={clsx(styles.minecraftItemContainer, styles.centerItem)}>
+    <div className={clsx(styles.minecraftItemContainer)}>
       <Image src={image} alt={name} width={32} height={32} />{" "}
       {playerAmount !== undefined && playerAmount !== null && (
         <div className={styles.minecraftItemLabel}>{playerAmount}</div>

@@ -11,11 +11,13 @@
 }
 
 .navToggle {
+  border: none;
   position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: var(--space-3);
-  background-color: var(--color-background-secondary);
+  top: 1rem;
+  right: 1.75rem;
+  padding: var(--space-s);
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text);
   z-index: 100;
   cursor: pointer;
   display: block;
@@ -30,13 +32,35 @@
 .hamburgerIcon,
 .closeIcon {
   display: block;
-  fill: white;
   width: 24px;
   height: 24px;
 }
 
 .navbarWrapper {
   flex-shrink: 0;
+}
+
+@include common.mobileScreenStyles {
+
+  .navbarWrapper,
+  .mainWrapper {
+    transition: padding 0.2s ease, width 0.2s ease;
+  }
+
+  .navbarWrapper.show {
+    flex-grow: 1;
+  }
+
+  .navbarWrapper.hide,
+  .mainWrapper.hide {
+    padding: 0;
+    width: 0;
+    flex-grow: 0;
+
+    >div {
+      padding: 0;
+    }
+  }
 }
 
 .mainWrapper {

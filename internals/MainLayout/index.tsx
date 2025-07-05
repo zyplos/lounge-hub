@@ -22,10 +22,7 @@ export default function MainLayout({
   }
 
   return (
-    <div
-      className={`${styles.mainLayoutWrapper} ${className || ""}`}
-      {...props}
-    >
+    <div className={clsx(styles.mainLayoutWrapper, className)} {...props}>
       <button
         type="button"
         className={styles.navToggle}
@@ -40,11 +37,21 @@ export default function MainLayout({
         {isOpen ? <CloseIcon /> : <HamburgerIcon />}
       </button>
 
-      <section className={styles.navbarWrapper}>
+      <section
+        className={clsx(styles.navbarWrapper, {
+          [styles.hide]: !isOpen,
+          [styles.show]: isOpen,
+        })}
+      >
         <Navbar />
       </section>
 
-      <main className={clsx(styles.mainWrapper, noPadding && styles.noPadding)}>
+      <main
+        className={clsx(styles.mainWrapper, {
+          [styles.noPadding]: noPadding,
+          [styles.hide]: isOpen,
+        })}
+      >
         {children}
       </main>
     </div>
