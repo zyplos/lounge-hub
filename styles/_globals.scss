@@ -117,8 +117,10 @@ a {
   gap: var(--space);
 }
 
-.biggerCardGrid {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+@include common.desktopScreenStyles {
+  .biggerCardGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 
 .responsiveCenteredContainer {
