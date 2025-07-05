@@ -20,6 +20,8 @@
   background: linear-gradient(135deg, #f06e6e 10%, #ff3e3e 100%);
   padding: var(--space-m);
   border-radius: var(--radius-l);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  color: #fff;
 
   font-family: "Minecraft", monospace;
 }

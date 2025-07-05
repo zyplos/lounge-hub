@@ -13,11 +13,14 @@
 .navToggle {
   border: none;
   position: absolute;
-  top: 1rem;
-  right: 1.75rem;
+  top: var(--space-m);
+  right: var(--space-m);
+
   padding: var(--space-s);
   background-color: var(--color-background-tertiary);
   color: var(--color-text);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
   z-index: 100;
   cursor: pointer;
   display: block;
