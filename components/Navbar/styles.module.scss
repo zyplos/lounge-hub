@@ -47,26 +47,33 @@
   align-items: center;
   text-decoration: none;
   color: var(--color-text);
-}
 
-.navText {
-  display: inline-block;
-  margin-left: var(--space);
-  vertical-align: text-bottom;
+  svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+    fill: var(--color-muted);
+    transition: fill 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      fill: var(--color-text);
+      transform: scale(1.1);
+    }
+  }
+
+  span {
+    display: inline-block;
+    margin-left: var(--space);
+    vertical-align: text-bottom;
+  }
 }
 
 @include common.desktopScreenStyles {
-  .navText {
+  .navLink span {
     display: none;
   }
 }
 
-.navIcon {
-  width: 32px;
-  height: 32px;
-  display: block;
-  fill: white;
-}
 
 .minecraftItemContainer {
   font-family: "Minecraft", monospace;
