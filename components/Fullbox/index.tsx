@@ -29,6 +29,9 @@ export function Fullbox({
   );
 }
 
-export function FullboxHeading({ children }) {
+export interface FullboxHeadingProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+export function FullboxHeading({ children }: FullboxHeadingProps) {
   return <h1 className={styles.heading}>{children}</h1>;
 }

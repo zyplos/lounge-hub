@@ -84,7 +84,7 @@ export default function ThemeToggle() {
   }, [theme]);
 
   useEffect(() => {
-    const handleMediaChange = ({ matches: isDark }) => {
+    const handleMediaChange = ({ matches: isDark }: { matches: boolean }) => {
       setTheme(isDark ? "dark" : "light");
     };
 
