@@ -1,9 +1,19 @@
 .layoutWrapper {
   display: grid;
-  // Fixed width for sidebar, auto for map
-  grid-template-columns: 500px auto;
+  grid-template-rows: 300px auto;
+
   height: 100%;
   gap: 0;
+
+  @include common.desktopScreenStyles {
+    // Fixed width for sidebar, auto for map
+    grid-template-columns: 500px auto;
+    grid-template-rows: auto;
+  }
+}
+
+.mainLayoutHideOverflow main {
+  overflow-y: hidden;
 }
 
 .sidebarWrapper {

@@ -3,6 +3,29 @@
   display: grid;
   gap: var(--space-m);
   padding: var(--space-m);
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--color-background-secondary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-text);
+  }
+
+  @include common.mobileScreenStyles {
+    // thank you gemini 2.5 pro
+    grid-auto-flow: column;
+    overflow-x: auto;
+    grid-auto-columns: 320px;
+    grid-auto-rows: 100px;
+  }
+
+
 }
 
 .noRecordsText {

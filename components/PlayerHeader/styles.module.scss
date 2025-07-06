@@ -34,6 +34,11 @@
 .playerPortrait {
   align-self: flex-start;
   position: relative;
+
+  @include common.mobileScreenStyles {
+    width: 100px;
+    height: auto;
+  }
 }
 
 .playerInfoGrid {
@@ -69,4 +74,15 @@
   top: 15px;
   right: 15px;
   z-index: -1;
+
+  @include common.mobileScreenStyles {
+    width: 200px;
+    height: auto;
+
+    bottom: -50px;
+    right: -10px;
+    top: initial;
+
+    opacity: 0.15;
+  }
 }

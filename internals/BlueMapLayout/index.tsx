@@ -15,7 +15,7 @@ export default function BlueMapLayout({
   title,
 }: BlueMapLayoutProps) {
   return (
-    <MainLayout noPadding={true}>
+    <MainLayout noPadding={true} className={styles.mainLayoutHideOverflow}>
       <div className={styles.layoutWrapper}>
         <div className={styles.sidebarWrapper}>{children}</div>
 
