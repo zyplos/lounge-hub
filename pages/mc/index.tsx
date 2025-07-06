@@ -1,4 +1,5 @@
 import Image from "next/image";
+import clsx from "clsx";
 import MainLayout from "@/internals/MainLayout";
 
 import styles from "@/styles/MCIndexPage.module.scss";
@@ -12,11 +13,10 @@ import CID3 from "@/assets/ref/3.png";
 import CID4 from "@/assets/ref/4.png";
 import CID5 from "@/assets/ref/5.png";
 import CID6 from "@/assets/ref/6.png";
-import clsx from "clsx";
 
 export default function MCHomePage() {
   return (
-    <MainLayout noPadding={true} className={styles.forceDarkMode}>
+    <MainLayout noPadding={true}>
       <div
         className={clsx(styles.heroSection, "paragraphMargin")}
         style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}
