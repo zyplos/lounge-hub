@@ -1,12 +1,13 @@
 import { createContext, useContext } from "react";
 import useSWR from "swr";
+import type { MinecraftServerStatusResult } from "./apiTypes";
 
 export interface MinecraftDataContextState {
-  vanilla: null | any;
-  modded: null | any;
+  vanilla: MinecraftServerStatusResult | null;
+  modded: MinecraftServerStatusResult | null;
 }
 
-const MinecraftContext = createContext({
+const MinecraftContext = createContext<MinecraftDataContextState>({
   vanilla: null,
   modded: null,
 });
@@ -17,9 +18,11 @@ export function MinecraftDataProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { data, error } = useSWR("/api/minecraft/status-bugfix", {
+  const { data, error } = useSWR("/api/minecraft/status", {
     refreshInterval: 60000,
+    revalidateOnFocus: false,
   });
+
   return (
     <MinecraftContext.Provider value={error || data}>
       {children}

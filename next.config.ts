@@ -12,13 +12,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "visage.surgeplay.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "crafatar.com",
+        hostname: "vzge.me",
         port: "",
         pathname: "/**",
       },

@@ -1,66 +1,46 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import Alert from "../Alert";
+import type { MinecraftServerStatusResult } from "@/internals/apiTypes";
 import styles from "./styles.module.scss";
 
 import defaultServerIcon from "@/assets/defaultServerIcon.png";
 
-interface PlayerSampleEntry {
-  id: string;
-  name: string;
-}
-
-interface ServerStatusData {
-  motd?: {
-    raw?: string;
-    clean?: string;
-    html?: string;
-  };
-  players: {
-    online: number;
-    max: number;
-    sample?: PlayerSampleEntry[];
-  };
-  version: {
-    name?: string;
-    protocol?: number;
-  };
-  favicon?: string | StaticImageData;
-  roundTripLatency?: number;
-}
-
 interface MinecraftStatusProps {
-  data?: ServerStatusData | null;
+  data: MinecraftServerStatusResult;
 }
+
+const getPlayerImage = (uuid: string): string => {
+  return `https://vzge.me/face/256/${uuid}`;
+};
 
 export default function MinecraftStatus({ data }: MinecraftStatusProps) {
   if (!data) {
     return <LoadingSkeleton />;
   }
 
-  if (!data.motd || !data.players) {
-    return (
-      <Alert>
-        This server is currently offline or its status is unavailable.
-      </Alert>
-    );
+  if ("message" in data) {
+    return <Alert>{data.message}</Alert>;
   }
 
-  const getPlayerImage = (uuid: string): string => {
-    return `https://crafatar.com/avatars/${uuid}?size=45&default=MHF_Steve&overlay`;
-  };
+  const numPlayersOnline = data.players.online;
+  const playerList = data.players.sample || [];
+  const versionName = data.version.name;
 
-  const numPlayersOnline = data.players?.online || 0;
-  const playerList = data.players?.sample || [];
-  const versionName = data.version?.name;
-
-  const computedPlural = (): string => {
-    return numPlayersOnline === 1 ? "player" : "players";
-  };
+  const computedPlayerPlural = numPlayersOnline === 1 ? "player" : "players";
 
   // Sort playerList safely by creating a new array
   const sortedPlayerList = [...playerList].sort((a, b) =>
     a.name.localeCompare(b.name)
   );
+
+  let motdString: string | null = null;
+  if (data.description) {
+    if (typeof data.description === "string") {
+      motdString = data.description;
+    } else {
+      motdString = data.description.text;
+    }
+  }
 
   return (
     <div className={styles.serverDisplayContainer}>
@@ -72,11 +52,16 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
           height={64}
           className={styles.serverIcon}
         />
-        <p className={styles.motd}>{data.motd?.clean || "(empty motd)"}</p>
+
+        {data.description && <p className={styles.motd}>{motdString}</p>}
+
+        {!motdString && (
+          <p className={`${styles.motd} textMuted`}>(empty motd)</p>
+        )}
       </div>
 
       <p>
-        {numPlayersOnline > 0 ? numPlayersOnline : "No"} {computedPlural()}{" "}
+        {numPlayersOnline > 0 ? numPlayersOnline : "No"} {computedPlayerPlural}{" "}
         online
         {versionName ? ` • ${versionName}` : ""}
       </p>
