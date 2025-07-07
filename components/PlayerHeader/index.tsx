@@ -23,7 +23,7 @@ export default function PlayerHeader({
       {...props}
     >
       <Image
-        src={`https://visage.surgeplay.com/full/304/${playerUuid}`}
+        src={`https://vzge.me/full/384/${playerUuid}`}
         alt={`${playerName}'s portrait`}
         width="198"
         height="320"
