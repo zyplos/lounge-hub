@@ -1,15 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { executeQuery } from "@/internals/db";
-import type { ApiError, Player, Chunk } from "@/internals/apiTypes";
+import type { ApiError, Player } from "@/internals/apiTypes";
 import { generate405Response, isStringUUID } from "@/internals/apiUtils";
-
-interface PlayerApiResponse extends Player {
-  chunks?: Chunk[];
-}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PlayerApiResponse | ApiError>
+  res: NextApiResponse<Player | ApiError>
 ) {
   if (req.method !== "GET") {
     res.setHeader("Allow", ["GET"]);
@@ -34,8 +30,6 @@ export default async function handler(
       [identifier]
     );
 
-    console.log("PLAYER RESULTS", playerResults);
-
     if (playerResults.length === 0) {
       return res.status(404).json({ errorMessage: "Player not found." });
     }
@@ -50,11 +44,10 @@ export default async function handler(
       player.home_dimension = null;
     }
 
-    const response: PlayerApiResponse = player;
-
-    res.status(200).json(response);
+    res.status(200).json(player);
   } catch (error) {
     console.error("unexpected error grabbing player info", error);
+
     res.status(500).json({
       errorMessage:
         "An unexpected error occurred trying to get this player's info.",
