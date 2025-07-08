@@ -1,11 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { executeQuery } from "@/internals/db";
 import type { ApiError, Player, Chunk } from "@/internals/apiTypes";
-import { generate405Response } from "@/internals/apiUtils";
-
-// Regex to check if a string is a valid UUID
-const UUID_REGEX =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+import { generate405Response, isStringUUID } from "@/internals/apiUtils";
 
 interface PlayerApiResponse extends Player {
   chunks?: Chunk[];
@@ -28,7 +24,7 @@ export default async function handler(
       .json({ errorMessage: "Player name or UUID must be provided." });
   }
 
-  const isUUID = UUID_REGEX.test(identifier);
+  const isUUID = isStringUUID(identifier);
   const queryColumn = isUUID ? "player_id" : "name";
   const queryValue = isUUID ? "UUID_TO_BIN(?)" : "?";
 
