@@ -51,3 +51,12 @@ export interface Player {
   home_hidden: boolean;
 }
 
+export interface Chunk {
+  chunk_id: number;
+  player_id: string; // uuid
+  claimed_on: string; // datetime string
+  x: number;
+  z: number;
+  dimension: string; // uuid
+}
+
