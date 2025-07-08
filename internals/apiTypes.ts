@@ -27,3 +27,27 @@ export interface MinecraftStatusAPIResponse {
   modded: MinecraftServerStatusResult;
 }
 
+/*
+notes
+/api/minecraft/status                   | status                            | server status
+/api/minecraft/players/[name]           | player                            | player data
+/api/minecraft/players/[name]/claims    | chunkByUUID                       | land claims
+/api/minecraft/chunk                    | chunkByCoords/logEntryBgCoords    | chunk owner data
+*/
+
+export interface ApiError {
+  errorMessage: string;
+}
+
+export interface Player {
+  player_id: string; // uuid
+  name: string;
+  joined: string; // datetime string
+  community_id: number | null;
+  home_x: number | null;
+  home_y: number | null;
+  home_z: number | null;
+  home_dimension: string | null; // uuid
+  home_hidden: boolean;
+}
+
