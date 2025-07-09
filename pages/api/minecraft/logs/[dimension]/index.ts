@@ -31,7 +31,7 @@ export default async function handler(
         le.z,
         BIN_TO_UUID(le.dimension) AS dimension,
         BIN_TO_UUID(le.player_id) AS player_id,
-        p.name as player_name,
+        p.name,
         le.entered_time
       FROM logentries le
       JOIN players p ON le.player_id = p.player_id

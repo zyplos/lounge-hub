@@ -33,7 +33,7 @@ notes
 /api/minecraft/players/[name]                 | player data
 /api/minecraft/players/[name]/claims          | land claims
 /api/minecraft/chunk/[dimension]?x,z          | chunk owner data
-/api/minecraft/chunk/[dimension]/logs?x,z     | visitors log
+/api/minecraft/logs/[dimension]?x,z           | visitors log
 */
 
 export interface ApiError {

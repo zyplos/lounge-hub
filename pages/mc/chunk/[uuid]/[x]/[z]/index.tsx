@@ -20,45 +20,50 @@ import {
   prettyPrintDate,
   prettyPrintDateAndTime,
 } from "@/internals/Utils";
+import type {
+  ChunkWithPlayerBase,
+  LogEntryWithPlayerBase,
+} from "@/internals/apiTypes";
 
 import styles from "@/styles/ChunkPages.module.scss";
 
 export default function VisitorsLogPage() {
   const router = useRouter();
-  // console.log("===========QUERY", router.query);
-
   const { uuid: dimensionUuid, x, z } = router.query;
+  const queryHydrated = dimensionUuid && x && z;
 
-  const { data: logData, error: logError } = useSWR(
-    dimensionUuid && x && z
-      ? `/api/minecraft/logEntryByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}`
-      : null
+  const { data: logData, error: logError } = useSWR<LogEntryWithPlayerBase[]>(
+    queryHydrated ? `/api/minecraft/logs/${dimensionUuid}?x=${x}&z=${z}` : null
   );
 
-  const { data: chunkOwnerData, error: chunkOwnerError } = useSWR(
-    dimensionUuid && x && z
-      ? `/api/minecraft/chunkByCoords?x=${x}&z=${z}&dimension=${dimensionUuid}`
-      : null
-  );
+  const { data: chunkOwnerData, error: chunkOwnerError } =
+    useSWR<ChunkWithPlayerBase>(
+      queryHydrated
+        ? `/api/minecraft/chunks/${dimensionUuid}?x=${x}&z=${z}`
+        : null
+    );
 
   if (!dimensionUuid || !x || !z) {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>Error</FullboxHeading>
-          <p>Invalid query parameters.</p>
+          <FullboxHeading>oops</FullboxHeading>
+          <p>Invalid url. Can't pull up the visitor's log.</p>
         </Fullbox>
       </MainLayout>
     );
   }
 
-  // TODO temp
-  if (typeof z !== "string" || typeof x !== "string") {
+  if (
+    typeof z !== "string" ||
+    typeof x !== "string" ||
+    typeof dimensionUuid !== "string"
+  ) {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>Error</FullboxHeading>
-          <p>Invalid query parameters.</p>
+          <FullboxHeading>oops</FullboxHeading>
+          <p>Invalid url parameters.</p>
         </Fullbox>
       </MainLayout>
     );
@@ -68,8 +73,8 @@ export default function VisitorsLogPage() {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>{logError.status || "oops"}</FullboxHeading>
-          <p>Couldn't get the visitor's log.</p>
+          <FullboxHeading>oops</FullboxHeading>
+          <p>Couldn't get the visitor's log due to an unexpected error.</p>
         </Fullbox>
       </MainLayout>
     );
@@ -79,8 +84,8 @@ export default function VisitorsLogPage() {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>{chunkOwnerError.status || "Error"}</FullboxHeading>
-          <p>Couldn't get this chunk's data.</p>
+          <FullboxHeading>oops</FullboxHeading>
+          <p>Couldn't get this chunk's data due to an unexpected error.</p>
         </Fullbox>
       </MainLayout>
     );
@@ -104,36 +109,33 @@ export default function VisitorsLogPage() {
     );
   }
 
-  if (chunkOwnerData.data.length === 0) {
-    // A chunk must have an owner to have visit logs in this context
-    return (
-      <MainLayout>
-        <Fullbox>
-          <FullboxHeading>not found</FullboxHeading>
-          <p>This chunk is unclaimed and isn't owned by anyone.</p>
-        </Fullbox>
-      </MainLayout>
-    );
-  }
+  // TODO use chunkError once its type safe
+  // if (chunkOwnerData.data.length === 0) {
+  //   // A chunk must have an owner to have visit logs in this context
+  //   return (
+  //     <MainLayout>
+  //       <Fullbox>
+  //         <FullboxHeading>not found</FullboxHeading>
+  //         <p>This chunk is unclaimed and isn't owned by anyone.</p>
+  //       </Fullbox>
+  //     </MainLayout>
+  //   );
+  // }
 
-  // If chunkOwnerData is fine, but logData is empty, it means no visits yet.
-  // This is handled by the map function returning nothing or a "no visits" message.
-
-  const ownedChunk = chunkOwnerData.data[0];
   const mapChunkCenter = findChunkCenter(
     Number.parseInt(x),
     Number.parseInt(z)
   );
-  const dimensionColor = DimensionColorMap[ownedChunk.dimension] || "#333";
+
+  const mapUrl = `${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`;
+
+  const dimensionColor = DimensionColorMap[chunkOwnerData.dimension] || "#333";
 
   return (
-    <BlueMapLayout
-      mapUrl={`${mapUrlBase}/#${DimensionInternalNameMap[dimensionUuid[0] ?? dimensionUuid] || dimensionUuid}:${mapChunkCenter.x}:${mapChunkCenter.y}:${mapChunkCenter.z}:30:0:0:0:0:perspective`}
-      title={"Chunk Map"}
-    >
+    <BlueMapLayout mapUrl={mapUrl} title={"Chunk Map"}>
       <PlayerHeader
-        playerUuid={ownedChunk.player_id}
-        playerName={ownedChunk.name}
+        playerUuid={chunkOwnerData.player_id}
+        playerName={chunkOwnerData.name}
         style={{ backgroundColor: dimensionColor }}
       >
         <PlayerHeading>
@@ -142,28 +144,28 @@ export default function VisitorsLogPage() {
 
         <PlayerDetail>
           <PlayerIcon className={styles.chunkDetailIcon} />
-          <span>Owned by {ownedChunk.name}</span>
+          <span>Owned by {chunkOwnerData.name}</span>
         </PlayerDetail>
 
         <PlayerDetail>
           <CalendarIcon className={styles.chunkDetailIcon} />
-          Claimed {prettyPrintDate(new Date(ownedChunk.claimed_on))}
+          Claimed {prettyPrintDate(new Date(chunkOwnerData.claimed_on))}
         </PlayerDetail>
       </PlayerHeader>
 
       <div className={styles.listGrid}>
-        {logData.data.length === 0 && (
+        {logData.length === 0 && (
           <p className={styles.noRecordsText}>
             Seems no one has visited this chunk yet.
           </p>
         )}
 
-        {logData.data.map((logEntry, index) => (
+        {logData.map((logEntry) => (
           <FlexRowCard
-            key=""
+            key={logEntry.id}
             leftContent={
               <Image
-                src={`https://crafatar.com/avatars/${logEntry.player_id}?size=64&overlay`}
+                src={`https://vzge.me/face/64/${logEntry.player_id}`}
                 alt={`${logEntry.name}'s Head`}
                 width="64"
                 height="64"
