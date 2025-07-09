@@ -1,4 +1,4 @@
-const CommunityIdMap = {
+const CommunityIdMap: { [key: number]: string } = {
   1: "the lounge",
   2: "3 AM",
   3: "3DS Rock Rock Mountain",
@@ -8,7 +8,7 @@ const CommunityIdMap = {
   99: "Friend of Friend",
 };
 
-const CommunityColorMap = {
+const CommunityColorMap: { [key: number]: string } = {
   1: "#ff3e3e",
   2: "#00a3a3",
   3: "#0094ff",

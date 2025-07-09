@@ -24,43 +24,42 @@ import {
 } from "@/internals/Utils";
 
 import styles from "@/styles/ChunkPages.module.scss";
+import type { Chunk, Player } from "@/internals/apiTypes";
 
 export default function PlayerPage() {
   const router = useRouter();
   const playerName = router.query.name;
-
-  const { data: playerData, error: playerError } = useSWR(
-    playerName ? `/api/minecraft/player?name=${playerName}` : null
-  );
-
-  const { data: chunkData, error: chunkError } = useSWR(() =>
-    playerData?.data && playerData.data.length > 0
-      ? `/api/minecraft/chunkByUUID?uuid=${playerData.data[0].player_id}`
-      : null
-  );
-
   const [currentMapUrl, setMapUrl] = useState(
     `${mapUrlBase}/#world:-7:58:214:30:0:0:0:0:perspective`
   );
 
+  const { data: player, error: playerError } = useSWR<Player>(
+    playerName ? `/api/minecraft/players/${playerName}` : null
+  );
+
+  const { data: chunkData, error: chunkError } = useSWR<Chunk[]>(() =>
+    player ? `/api/minecraft/players/${player.player_id}/claims` : null
+  );
+
   if (chunkError) {
-    // Don't block rendering if chunk data fails, player info might still be useful
-    console.error("Error getting chunk data:", chunkError);
+    console.log("Error getting chunk data:", chunkError);
   }
 
-  // Effect to update map URL if player data changes (e.g. initial load with home coords)
   // biome-ignore lint/correctness/useExhaustiveDependencies: adding updateMapFrameHome to props makes loop
   useEffect(() => {
-    if (playerData?.data?.[0]?.home_x && playerData.data[0].home_dimension) {
-      const p = playerData.data[0];
+    if (!player) return;
+
+    const { home_x, home_y, home_z, home_dimension } = player;
+
+    if (home_x && home_y && home_z && home_dimension) {
       updateMapFrameHome(
-        p.home_x,
-        p.home_y,
-        p.home_z,
-        DimensionInternalNameMap[p.home_dimension]
+        home_x,
+        home_y,
+        home_z,
+        DimensionInternalNameMap[home_dimension]
       );
     }
-  }, [playerData]);
+  }, [player]);
 
   // it doesnt seem this will happen since index.tsx catches the route without a player name
   // if (!playerName) {
@@ -85,7 +84,7 @@ export default function PlayerPage() {
     );
   }
 
-  if (!playerData) {
+  if (!player) {
     return (
       <MainLayout>
         <Fullbox>
@@ -96,25 +95,31 @@ export default function PlayerPage() {
     );
   }
 
-  if (playerData.data.length === 0) {
-    return (
-      <MainLayout>
-        <Fullbox>
-          <FullboxHeading>not found</FullboxHeading>
-          <p>That player's data couldn't be found.</p>
-        </Fullbox>
-      </MainLayout>
-    );
-  }
+  // TODO check for not found player in playerError now
+  // if (playerData.data.length === 0) {
+  //   return (
+  //     <MainLayout>
+  //       <Fullbox>
+  //         <FullboxHeading>not found</FullboxHeading>
+  //         <p>That player's data couldn't be found.</p>
+  //       </Fullbox>
+  //     </MainLayout>
+  //   );
+  // }
 
-  function updateMapFrame(x, z, dimension) {
+  function updateMapFrame(x: number, z: number, dimension: string) {
     const newCoords = findChunkCenter(x, z);
     setMapUrl(
       `${mapUrlBase}/#${DimensionInternalNameMap[dimension] || dimension}:${newCoords.x}:${newCoords.y}:${newCoords.z}:30:0:0:0:0:perspective`
     );
   }
 
-  function updateMapFrameHome(x, y, z, dimension) {
+  function updateMapFrameHome(
+    x: number,
+    y: number,
+    z: number,
+    dimension: string
+  ) {
     setMapUrl(
       `${mapUrlBase}/#${DimensionInternalNameMap[dimension] || dimension}:${x}:${y + 2}:${z}:5:0:1.4:0:0:free`
     );
@@ -122,10 +127,12 @@ export default function PlayerPage() {
 
   // ===== player data loaded here
 
-  const player = playerData.data[0];
   const joinDate = new Date(player.joined);
+  const { home_x, home_y, home_z, home_dimension } = player;
+  const hasHome = home_x && home_y && home_z && home_dimension;
+
   const communityId = player.community_id || 99;
-  const communityName = CommunityIdMap[communityId];
+  const communityName = CommunityIdMap[communityId] || CommunityIdMap[99];
   const communityColor = CommunityColorMap[communityId] || "#333";
 
   return (
@@ -153,31 +160,29 @@ export default function PlayerPage() {
       </PlayerHeader>
 
       <div className={styles.listGrid}>
-        {player.home_x &&
-          player.home_y &&
-          player.home_z &&
-          player.home_dimension && (
-            <button
-              type="button"
-              onClick={() =>
-                updateMapFrameHome(
-                  player.home_x,
-                  player.home_y,
-                  player.home_z,
-                  player.home_dimension
-                )
-              }
-              className={styles.chunkCardButton}
-            >
-              <ChunkCard
-                x={player.home_x}
-                y={player.home_y}
-                z={player.home_z}
-                dimension={player.home_dimension}
-                isHome
-              />
-            </button>
-          )}
+        {hasHome && (
+          <button
+            type="button"
+            onClick={() =>
+              updateMapFrameHome(home_x, home_y, home_z, home_dimension)
+            }
+            className={styles.chunkCardButton}
+          >
+            <ChunkCard
+              x={home_x}
+              y={home_y}
+              z={home_z}
+              dimension={home_dimension}
+              isHome
+            />
+          </button>
+        )}
+
+        {chunkError && (
+          <p className={styles.noChunksText}>
+            Sorry, couldn't load this player's land claims.
+          </p>
+        )}
 
         {!chunkData && !chunkError && (
           <Fullbox>
@@ -186,13 +191,13 @@ export default function PlayerPage() {
           </Fullbox>
         )}
 
-        {chunkData && chunkData.data.length === 0 && (
+        {chunkData?.length === 0 && (
           <p className={styles.noRecordsText}>
             This player has not claimed any chunks yet.
           </p>
         )}
 
-        {chunkData?.data.map((chunk, index) => (
+        {chunkData?.map((chunk) => (
           <button
             type="button"
             onClick={() => updateMapFrame(chunk.x, chunk.z, chunk.dimension)}
@@ -209,12 +214,6 @@ export default function PlayerPage() {
             />
           </button>
         ))}
-
-        {chunkError && (
-          <p className={styles.noChunksText}>
-            Sorry, couldn't load this player's land claims.
-          </p>
-        )}
       </div>
     </BlueMapLayout>
   );
