@@ -29,11 +29,11 @@ export interface MinecraftStatusAPIResponse {
 
 /*
 notes
-/api/minecraft/status                        | status               | server status
-/api/minecraft/players/[name]                | player               | player data
-/api/minecraft/players/[name]/claims         | chunkByUUID          | land claims
-/api/minecraft/chunk/[dimension]?x,z         | chunkByCoords        | chunk owner data
-/api/minecraft/chunk/[dimension]/logs?x,z    | logEntryBgCoords     | visitors log
+/api/minecraft/status                         | server status
+/api/minecraft/players/[name]                 | player data
+/api/minecraft/players/[name]/claims          | land claims
+/api/minecraft/chunk/[dimension]?x,z          | chunk owner data
+/api/minecraft/chunk/[dimension]/logs?x,z     | visitors log
 */
 
 export interface ApiError {
@@ -66,3 +66,13 @@ export interface Chunk {
 
 export type ChunkWithPlayerBase = Chunk & PlayerBase;
 
+export interface LogEntry {
+  id: number;
+  x: number;
+  z: number;
+  dimension: string; // uuid
+  player_id: string; // uuid
+  entered_time: string; // datetime string
+}
+
+export type LogEntryWithPlayerBase = LogEntry & PlayerBase;
