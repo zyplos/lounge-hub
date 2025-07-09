@@ -49,7 +49,7 @@ export default async function handler(
 
     res.status(200).json(chunk);
   } catch (error) {
-    console.error("unexpected error grabbing player land claims", error);
+    console.error("unexpected error grabbing chunk owner info", error);
 
     res.status(500).json({
       errorMessage:
