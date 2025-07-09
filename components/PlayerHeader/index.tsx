@@ -22,13 +22,13 @@ export default function PlayerHeader({
       style={style}
       {...props}
     >
-      <Image
+      {/** biome-ignore lint/performance/noImgElement: visage doesn't seem to like <Image /> */}
+      <img
         src={`https://vzge.me/full/384/${playerUuid}`}
         alt={`${playerName}'s portrait`}
         width="198"
         height="320"
-        priority
-        quality={100}
+        fetchPriority="high"
         className={styles.playerPortrait}
       />
 

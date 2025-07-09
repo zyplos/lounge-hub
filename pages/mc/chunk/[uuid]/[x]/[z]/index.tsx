@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import BlueMapLayout from "@/internals/BlueMapLayout";
 import MainLayout from "@/internals/MainLayout";
 import Spinner from "@/components/Spinner";
@@ -164,7 +163,8 @@ export default function VisitorsLogPage() {
           <FlexRowCard
             key={logEntry.id}
             leftContent={
-              <Image
+              // biome-ignore lint/performance/noImgElement: visage doesn't seem to like <Image />
+              <img
                 src={`https://vzge.me/face/64/${logEntry.player_id}`}
                 alt={`${logEntry.name}'s Head`}
                 width="64"

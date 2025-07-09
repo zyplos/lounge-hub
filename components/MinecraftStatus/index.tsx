@@ -9,10 +9,6 @@ interface MinecraftStatusProps {
   data: MinecraftServerStatusResult;
 }
 
-const getPlayerImage = (uuid: string): string => {
-  return `https://vzge.me/face/256/${uuid}`;
-};
-
 export default function MinecraftStatus({ data }: MinecraftStatusProps) {
   if (!data) {
     return <LoadingSkeleton />;
@@ -74,8 +70,9 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
         <div className={styles.playerGrid}>
           {sortedPlayerList.map((player) => (
             <div key={player.id || player.name} className={styles.playerItem}>
-              <Image
-                src={getPlayerImage(player.id)}
+              {/** biome-ignore lint/performance/noImgElement: visage doesn't seem to like <Image /> */}
+              <img
+                src={`https://vzge.me/face/256/${player.id}`}
                 alt={`${player.name}'s portrait`}
                 width={45}
                 height={45}
