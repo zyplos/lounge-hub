@@ -18,7 +18,7 @@ import {
   findChunkCenter,
   prettyPrintDate,
   prettyPrintDateAndTime,
-} from "@/internals/Utils";
+} from "@/internals/clientUtils";
 import type {
   ChunkWithPlayerBase,
   LogEntryWithPlayerBase,

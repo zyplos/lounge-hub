@@ -21,7 +21,7 @@ import {
   findChunkCenter,
   prettyPrintDate,
   prettyPrintDateAndTime,
-} from "@/internals/Utils";
+} from "@/internals/clientUtils";
 
 import styles from "@/styles/ChunkPages.module.scss";
 import type { Chunk, Player } from "@/internals/apiTypes";

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import clsx from "clsx";
 import ThemeToggle from "@/components/ThemeToggle";
-import { mapUrlBase } from "@/internals/Utils";
+import { mapUrlBase } from "@/internals/clientUtils";
 import {
   useMinecraftData,
   type MinecraftDataContextState,
