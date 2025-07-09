@@ -29,19 +29,23 @@ export interface MinecraftStatusAPIResponse {
 
 /*
 notes
-/api/minecraft/status                   | status                            | server status
-/api/minecraft/players/[name]           | player                            | player data
-/api/minecraft/players/[name]/claims    | chunkByUUID                       | land claims
-/api/minecraft/chunk                    | chunkByCoords/logEntryBgCoords    | chunk owner data
+/api/minecraft/status                        | status               | server status
+/api/minecraft/players/[name]                | player               | player data
+/api/minecraft/players/[name]/claims         | chunkByUUID          | land claims
+/api/minecraft/chunk/[dimension]?x,z         | chunkByCoords        | chunk owner data
+/api/minecraft/chunk/[dimension]/logs?x,z    | logEntryBgCoords     | visitors log
 */
 
 export interface ApiError {
   errorMessage: string;
 }
 
-export interface Player {
+interface PlayerBase {
   player_id: string; // uuid
   name: string;
+}
+
+export interface Player extends PlayerBase {
   joined: string; // datetime string
   community_id: number | null;
   home_x: number | null;
@@ -59,4 +63,6 @@ export interface Chunk {
   z: number;
   dimension: string; // uuid
 }
+
+export type ChunkWithPlayerBase = Chunk & PlayerBase;
 
