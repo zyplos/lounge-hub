@@ -4,38 +4,7 @@ import useSWR, { type SWRResponse } from "swr";
 import Spinner from "../Spinner";
 import styles from "./styles.module.scss";
 
-// Types for Discord Widget API
-interface DiscordGame {
-  name: string;
-}
-
-type DiscordMemberStatus = "online" | "idle" | "dnd" | "offline" | "streaming";
-
-interface DiscordMember {
-  id: string;
-  username: string;
-  avatar_url: string;
-  status: DiscordMemberStatus;
-  channel_id?: string;
-  game?: DiscordGame;
-}
-
-interface DiscordChannel {
-  id: string;
-  name: string;
-  position: number;
-}
-
-interface DiscordWidgetData {
-  id: string;
-  name: string;
-  instant_invite: string | null;
-  channels: DiscordChannel[];
-  members: DiscordMember[];
-  presence_count: number;
-}
-
-const getStatusClass = (status: DiscordMemberStatus): string => {
+const getStatusClass = (status: DiscordMember["status"]): string => {
   switch (status) {
     case "online":
       return styles.statusOnline;
@@ -49,10 +18,9 @@ const getStatusClass = (status: DiscordMemberStatus): string => {
 };
 
 export default function DiscordServer() {
-  const { data: discordData, error }: SWRResponse<DiscordWidgetData, any> =
-    useSWR(
-      "https://canary.discordapp.com/api/guilds/426394718172086273/widget.json"
-    );
+  const { data: discordData, error }: SWRResponse<DiscordServer> = useSWR(
+    "https://canary.discordapp.com/api/guilds/426394718172086273/widget.json"
+  );
 
   if (error) {
     return (
@@ -63,6 +31,7 @@ export default function DiscordServer() {
       </>
     );
   }
+
   if (!discordData) {
     return (
       <>
@@ -104,7 +73,7 @@ export default function DiscordServer() {
 
         {/* Member Cards */}
         {discordData.members.map((member) => (
-          <div key={member.id || member.username} className={styles.memberItem}>
+          <div key={member.username} className={styles.memberItem}>
             <div
               className={clsx(
                 styles.iconWrapper,
@@ -159,4 +128,40 @@ function VoiceChannelIcon() {
       />
     </svg>
   );
+}
+
+// ===== Discord widget types
+
+export interface DiscordChannel {
+  id: string;
+  name: string;
+  position: number;
+}
+
+export interface DiscordMember {
+  id: string;
+  username: string;
+  discriminator: string;
+  avatar: string | null;
+  status: "online" | "idle" | "dnd";
+  avatar_url: string;
+  game?: {
+    name: string;
+  };
+  // these only appear if user is in a voice channel
+  deaf?: boolean;
+  mute?: boolean;
+  self_deaf?: boolean;
+  self_mute?: boolean;
+  suppress?: boolean;
+  channel_id?: string;
+}
+
+export interface DiscordServer {
+  id: string;
+  name: string;
+  instant_invite: string | null;
+  channels: DiscordChannel[];
+  members: DiscordMember[];
+  presence_count: number;
 }
