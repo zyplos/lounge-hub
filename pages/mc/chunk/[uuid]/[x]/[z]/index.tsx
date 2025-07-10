@@ -154,9 +154,7 @@ export default function VisitorsLogPage() {
 
       <div className={styles.listGrid}>
         {logData.length === 0 && (
-          <p className={styles.noRecordsText}>
-            Seems no one has visited this chunk yet.
-          </p>
+          <p>Seems no one has visited this chunk yet.</p>
         )}
 
         {logData.map((logEntry) => (
