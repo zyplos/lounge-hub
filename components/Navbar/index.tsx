@@ -3,10 +3,8 @@ import Image, { type StaticImageData } from "next/image";
 import clsx from "clsx";
 import ThemeToggle from "@/components/ThemeToggle";
 import { mapUrlBase } from "@/internals/clientUtils";
-import {
-  useMinecraftData,
-  type MinecraftDataContextState,
-} from "@/internals/MinecraftContext";
+import { useMinecraftData } from "@/internals/MinecraftContext";
+import type { MinecraftServerStatusResult } from "@/internals/apiTypes";
 import {
   BlockIcon,
   BookIcon,
@@ -22,51 +20,37 @@ import playerHead from "@/assets/head.png";
 import computerHead from "@/assets/computer.png";
 
 export default function Navbar() {
-  const minecraftData: MinecraftDataContextState | null = useMinecraftData();
-  // console.log(minecraftData);
+  const { vanilla, modded } = useMinecraftData();
 
   const minecraftFragments: React.ReactNode[] = [];
 
-  // Ensure minecraftData and its properties exist before accessing them
-  if (minecraftData) {
-    // Check if 'online' is a number. Treat undefined 'online' as server being offline for this display logic.
-    const isVanillaOnline =
-      typeof minecraftData.vanilla?.players?.online === "number";
-    const vanillaPlayersOnline = isVanillaOnline
-      ? minecraftData.vanilla!.players!.online
-      : null;
+  const vanillaPlayersOnline = getPlayerNumber(vanilla);
+  const moddedPlayersOnline = getPlayerNumber(modded);
 
-    const isModdedOnline =
-      typeof minecraftData.modded?.players?.online === "number";
-    const moddedPlayersOnline = isModdedOnline
-      ? minecraftData.modded!.players!.online
-      : null;
+  if (vanillaPlayersOnline !== null || moddedPlayersOnline !== null) {
+    minecraftFragments.push(<div className={styles.navDivider} />);
+  }
 
-    if (vanillaPlayersOnline !== null || moddedPlayersOnline !== null) {
-      minecraftFragments.push(<div className={styles.navDivider} />);
-    }
+  if (vanillaPlayersOnline !== null) {
+    minecraftFragments.push(
+      <NavMinecraftItem
+        key="vanilla-status"
+        image={playerHead}
+        name="Vanilla Server Status"
+        playerAmount={vanillaPlayersOnline}
+      />
+    );
+  }
 
-    if (vanillaPlayersOnline !== null) {
-      minecraftFragments.push(
-        <NavMinecraftItem
-          key="vanilla-status"
-          image={playerHead}
-          name="Vanilla Server Status"
-          playerAmount={vanillaPlayersOnline}
-        />
-      );
-    }
-
-    if (moddedPlayersOnline !== null) {
-      minecraftFragments.push(
-        <NavMinecraftItem
-          key="modded-status"
-          image={computerHead}
-          name="Modded Server Status"
-          playerAmount={moddedPlayersOnline}
-        />
-      );
-    }
+  if (moddedPlayersOnline !== null) {
+    minecraftFragments.push(
+      <NavMinecraftItem
+        key="modded-status"
+        image={computerHead}
+        name="Modded Server Status"
+        playerAmount={moddedPlayersOnline}
+      />
+    );
   }
 
   return (
@@ -116,6 +100,15 @@ export default function Navbar() {
       </div>
     </>
   );
+}
+
+// returns null if offline
+function getPlayerNumber(data: MinecraftServerStatusResult | null) {
+  if (data && !("message" in data)) {
+    return data.players.online;
+  }
+
+  return null;
 }
 
 interface NavMinecraftItemProps {

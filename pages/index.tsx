@@ -7,9 +7,7 @@ import { useMinecraftData } from "@/internals/MinecraftContext";
 import styles from "@/styles/HomePage.module.css";
 
 export default function HomePage() {
-  const minecraftData = useMinecraftData();
-  const vanilla = minecraftData ? minecraftData.vanilla : null;
-  const modded = minecraftData ? minecraftData.modded : null;
+  const { vanilla, modded } = useMinecraftData();
 
   return (
     <MainLayout>

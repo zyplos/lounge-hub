@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 import defaultServerIcon from "@/assets/defaultServerIcon.png";
 
 interface MinecraftStatusProps {
-  data: MinecraftServerStatusResult;
+  data: MinecraftServerStatusResult | null;
 }
 
 export default function MinecraftStatus({ data }: MinecraftStatusProps) {
