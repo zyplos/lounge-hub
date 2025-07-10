@@ -6,6 +6,7 @@ import BlueMapLayout from "@/internals/BlueMapLayout";
 import Spinner from "@/components/Spinner";
 import { CardHeading } from "@/components/Card";
 import { Fullbox, FullboxHeading } from "@/components/Fullbox";
+import { PageButton } from "@/components/Button";
 import PlayerHeader, {
   PlayerDetail,
   PlayerHeading,
@@ -22,9 +23,10 @@ import {
   prettyPrintDate,
   prettyPrintDateAndTime,
 } from "@/internals/clientUtils";
+import type { Chunk, Player } from "@/internals/apiTypes";
+import { getApiErrorMessage, type FetcherError } from "@/internals/fetcher";
 
 import styles from "@/styles/ChunkPages.module.scss";
-import type { Chunk, Player } from "@/internals/apiTypes";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -33,12 +35,12 @@ export default function PlayerPage() {
     `${mapUrlBase}/#world:-7:58:214:30:0:0:0:0:perspective`
   );
 
-  const { data: player, error: playerError } = useSWR<Player>(
+  const { data: player, error: playerError } = useSWR<Player, FetcherError>(
     playerName ? `/api/minecraft/players/${playerName}` : null
   );
 
-  const { data: chunkData, error: chunkError } = useSWR<Chunk[]>(() =>
-    player ? `/api/minecraft/players/${player.player_id}/claims` : null
+  const { data: chunkData, error: chunkError } = useSWR<Chunk[], FetcherError>(
+    () => (player ? `/api/minecraft/players/${player.player_id}/claims` : null)
   );
 
   if (chunkError) {
@@ -77,8 +79,9 @@ export default function PlayerPage() {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>{playerError.status || "Error"}</FullboxHeading>
-          <p>Error getting player data.</p>
+          <FullboxHeading>{playerError.status}</FullboxHeading>
+          <p>{getApiErrorMessage(playerError.response)}</p>
+          <PageButton href="/">Home Page</PageButton>
         </Fullbox>
       </MainLayout>
     );
@@ -94,18 +97,6 @@ export default function PlayerPage() {
       </MainLayout>
     );
   }
-
-  // TODO check for not found player in playerError now
-  // if (playerData.data.length === 0) {
-  //   return (
-  //     <MainLayout>
-  //       <Fullbox>
-  //         <FullboxHeading>not found</FullboxHeading>
-  //         <p>That player's data couldn't be found.</p>
-  //       </Fullbox>
-  //     </MainLayout>
-  //   );
-  // }
 
   function updateMapFrame(x: number, z: number, dimension: string) {
     const newCoords = findChunkCenter(x, z);
@@ -178,11 +169,7 @@ export default function PlayerPage() {
           </button>
         )}
 
-        {chunkError && (
-          <p className={styles.noChunksText}>
-            Sorry, couldn't load this player's land claims.
-          </p>
-        )}
+        {chunkError && <p>Sorry, couldn't load this player's land claims.</p>}
 
         {!chunkData && !chunkError && (
           <Fullbox>
@@ -192,9 +179,7 @@ export default function PlayerPage() {
         )}
 
         {chunkData?.length === 0 && (
-          <p className={styles.noRecordsText}>
-            This player has not claimed any chunks yet.
-          </p>
+          <p>This player has not claimed any chunks yet.</p>
         )}
 
         {chunkData?.map((chunk) => (
