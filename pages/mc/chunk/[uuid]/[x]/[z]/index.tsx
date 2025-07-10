@@ -7,6 +7,7 @@ import FlexRowCard from "@/components/FlexRowCard";
 import { CardHeading } from "@/components/Card";
 import { Fullbox, FullboxHeading } from "@/components/Fullbox";
 import { CalendarIcon, PlayerIcon } from "@/components/Icon";
+import { PageButton } from "@/components/Button";
 import PlayerHeader, {
   PlayerDetail,
   PlayerHeading,
@@ -23,6 +24,7 @@ import type {
   ChunkWithPlayerBase,
   LogEntryWithPlayerBase,
 } from "@/internals/apiTypes";
+import { getApiErrorMessage } from "@/internals/fetcher";
 
 import styles from "@/styles/ChunkPages.module.scss";
 
@@ -31,16 +33,18 @@ export default function VisitorsLogPage() {
   const { uuid: dimensionUuid, x, z } = router.query;
   const queryHydrated = dimensionUuid && x && z;
 
-  const { data: logData, error: logError } = useSWR<LogEntryWithPlayerBase[]>(
-    queryHydrated ? `/api/minecraft/logs/${dimensionUuid}?x=${x}&z=${z}` : null
-  );
-
   const { data: chunkOwnerData, error: chunkOwnerError } =
     useSWR<ChunkWithPlayerBase>(
       queryHydrated
         ? `/api/minecraft/chunks/${dimensionUuid}?x=${x}&z=${z}`
         : null
     );
+
+  const { data: logData, error: logError } = useSWR<LogEntryWithPlayerBase[]>(
+    queryHydrated && chunkOwnerData
+      ? `/api/minecraft/logs/${dimensionUuid}?x=${x}&z=${z}`
+      : null
+  );
 
   if (!dimensionUuid || !x || !z) {
     return (
@@ -68,34 +72,15 @@ export default function VisitorsLogPage() {
     );
   }
 
-  if (logError) {
-    return (
-      <MainLayout>
-        <Fullbox>
-          <FullboxHeading>oops</FullboxHeading>
-          <p>Couldn't get the visitor's log due to an unexpected error.</p>
-        </Fullbox>
-      </MainLayout>
-    );
-  }
-
   if (chunkOwnerError) {
     return (
       <MainLayout>
         <Fullbox>
-          <FullboxHeading>oops</FullboxHeading>
-          <p>Couldn't get this chunk's data due to an unexpected error.</p>
+          <FullboxHeading>{chunkOwnerError.status}</FullboxHeading>
+          <p>{getApiErrorMessage(chunkOwnerError.response)}</p>
+          <PageButton href="/">Home Page</PageButton>
         </Fullbox>
       </MainLayout>
-    );
-  }
-
-  if (!logData) {
-    return (
-      <Fullbox>
-        <Spinner />
-        <p>Grabbing log entries...</p>
-      </Fullbox>
     );
   }
 
@@ -107,19 +92,6 @@ export default function VisitorsLogPage() {
       </Fullbox>
     );
   }
-
-  // TODO use chunkError once its type safe
-  // if (chunkOwnerData.data.length === 0) {
-  //   // A chunk must have an owner to have visit logs in this context
-  //   return (
-  //     <MainLayout>
-  //       <Fullbox>
-  //         <FullboxHeading>not found</FullboxHeading>
-  //         <p>This chunk is unclaimed and isn't owned by anyone.</p>
-  //       </Fullbox>
-  //     </MainLayout>
-  //   );
-  // }
 
   const mapChunkCenter = findChunkCenter(
     Number.parseInt(x),
@@ -153,11 +125,20 @@ export default function VisitorsLogPage() {
       </PlayerHeader>
 
       <div className={styles.listGrid}>
-        {logData.length === 0 && (
+        {logError && <p>{getApiErrorMessage(logError.response)}</p>}
+
+        {!logData && !logError && (
+          <Fullbox>
+            <Spinner />
+            <p>Loading visitor's log...</p>
+          </Fullbox>
+        )}
+
+        {logData?.length === 0 && (
           <p>Seems no one has visited this chunk yet.</p>
         )}
 
-        {logData.map((logEntry) => (
+        {logData?.map((logEntry) => (
           <FlexRowCard
             key={logEntry.id}
             leftContent={
