@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import mc from "minecraftstatuspinger";
 import type {
+  ApiError,
   MinecraftServerStatus,
-  MinecraftServerStatusResult,
   MinecraftStatusAPIResponse,
 } from "@/internals/apiTypes";
 
@@ -15,7 +15,7 @@ function isNodeError(error: unknown): error is NodeJS.ErrnoException {
 const getServerData = async (
   ip: string,
   port?: number
-): Promise<MinecraftServerStatusResult> => {
+): Promise<MinecraftServerStatus | ApiError> => {
   try {
     const result = await mc.lookup({
       host: ip,
@@ -39,13 +39,13 @@ const getServerData = async (
       (error.code === "ECONNREFUSED" || error.code === "ETIMEDOUT")
     ) {
       return {
-        message:
+        errorMessage:
           "This server is currently offline or its status is unavailable.",
       };
     }
 
     console.error(`unknown error for ${ip}`, error);
-    return { message: "This server's status is unavailable." };
+    return { errorMessage: "This server's status is unavailable." };
   }
 };
 

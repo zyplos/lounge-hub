@@ -18,13 +18,11 @@ export interface MinecraftServerStatus {
   };
 }
 
-export type MinecraftServerStatusResult =
-  | MinecraftServerStatus
-  | { message: string };
+export type MinecraftServerResponse = MinecraftServerStatus | ApiError;
 
 export interface MinecraftStatusAPIResponse {
-  vanilla: MinecraftServerStatusResult;
-  modded: MinecraftServerStatusResult;
+  vanilla: MinecraftServerResponse;
+  modded: MinecraftServerResponse;
 }
 
 /*

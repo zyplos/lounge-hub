@@ -3,8 +3,10 @@ import Image, { type StaticImageData } from "next/image";
 import clsx from "clsx";
 import ThemeToggle from "@/components/ThemeToggle";
 import { mapUrlBase } from "@/internals/clientUtils";
-import { useMinecraftData } from "@/internals/MinecraftContext";
-import type { MinecraftServerStatusResult } from "@/internals/apiTypes";
+import {
+  type MinecraftContextStateValue,
+  useMinecraftData,
+} from "@/internals/MinecraftContext";
 import {
   BlockIcon,
   BookIcon,
@@ -103,8 +105,14 @@ export default function Navbar() {
 }
 
 // returns null if offline
-function getPlayerNumber(data: MinecraftServerStatusResult | null) {
-  if (data && !("message" in data)) {
+function getPlayerNumber(data: MinecraftContextStateValue): number | null {
+  if (!data) return null;
+
+  if (
+    "players" in data &&
+    data.players &&
+    typeof data.players.online === "number"
+  ) {
     return data.players.online;
   }
 

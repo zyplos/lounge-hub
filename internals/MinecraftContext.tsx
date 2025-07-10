@@ -1,16 +1,25 @@
 import { createContext, useContext } from "react";
 import useSWR from "swr";
-import type { MinecraftServerStatusResult } from "./apiTypes";
+import type {
+  MinecraftStatusAPIResponse,
+  MinecraftServerResponse,
+} from "./apiTypes";
 
-export interface MinecraftDataContextState {
-  vanilla: MinecraftServerStatusResult | null;
-  modded: MinecraftServerStatusResult | null;
+export type MinecraftContextStateValue = MinecraftServerResponse | null;
+
+interface MinecraftContextState {
+  vanilla: MinecraftContextStateValue;
+  modded: MinecraftContextStateValue;
 }
 
-const MinecraftContext = createContext<MinecraftDataContextState>({
+const DEFAULT_CONTEXT_VALUE = {
   vanilla: null,
   modded: null,
-});
+};
+
+const MinecraftContext = createContext<MinecraftContextState>(
+  DEFAULT_CONTEXT_VALUE
+);
 MinecraftContext.displayName = "MinecraftContext";
 
 export function MinecraftDataProvider({
@@ -18,15 +27,22 @@ export function MinecraftDataProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { data, error } = useSWR("/api/minecraft/status", {
-    refreshInterval: 60000,
-    revalidateOnFocus: false,
-  });
+  const { data, error } = useSWR<MinecraftStatusAPIResponse>(
+    "/api/minecraft/status",
+    {
+      refreshInterval: 60000,
+      revalidateOnFocus: false,
+    }
+  );
+
+  if (error) {
+    console.error("MinecraftContext error", error);
+  }
 
   return (
-    <MinecraftContext.Provider value={error || data}>
+    <MinecraftContext value={data || DEFAULT_CONTEXT_VALUE}>
       {children}
-    </MinecraftContext.Provider>
+    </MinecraftContext>
   );
 }
 

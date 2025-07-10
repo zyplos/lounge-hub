@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Alert from "../Alert";
-import type { MinecraftServerStatusResult } from "@/internals/apiTypes";
+import type { MinecraftContextStateValue } from "@/internals/MinecraftContext";
 import styles from "./styles.module.scss";
 
 import defaultServerIcon from "@/assets/defaultServerIcon.png";
 
 interface MinecraftStatusProps {
-  data: MinecraftServerStatusResult | null;
+  data: MinecraftContextStateValue;
 }
 
 export default function MinecraftStatus({ data }: MinecraftStatusProps) {
@@ -14,8 +14,8 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
     return <LoadingSkeleton />;
   }
 
-  if ("message" in data) {
-    return <Alert>{data.message}</Alert>;
+  if ("errorMessage" in data) {
+    return <Alert>{data.errorMessage}</Alert>;
   }
 
   const numPlayersOnline = data.players.online;
