@@ -64,3 +64,10 @@ export function prettyPrintDateAndTime(date: Date) {
 export function prettyPrintDate(date: Date) {
   return date.toLocaleDateString("en-US");
 }
+
+/**
+ * width is 128 by default. don't use this with next/image
+ */
+export function getPlayerFaceUrl(uuid: string, width = 128) {
+  return `https://vzge.me/face/${width}/${uuid}`;
+}

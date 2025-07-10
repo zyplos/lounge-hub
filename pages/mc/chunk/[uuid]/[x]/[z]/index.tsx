@@ -19,6 +19,7 @@ import {
   findChunkCenter,
   prettyPrintDate,
   prettyPrintDateAndTime,
+  getPlayerFaceUrl,
 } from "@/internals/clientUtils";
 import type {
   ChunkWithPlayerBase,
@@ -144,7 +145,7 @@ export default function VisitorsLogPage() {
             leftContent={
               // biome-ignore lint/performance/noImgElement: visage doesn't seem to like <Image />
               <img
-                src={`https://vzge.me/face/64/${logEntry.player_id}`}
+                src={getPlayerFaceUrl(logEntry.player_id, 64)}
                 alt={`${logEntry.name}'s Head`}
                 width="64"
                 height="64"

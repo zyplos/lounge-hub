@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Alert from "../Alert";
 import type { MinecraftContextStateValue } from "@/internals/MinecraftContext";
+import { getPlayerFaceUrl } from "@/internals/clientUtils";
 import styles from "./styles.module.scss";
 
 import defaultServerIcon from "@/assets/defaultServerIcon.png";
@@ -72,7 +73,7 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
             <div key={player.id || player.name} className={styles.playerItem}>
               {/** biome-ignore lint/performance/noImgElement: visage doesn't seem to like <Image /> */}
               <img
-                src={`https://vzge.me/face/256/${player.id}`}
+                src={getPlayerFaceUrl(player.id)}
                 alt={`${player.name}'s portrait`}
                 width={45}
                 height={45}
