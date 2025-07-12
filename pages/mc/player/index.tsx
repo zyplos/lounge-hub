@@ -5,7 +5,7 @@ import useSWR from "swr";
 import MainLayout from "@/internals/MainLayout";
 import type { Player } from "@/internals/apiTypes";
 import type { FetcherError } from "@/internals/fetcher";
-import { CommunityColorMap, getPlayerFaceUrl } from "@/internals/clientUtils";
+import { CommunityInfoMap, getPlayerFaceUrl } from "@/internals/clientUtils";
 
 import styles from "@/styles/PlayerDirectory.module.scss";
 import Spinner from "@/components/Spinner";
@@ -102,8 +102,7 @@ interface PlayerHoverCardProps {
 
 function PlayerHoverCard({ player }: PlayerHoverCardProps) {
   const communityId = player.community_id || 99;
-  // const communityName = CommunityIdMap[communityId] || CommunityIdMap[99];
-  const communityColor = CommunityColorMap[communityId] || "#333";
+  const communityInfo = CommunityInfoMap[communityId];
 
   return (
     <Link
@@ -121,7 +120,7 @@ function PlayerHoverCard({ player }: PlayerHoverCardProps) {
       />
 
       <DynamicItemFrame
-        color={communityColor}
+        color={communityInfo.mainColor}
         width="128"
         height="128"
         className={styles.itemFrame}

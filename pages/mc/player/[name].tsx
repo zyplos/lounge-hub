@@ -14,8 +14,7 @@ import PlayerHeader, {
 import { CalendarIcon, CommunityIcon } from "@/components/Icon";
 import FlexRowCard from "@/components/FlexRowCard";
 import {
-  CommunityIdMap,
-  CommunityColorMap,
+  CommunityInfoMap,
   DimensionColorMap,
   DimensionInternalNameMap,
   mapUrlBase,
@@ -123,8 +122,7 @@ export default function PlayerPage() {
   const hasHome = home_x && home_y && home_z && home_dimension;
 
   const communityId = player.community_id || 99;
-  const communityName = CommunityIdMap[communityId] || CommunityIdMap[99];
-  const communityColor = CommunityColorMap[communityId] || "#333";
+  const communityInfo = CommunityInfoMap[communityId];
 
   return (
     <BlueMapLayout
@@ -135,13 +133,16 @@ export default function PlayerPage() {
         playerUuid={player.player_id}
         playerName={player.name}
         watermarkUrl={`/static-assets/community/${communityId}.png`}
-        style={{ backgroundColor: communityColor as string }}
+        style={{
+          backgroundColor: communityInfo.mainColor,
+          color: communityInfo.textColor,
+        }}
       >
         <PlayerHeading>{player.name}</PlayerHeading>
 
         <PlayerDetail>
           <CommunityIcon />
-          {communityName}
+          {communityInfo.name}
         </PlayerDetail>
 
         <PlayerDetail>

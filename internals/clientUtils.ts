@@ -1,21 +1,33 @@
-export const CommunityIdMap: { [key: number]: string } = {
-  1: "the lounge",
-  2: "3 AM",
-  3: "3DS Rock Rock Mountain",
-  4: "blaster's circle",
-  5: "The ultimate Mob Psycho fan club",
-  6: "vold group",
-  99: "Friend of Friend",
-};
+export interface CommunityInfoData {
+  [id: number]: {
+    name: string;
+    mainColor: string;
+    textColor: string;
+  };
+}
 
-export const CommunityColorMap: { [key: number]: string } = {
-  1: "#ff3e3e",
-  2: "#00a3a3",
-  3: "#0094ff",
-  4: "#7c00ff",
-  5: "#d2d42a",
-  6: "#d8b01a",
-  99: "#919191",
+export const CommunityInfoMap: CommunityInfoData = {
+  1: {
+    name: "the lounge",
+    mainColor: "#ff3e3e",
+    textColor: "#fff",
+  },
+  2: { name: "3 AM", mainColor: "#00a3a3", textColor: "#c5fffe" },
+  3: {
+    name: "pegg",
+    mainColor: "#0094ff",
+    textColor: "#fff",
+  },
+  4: { name: "blaster's circle", mainColor: "#7c00ff", textColor: "#fff" },
+  5: {
+    name: "The ultimate Mob Psycho fan club",
+    mainColor: "#35dd44",
+    textColor: "#0d3907",
+  },
+  6: { name: "vold group", mainColor: "#d8b01a", textColor: "#312700" },
+  7: { name: "cali's circle", mainColor: "#9F68B4", textColor: "#e6dbf4" },
+  8: { name: "UIC OW", mainColor: "#f06414", textColor: "#3e1500" },
+  99: { name: "Friend of Friend", mainColor: "#444", textColor: "#fff" },
 };
 
 export const worldUUIDs = {
