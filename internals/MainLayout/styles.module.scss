@@ -67,11 +67,40 @@
 }
 
 .mainWrapper {
+  --corner-radius: var(--radius-l);
+  --sidebar-color: var(--color-background-secondary);
+
   flex-grow: 1;
   padding: var(--space-m);
+  padding-top: calc(var(--space-m) + var(--corner-radius));
   overflow-y: auto;
+  position: relative;
 }
 
 .noPadding {
   padding: 0;
+}
+
+.coolRoundedThing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--corner-radius);
+  background-color: var(--sidebar-color);
+}
+
+.coolRoundedThing::before {
+  content: '';
+  position: absolute;
+
+  top: 100%;
+  left: 0;
+
+  width: var(--corner-radius);
+  height: var(--corner-radius);
+
+  background: radial-gradient(circle at bottom right,
+      transparent var(--corner-radius),
+      var(--sidebar-color) var(--corner-radius));
 }

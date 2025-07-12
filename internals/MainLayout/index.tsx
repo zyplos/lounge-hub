@@ -52,6 +52,7 @@ export default function MainLayout({
           [styles.hide]: isOpen,
         })}
       >
+        {!noPadding && <div className={styles.coolRoundedThing} />}
         {children}
       </main>
     </div>
