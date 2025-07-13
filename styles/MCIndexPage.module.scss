@@ -1,0 +1,123 @@
+// ===== hero container 
+@keyframes emblemBounce {
+  from {
+    transform: translateY(-5px);
+  }
+
+  to {
+    transform: translateY(5px);
+  }
+}
+
+.heroSection {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  padding: var(--space-m);
+  height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+}
+
+.heroEmblem {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  opacity: 0.3;
+  animation: emblemBounce 2s ease-in-out alternate infinite;
+  display: block;
+}
+
+@include common.desktopScreenStyles {
+  .heroEmblem {
+    width: 450px;
+  }
+}
+
+// ===== actual hero text
+.heroTextContent {
+  font-family: "Minecraft", monospace;
+  z-index: 2;
+  text-align: center;
+}
+
+.biggerOutlinedText {
+  font-size: 1.75rem;
+  text-shadow: black 2px 2px 0px,
+    black -1px 1px 0px,
+    black -1px -1px 0px,
+    black 1px -1px 0px;
+  margin-bottom: var(--space)
+}
+
+.outlinedText {
+  font-size: 1.5rem;
+  text-shadow: black 1.5px 1.5px 0px,
+    black -1px 1px 0px,
+    black -1px -1px 0px,
+    black 1px -1px 0px;
+}
+
+@include common.desktopScreenStyles {
+  .biggerOutlinedText {
+    font-size: 4.25rem;
+    text-shadow: black 5px 5px 0px,
+      black -4px 4px 0px,
+      black -4px -4px 0px,
+      black 4px -4px 0px;
+  }
+
+  .outlinedText {
+    font-size: 3.25rem;
+    text-shadow: black 3px 3px 0px,
+      black -2px 2px 0px,
+      black -2px -2px 0px,
+      black 2px -2px 0px;
+  }
+}
+
+// bottom section stuff
+.centerStuff {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: var(--font-size-l);
+  text-align: center;
+  gap: var(--space-l);
+
+  padding: var(--space-m);
+}
+
+.cbImageGrid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+  margin-bottom: var(--space-m);
+  flex-grow: 1;
+
+  img {
+    padding: var(--space);
+    border-radius: var(--radius-l);
+  }
+}
+
+@include common.desktopScreenStyles {
+  .cbImageGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+:root[data-theme="light"] .cbImageGrid img {
+  background-color: var(--color-background-tertiary);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}

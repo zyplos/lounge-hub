@@ -1,0 +1,71 @@
+.minecraftSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  box-sizing: content-box;
+
+  width: 32px;
+  height: 32px;
+
+  background-color: #8b8b8b;
+  border: 2px solid #373737;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+}
+
+:root[data-theme="dark"] .minecraftSlot {
+  background-color: #0e0e0e;
+  border: 2px solid #080808;
+  border-right-color: #585858;
+  border-bottom-color: #585858;
+}
+
+.large {
+  width: 52px;
+  height: 52px;
+}
+
+.stonecutter {
+  background-color: #a09172 !important;
+  border: 2px solid #e0ca9f !important;
+  border-right-color: #544c3b !important;
+  border-bottom-color: #544c3b !important;
+}
+
+.itemImage {
+  display: block;
+}
+
+.tooltip:before {
+  content: attr(data-tooltip-name);
+
+  position: absolute;
+  top: calc(100% + 7px);
+
+  width: max-content;
+  padding: 7px;
+  border-radius: 7px;
+  border: 3px solid #2f0864;
+
+  background: #1a0c1b;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8em;
+
+  z-index: 30;
+  display: none;
+}
+
+.tooltip:hover:before {
+  display: block;
+}
+
+.amountText {
+  color: #fff;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.637);
+}

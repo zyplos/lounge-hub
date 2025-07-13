@@ -1,0 +1,11 @@
+.recipeLayout {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  gap: 0;
+}

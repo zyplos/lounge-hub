@@ -1,0 +1,22 @@
+.fullbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: var(--space);
+  height: 100%;
+}
+
+.useDims {
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.usePadding {
+  padding: var(--space);
+}
+
+.heading {
+  font-size: var(--font-size-xxl);
+}

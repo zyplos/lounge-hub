@@ -1,0 +1,52 @@
+// common
+.listGrid {
+  display: grid;
+  gap: var(--space-m);
+  padding: var(--space-m);
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--color-background-secondary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-text);
+  }
+
+  @include common.mobileScreenStyles {
+    // thank you gemini 2.5 pro
+    grid-auto-flow: column;
+    overflow-x: auto;
+    grid-auto-columns: 320px;
+    grid-auto-rows: 100px;
+  }
+}
+
+// players land claims page specific classes
+.chunkCard:hover {
+  transform: scale(1.03);
+}
+
+.chunkCardButton {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-size: var(--font-size);
+  color: var(--color-text);
+}
+
+.chunkCardDimensionIcon {
+  width: 64px;
+  height: 64px;
+}
+
+.chunkCardIconPaths {
+  fill: #fff;
+}

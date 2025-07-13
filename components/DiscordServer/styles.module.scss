@@ -1,0 +1,95 @@
+.discordGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--space-l);
+}
+
+.memberItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+// profile picture stuff
+
+.iconWrapper {
+  width: 64px;
+  height: 64px;
+  margin-right: var(--space-s);
+  border-radius: 100%;
+
+  // fixes border not sizing right with profile pictures
+  box-sizing: content-box;
+}
+
+.iconWrapper img {
+  border-radius: 100%;
+}
+
+.statusBorder {
+  border: 3px solid var(--color-discord);
+}
+
+.statusOnline {
+  border-color: #3eff58;
+}
+
+:root[data-theme="light"] .statusOnline {
+  border-color: #12ca22;
+}
+
+.statusIdle {
+  border-color: #ffde00;
+}
+
+.statusDnd {
+  border-color: #ff3e3e;
+}
+
+// name and game stuff
+
+.textContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.usernameText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.statusText {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.totalOnlineText {
+  color: var(--color-muted);
+  margin-top: var(--space-m);
+}
+
+.botBadge {
+  background-color: var(--color-discord);
+  color: #fff;
+  padding: var(--space-xxs) var(--space-xs);
+  margin-left: var(--space-xs);
+  border-radius: var(--radius-s);
+  display: inline-block;
+}
+
+// voice icon stuff
+
+.voiceIconSvg {
+  border: 2px solid transparent;
+}
+
+.voiceIconBg {
+  fill: var(--color-discord);
+}
+
+.voiceIconPath {
+  fill: #fff;
+}

@@ -1,0 +1,12 @@
+.sectionSpacer {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.serverGrid {
+  gap: var(--space-xl);
+}
+
+.sectionHeading {
+  margin-bottom: var(--space);
+}

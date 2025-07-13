@@ -1,0 +1,15 @@
+.recipeLayout {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+.resultSlotWrapper {
+  border: 2px solid #373737;
+  /* this removes the weird bottom margin */
+  display: flex;
+}
+
+:root[data-theme="dark"] .resultSlotWrapper {
+  border: 2px solid #080808;
+}

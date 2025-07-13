@@ -1,0 +1,21 @@
+.recipeLayout {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+.inputSection {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+}
+
+.flameIcon {
+  width: 25px;
+  height: 25px;
+  fill: #8b8b8b;
+}
+
+:root[data-theme="dark"] .flameIcon {
+  fill: #080808;
+}

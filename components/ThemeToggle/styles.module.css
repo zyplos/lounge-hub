@@ -1,0 +1,30 @@
+.themeToggle {
+  background-color: var(--color-background-tertiary);
+  padding: var(--space-xs);
+  line-height: 0;
+
+  border: none;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG icon styles */
+.themeToggleButton svg {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+.moonShape {
+  fill: var(--color-text);
+}
+
+.sunShape,
+.sunLines {
+  fill: var(--color-text);
+  stroke: var(--color-text);
+}

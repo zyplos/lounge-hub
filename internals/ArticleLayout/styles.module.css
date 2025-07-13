@@ -1,0 +1,11 @@
+.articleTitle {
+  margin-bottom: var(--space);
+}
+
+.articleDivider {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+  height: 1px;
+  background-color: var(--color-muted);
+  border: 0;
+}

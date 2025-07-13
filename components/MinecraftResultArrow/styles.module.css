@@ -1,0 +1,8 @@
+.arrowSvg {
+  width: 50px;
+  fill: #8b8b8b;
+}
+
+:root[data-theme="dark"] .arrowSvg {
+  fill: #080808;
+}

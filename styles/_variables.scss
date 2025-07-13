@@ -1,0 +1,125 @@
+// shoutouts https://hihayk.github.io/shaper/#system-ui,%20sans-serif/1.25/1/1.8/0.8/1.65/0.5/254/31/50/5/0.5/2/false
+// ===== css variables
+:root {
+  // typography
+  --baseFontSize: 1rem;
+  --fontSizeIncrement: 1.25;
+
+  --font-size-s: calc(var(--baseFontSize) / var(--fontSizeIncrement));
+  --font-size: var(--baseFontSize);
+  --font-size-m: calc(var(--font-size) * var(--fontSizeIncrement));
+  --font-size-l: calc(var(--font-size-m) * var(--fontSizeIncrement));
+  --font-size-xl: calc(var(--font-size-l) * var(--fontSizeIncrement));
+  --font-size-xxl: calc(var(--font-size-xl) * var(--fontSizeIncrement));
+
+  --font-body:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", sans-serif;
+  --font-heading: inherit;
+  --font-monospace: Menlo, monospace;
+
+  --font-weight-body: 400;
+  --font-weight-heading: 700;
+  --font-weight-bold: 700;
+
+  // spacing
+  --unit: 1rem;
+  --spaceIncrement: 1.65;
+
+  --space-xxs: calc(var(--space-xs) / var(--spaceIncrement));
+  --space-xs: calc(var(--space-s) / var(--spaceIncrement));
+  --space-s: calc(var(--space) / var(--spaceIncrement));
+  --space: var(--unit);
+  --space-m: calc(var(--space) * var(--spaceIncrement));
+  --space-l: calc(var(--space-m) * var(--spaceIncrement));
+  --space-xl: calc(var(--space-l) * var(--spaceIncrement));
+
+  // padding
+  --textFrameRatio: 1.8;
+  --textFrameY: 0.8em;
+  --textFrameX: calc(var(--textFrameY) * var(--textFrameRatio));
+
+  // sizes
+  --max-width-percent: 75%;
+  --max-width-pixel: 1370px;
+
+  --radius-xs: 10px;
+  --radius-s: 0.2rem;
+  --radius: 0.5rem;
+  --radius-m: 0.8rem;
+  --radius-l: 1.2rem;
+  --radius-circle: 1000px;
+}
+
+// colors
+// ===== dark mode (default)
+:root {
+  color-scheme: dark;
+
+  --color-text: #fff5f5;
+  --color-background: #383332;
+  --color-background-secondary: #212020;
+  --color-background-tertiary: #5a4f4c;
+
+  --color-primary: #ff3e3e;
+  --color-secondary: #ffd300;
+  --color-accent: #fff;
+  --color-highlight: #ff4000;
+
+  --color-muted: #958a8a;
+  --color-dark-gray: #000;
+  --color-dark-gray-accent: #353535;
+  --color-link: #ffa5a5;
+
+  --color-discord: #5865f2;
+  --color-twitch: #9146ff;
+
+  // components
+
+  --color-alert-info-text: #fff;
+  --color-alert-info-bg: #4265b1;
+
+  --color-button-background: #ff3e3e;
+  --color-button-text: #fff;
+  --color-button-hover-background: #ff5555;
+  --color-button-active-background: #e72828;
+
+  --color-card-bg: #4a403e;
+  --color-card-bg-secondary: #332c2b;
+}
+
+// ===== light mode
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-text: #292222;
+  --color-background: #f2e9e9;
+  --color-background-secondary: #e1d1d1;
+  --color-background-tertiary: #cfa3a3;
+
+  --color-primary: #ff3e3e;
+  --color-secondary: #ab8f00;
+  --color-accent: #fff;
+  --color-highlight: #ff4000;
+
+  --color-muted: #9d8787;
+  --color-dark-gray: #242424;
+  --color-dark-gray-accent: #353535;
+  --color-link: #ff3e3e;
+
+  --color-discord: #5865f2;
+  --color-twitch: #9146ff;
+
+  // components
+
+  --color-alert-info-text: #fff;
+  --color-alert-info-bg: #fc6603;
+
+  --color-button-background: #ff3e3e;
+  --color-button-text: #fff;
+  --color-button-hover-background: #ff5555;
+  --color-button-active-background: #e72828;
+
+  --color-card-bg: #fdf4f4;
+  --color-card-bg-secondary: #c7c7c7;
+}

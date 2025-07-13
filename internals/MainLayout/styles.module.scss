@@ -1,0 +1,112 @@
+.mainLayoutWrapper {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  position: relative;
+}
+
+.navToggle {
+  border: none;
+  position: absolute;
+  top: var(--space-m);
+  right: var(--space-m);
+
+  padding: var(--space-s);
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
+  z-index: 100;
+  cursor: pointer;
+  display: block;
+}
+
+@include common.desktopScreenStyles {
+  .navToggle {
+    display: none;
+  }
+}
+
+.hamburgerIcon,
+.closeIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.navbarWrapper {
+  flex-shrink: 0;
+}
+
+@include common.mobileScreenStyles {
+
+  .navbarWrapper,
+  .mainWrapper {
+    transition: padding 0.2s ease, width 0.2s ease;
+  }
+
+  .navbarWrapper.show {
+    flex-grow: 1;
+  }
+
+  .navbarWrapper.hide,
+  .mainWrapper.hide {
+    padding: 0;
+    width: 0;
+    flex-grow: 0;
+
+    >div {
+      padding: 0;
+    }
+  }
+}
+
+.mainWrapper {
+  --corner-radius: var(--radius-l);
+  --sidebar-color: var(--color-background-secondary);
+
+  flex-grow: 1;
+  padding: var(--space-m);
+  overflow-y: auto;
+  position: relative;
+
+  // padding for cool header thing 
+  @include common.desktopScreenStyles {
+    padding-top: calc(var(--space-m) + var(--corner-radius));
+  }
+}
+
+.noPadding {
+  padding: 0;
+}
+
+@include common.desktopScreenStyles {
+  .coolRoundedThing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--corner-radius);
+    background-color: var(--sidebar-color);
+  }
+
+  .coolRoundedThing::before {
+    content: '';
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: var(--corner-radius);
+    height: var(--corner-radius);
+
+    background: radial-gradient(circle at bottom right,
+        transparent var(--corner-radius),
+        var(--sidebar-color) var(--corner-radius));
+  }
+}

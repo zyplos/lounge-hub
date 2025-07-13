@@ -1,0 +1,23 @@
+.link {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space);
+
+  padding: var(--space-l) var(--space-m);
+  border-radius: var(--radius-l);
+  height: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  font-size: var(--font-size-l);
+  margin-bottom: var(--space);
+}

@@ -1,0 +1,39 @@
+.layoutWrapper {
+  display: grid;
+  grid-template-rows: 300px auto;
+
+  height: 100%;
+  gap: 0;
+
+  @include common.desktopScreenStyles {
+    // Fixed width for sidebar, auto for map
+    grid-template-columns: 500px auto;
+    grid-template-rows: auto;
+  }
+}
+
+.mainLayoutHideOverflow main {
+  overflow-y: hidden;
+}
+
+.sidebarWrapper {
+  overflow-y: auto;
+}
+
+.sidebarWrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebarWrapper::-webkit-scrollbar-track {
+  background-color: var(--color-background-secondary);
+}
+
+.sidebarWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--color-text);
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
