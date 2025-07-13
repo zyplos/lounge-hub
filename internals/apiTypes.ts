@@ -7,6 +7,10 @@ export interface MinecraftServerStatus {
     | string
     | {
         text: string;
+        extra?: {
+          text: string;
+          color: string;
+        }[];
       };
   players: {
     max: number;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Alert from "../Alert";
 import type { MinecraftContextStateValue } from "@/internals/MinecraftContext";
-import { getPlayerFaceUrl } from "@/internals/clientUtils";
+import { getPlayerFaceUrl, isStringEmpty } from "@/internals/clientUtils";
 import styles from "./styles.module.scss";
 
 import defaultServerIcon from "@/assets/defaultServerIcon.png";
@@ -30,12 +30,18 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
     a.name.localeCompare(b.name)
   );
 
-  let motdString: string | null = null;
+  let motdString = "";
   if (data.description) {
     if (typeof data.description === "string") {
       motdString = data.description;
     } else {
-      motdString = data.description.text;
+      if (data.description.extra) {
+        for (const textComponent of data.description.extra) {
+          motdString += textComponent.text;
+        }
+      } else {
+        motdString = data.description.text;
+      }
     }
   }
 
@@ -52,7 +58,7 @@ export default function MinecraftStatus({ data }: MinecraftStatusProps) {
 
         {data.description && <p className={styles.motd}>{motdString}</p>}
 
-        {!motdString && (
+        {isStringEmpty(motdString) && (
           <p className={`${styles.motd} textMuted`}>(empty motd)</p>
         )}
       </div>

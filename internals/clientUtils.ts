@@ -83,3 +83,8 @@ export function prettyPrintDate(date: Date) {
 export function getPlayerFaceUrl(uuid: string, width = 128) {
   return `https://vzge.me/face/${width}/${uuid}`;
 }
+
+// https://stackoverflow.com/questions/154059/how-do-i-check-for-an-empty-undefined-null-string-in-javascript/3261380#3261380
+export function isStringEmpty(str: string) {
+  return !str || /^\s*$/.test(str);
+}
