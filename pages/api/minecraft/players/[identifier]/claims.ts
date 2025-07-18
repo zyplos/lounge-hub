@@ -21,21 +21,19 @@ export default async function handler(
   }
 
   const isUUID = isStringUUID(identifier);
-  const queryColumn = isUUID ? "p.player_id" : "p.name";
-  const queryValue = isUUID ? "UUID_TO_BIN(?)" : "?";
 
   try {
     const results = await executeQuery<Chunk>(
       `SELECT
-         BIN_TO_UUID(p.player_id) AS player_id,
+         p.player_id,
          c.chunk_id,
          c.claimed_on,
          c.x,
          c.z,
-         BIN_TO_UUID(c.dimension) AS dimension
+         c.dimension
        FROM players p
        LEFT JOIN chunks c ON p.player_id = c.player_id
-       WHERE ${queryColumn} = ${queryValue}`,
+       WHERE ${isUUID ? "p.player_id" : "p.name"} = $1`,
       [identifier]
     );
 
