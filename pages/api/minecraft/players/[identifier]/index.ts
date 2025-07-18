@@ -21,12 +21,21 @@ export default async function handler(
   }
 
   const isUUID = isStringUUID(identifier);
-  const queryColumn = isUUID ? "player_id" : "name";
-  const queryValue = isUUID ? "UUID_TO_BIN(?)" : "?";
+  console.log("isUUID", isUUID, identifier);
 
   try {
     const playerResults = await executeQuery<Player>(
-      `SELECT BIN_TO_UUID(player_id) AS player_id, name, joined, community_id, home_x, home_y, home_z, BIN_TO_UUID(home_dimension) AS home_dimension, home_hidden FROM players WHERE ${queryColumn}=${queryValue}`,
+      `SELECT 
+        player_id,
+        name,
+        joined,
+        community_id,
+        home_x,
+        home_y,
+        home_z,
+        home_dimension,
+        home_hidden
+      FROM players WHERE ${isUUID ? "player_id" : "name"}=$1`,
       [identifier]
     );
 
