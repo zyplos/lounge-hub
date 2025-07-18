@@ -14,7 +14,7 @@ export default async function handler(
 
   try {
     const players = await executeQuery<Player>(
-      "SELECT BIN_TO_UUID(player_id) AS player_id, name, community_id FROM players"
+      "SELECT player_id, name, community_id FROM players"
     );
 
     res.status(200).json(players);
