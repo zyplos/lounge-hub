@@ -1,3 +1,4 @@
+import Head from "next/head";
 import MainLayout from "@/internals/MainLayout";
 import WikiCard from "@/components/WikiCard";
 
@@ -11,6 +12,10 @@ import jigsawBlock from "@/assets/jigsaw-block.png";
 export default function WikiHomePage() {
   return (
     <MainLayout>
+      <Head>
+        <title>wiki • the lounge hub</title>
+      </Head>
+
       <div className={styles.wikiGrid}>
         <div className={styles.heroCard}>
           <p className={styles.heroTextLine1}>the lounge SMP's</p>

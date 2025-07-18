@@ -1,10 +1,15 @@
+import Head from "next/head";
 import ArticleLayout from "@/internals/ArticleLayout";
 import { NewTabLink } from "@/components/NewTabLink";
 import { Card, CardHeading, type CardProps } from "@/components/Card";
 
 export default function ChangelogPage() {
   return (
-    <ArticleLayout title="Server History">
+    <ArticleLayout title="Changelog">
+      <Head>
+        <title>Changelog • wiki • the lounge hub</title>
+      </Head>
+
       {/* <Alert variant="info" className={styles.infoAlert}>
           i'll add world backups here sometime soon
         </Alert> */}

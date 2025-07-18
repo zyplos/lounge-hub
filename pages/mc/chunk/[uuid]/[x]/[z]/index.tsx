@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import BlueMapLayout from "@/internals/BlueMapLayout";
 import MainLayout from "@/internals/MainLayout";
 import Spinner from "@/components/Spinner";
@@ -50,6 +51,8 @@ export default function VisitorsLogPage() {
   if (!dimensionUuid || !x || !z) {
     return (
       <MainLayout>
+        <DefaultHeadTitle />
+
         <Fullbox>
           <FullboxHeading>oops</FullboxHeading>
           <p>Invalid url. Can't pull up the visitor's log.</p>
@@ -65,6 +68,8 @@ export default function VisitorsLogPage() {
   ) {
     return (
       <MainLayout>
+        <DefaultHeadTitle />
+
         <Fullbox>
           <FullboxHeading>oops</FullboxHeading>
           <p>Invalid url parameters.</p>
@@ -76,6 +81,8 @@ export default function VisitorsLogPage() {
   if (chunkOwnerError) {
     return (
       <MainLayout>
+        <DefaultHeadTitle />
+
         <Fullbox>
           <FullboxHeading>{chunkOwnerError.status}</FullboxHeading>
           <p>{getApiErrorMessage(chunkOwnerError.response)}</p>
@@ -88,6 +95,8 @@ export default function VisitorsLogPage() {
   if (!chunkOwnerData) {
     return (
       <Fullbox>
+        <DefaultHeadTitle />
+
         <Spinner />
         <p>Grabbing this chunk's owner data...</p>
       </Fullbox>
@@ -105,6 +114,11 @@ export default function VisitorsLogPage() {
 
   return (
     <BlueMapLayout mapUrl={mapUrl} title={"Chunk Map"}>
+      <Head>
+        <title>
+          Chunk ({x}, {z}) • visitor's log • the lounge hub
+        </title>
+      </Head>
       <PlayerHeader
         playerUuid={chunkOwnerData.player_id}
         playerName={chunkOwnerData.name}
@@ -160,5 +174,13 @@ export default function VisitorsLogPage() {
         ))}
       </div>
     </BlueMapLayout>
+  );
+}
+
+function DefaultHeadTitle() {
+  return (
+    <Head>
+      <title>visitor's log • the lounge hub</title>
+    </Head>
   );
 }

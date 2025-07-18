@@ -1,10 +1,15 @@
 import Link from "next/link";
+import Head from "next/head";
 import MinecraftText from "@/components/MinecraftText/index";
 import ArticleLayout from "@/internals/ArticleLayout";
 
 export default function LandClaimingPage() {
   return (
     <ArticleLayout title="Land Claiming">
+      <Head>
+        <title>Land Claiming • wiki • the lounge hub</title>
+      </Head>
+
       <div className="paragraphMargin textContent">
         <p>
           Chunks in the world can be claimed by players. Typing{" "}

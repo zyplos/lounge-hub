@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Head from "next/head";
 import MainLayout from "@/internals/MainLayout";
 import BlueMapLayout from "@/internals/BlueMapLayout";
 import Spinner from "@/components/Spinner";
@@ -77,6 +78,8 @@ export default function PlayerPage() {
   if (playerError) {
     return (
       <MainLayout>
+        <DefaultHeadTitle />
+
         <Fullbox>
           <FullboxHeading>{playerError.status}</FullboxHeading>
           <p>{getApiErrorMessage(playerError.response)}</p>
@@ -89,6 +92,8 @@ export default function PlayerPage() {
   if (!player) {
     return (
       <MainLayout>
+        <DefaultHeadTitle />
+
         <Fullbox>
           <Spinner />
           <p>Grabbing player data...</p>
@@ -129,6 +134,10 @@ export default function PlayerPage() {
       mapUrl={currentMapUrl}
       title={`Map of ${player.name}'s land claims`}
     >
+      <Head>
+        <title>{`${player.name}'s profile • the lounge hub`}</title>
+      </Head>
+
       <PlayerHeader
         playerUuid={player.player_id}
         playerName={player.name}
@@ -277,5 +286,13 @@ function DimensionIcon({ ...props }: React.SVGAttributes<SVGElement>) {
         <polygon points="32.76 55.43 32 56.19 31.24 55.43 30.11 36.53 33.89 36.53 32.76 55.43" />
       </g>
     </svg>
+  );
+}
+
+function DefaultHeadTitle() {
+  return (
+    <Head>
+      <title>player profile • the lounge hub</title>
+    </Head>
   );
 }

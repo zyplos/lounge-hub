@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import useSWR from "swr";
 
 import MainLayout from "@/internals/MainLayout";
@@ -41,6 +42,10 @@ export default function PlayerIndexPage() {
   if (playersError) {
     return (
       <MainLayout>
+        <Head>
+          <title>Player Directory • the lounge hub</title>
+        </Head>
+
         <div className="paragraphMargin textContent">
           <h1>Player Directory</h1>
           <p>
@@ -54,6 +59,10 @@ export default function PlayerIndexPage() {
 
   return (
     <MainLayout>
+      <Head>
+        <title>Player Directory • the lounge hub</title>
+      </Head>
+
       <div className="bottomSpaceMargin textContent">
         <h1>Player Directory</h1>
         <p>See where someone's base is or check their land claims.</p>

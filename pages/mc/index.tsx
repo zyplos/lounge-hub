@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import Head from "next/head";
 import MainLayout from "@/internals/MainLayout";
 
 import styles from "@/styles/MCIndexPage.module.scss";
@@ -17,6 +18,10 @@ import CID6 from "@/assets/ref/6.png";
 export default function MCHomePage() {
   return (
     <MainLayout noPadding={true}>
+      <Head>
+        <title>smp • the lounge hub</title>
+      </Head>
+
       <div
         className={clsx(styles.heroSection, "paragraphMargin")}
         style={{ backgroundImage: `url(${InvitationSplashImage.src})` }}

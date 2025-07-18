@@ -1,4 +1,5 @@
 import type { NextPageContext } from "next";
+import Head from "next/head";
 
 import MainLayout from "@/internals/MainLayout";
 import { Fullbox } from "@/components/Fullbox";
@@ -12,6 +13,10 @@ interface ErrorProps {
 function Error({ statusCode }: ErrorProps) {
   return (
     <MainLayout noPadding>
+      <Head>
+        <title>Error • the lounge hub</title>
+      </Head>
+
       <Fullbox useDims={true}>
         <h1 className={styles.heading}>{statusCode ?? "oops"}</h1>
         <p>

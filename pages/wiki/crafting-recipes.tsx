@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: this array will never change */
+import Head from "next/head";
 import MainLayout from "@/internals/MainLayout";
 import CraftingTable from "@/components/CraftingTable";
 import Stonecutter from "@/components/Stonecutter";
@@ -9,6 +10,10 @@ import styles from "@/styles/CraftingRecipesPage.module.scss";
 export default function CraftingRecipesPage() {
   return (
     <MainLayout>
+      <Head>
+        <title>Crafting Recipes • wiki • the lounge hub</title>
+      </Head>
+
       <div className="textContent bottomSpaceMargin">
         <h1>Crafting Recipes</h1>
 

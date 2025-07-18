@@ -1,3 +1,4 @@
+import Head from "next/head";
 import clsx from "clsx";
 import MainLayout from "@/internals/MainLayout";
 import DiscordServer from "@/components/DiscordServer";
@@ -11,6 +12,10 @@ export default function HomePage() {
 
   return (
     <MainLayout>
+      <Head>
+        <title>the lounge hub</title>
+      </Head>
+
       <div className={styles.sectionSpacer}>
         <section className={clsx("twoGrid", styles.serverGrid)}>
           <div>

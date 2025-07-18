@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import MinecraftText from "@/components/MinecraftText";
 import ArticleLayout from "@/internals/ArticleLayout";
 import { Card, CardHeading } from "@/components/Card";
@@ -6,6 +7,10 @@ import { Card, CardHeading } from "@/components/Card";
 export default function GameplayPage() {
   return (
     <ArticleLayout title="Gameplay">
+      <Head>
+        <title>Gameplay • wiki • the lounge hub</title>
+      </Head>
+
       <div className="textContent paragraphMargin">
         <p>
           Some stuff on the server functions a little differently from Vanilla.
