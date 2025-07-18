@@ -29,13 +29,13 @@ export default async function handler(
         le.id,
         le.x,
         le.z,
-        BIN_TO_UUID(le.dimension) AS dimension,
-        BIN_TO_UUID(le.player_id) AS player_id,
+        le.dimension,
+        le.player_id,
         p.name,
         le.entered_time
       FROM logentries le
       JOIN players p ON le.player_id = p.player_id
-      WHERE le.dimension = UUID_TO_BIN(?) AND le.x = ? AND le.z = ?
+      WHERE le.dimension = $1 AND le.x = $2 AND le.z = $3
       ORDER BY le.entered_time DESC`,
       [dimension, x, z]
     );
