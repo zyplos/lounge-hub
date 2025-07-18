@@ -14,7 +14,7 @@ function Error({ statusCode }: ErrorProps) {
   return (
     <MainLayout noPadding>
       <Head>
-        <title>Error • the lounge hub</title>
+        <title>oops • the lounge hub</title>
       </Head>
 
       <Fullbox useDims={true}>
