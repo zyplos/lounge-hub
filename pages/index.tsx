@@ -5,22 +5,12 @@ import MinecraftStatus from "@/components/MinecraftStatus";
 import { useMinecraftData } from "@/internals/MinecraftContext";
 
 import styles from "@/styles/HomePage.module.css";
-import Alert from "@/components/Alert";
 
 export default function HomePage() {
   const { vanilla, modded } = useMinecraftData();
 
   return (
     <MainLayout>
-      <Alert
-        variant="info"
-        className="paragraphMargin"
-        style={{ display: "inline-block" }}
-      >
-        The player directory, land claims profiles, and visitor's log are
-        temporarily unavailable due to database upgrades being done in the
-        background.
-      </Alert>
       <div className={styles.sectionSpacer}>
         <section className={clsx("twoGrid", styles.serverGrid)}>
           <div>
