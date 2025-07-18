@@ -27,15 +27,15 @@ export default async function handler(
     const results = await executeQuery<ChunkWithPlayerBase>(
       `SELECT 
         c.chunk_id, 
-        BIN_TO_UUID(c.player_id) AS player_id, 
+        c.player_id, 
         p.name, 
         c.claimed_on, 
         c.x, 
         c.z,
-        BIN_TO_UUID(c.dimension) AS dimension
+        c.dimension
       FROM chunks as c
       LEFT JOIN players as p ON c.player_id=p.player_id
-      WHERE dimension=UUID_TO_BIN(?) AND x=? AND z=?`,
+      WHERE dimension=$1 AND x=$2 AND z=$3`,
       [dimension, x, z]
     );
 
